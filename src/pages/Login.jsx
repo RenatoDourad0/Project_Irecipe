@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import { minPassSize, rgx } from '../helpers/utilData';
 import { sendToLS } from '../helpers/localStorage';
 
@@ -8,6 +9,7 @@ export default function Login() {
     email: '',
     pass: '',
   });
+  const history = useHistory();
 
   useEffect(() => (setDisabled(!(rgx.test(user.email) && user.pass.length >= minPassSize))
   ), [user]);
@@ -24,6 +26,7 @@ export default function Login() {
     sendToLS('user', { email: user.email });
     sendToLS('mealsToken', 1);
     sendToLS('drinksToken', 1);
+    history.push('/meals');
   }
   return (
     <form onSubmit={ handleSubmit }>
