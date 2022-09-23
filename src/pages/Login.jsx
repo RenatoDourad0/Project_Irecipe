@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Header from '../components/Header';
 import { minPassSize, rgx } from '../helpers/utilData';
 
 export default function Login() {
@@ -25,7 +26,9 @@ export default function Login() {
     localStorage.setItem('drinksToken', JSON.stringify(1));
   }
   return (
+
     <form onSubmit={ handleSubmit }>
+      <Header />
       <label htmlFor="email">
         Email:
         <input
