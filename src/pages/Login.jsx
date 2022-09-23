@@ -20,6 +20,9 @@ export default function Login() {
 
   function handleSubmit(e) {
     e.preventDefault();
+    localStorage.setItem('user', JSON.stringify({ email: user.email }));
+    localStorage.setItem('mealsToken', JSON.stringify(1));
+    localStorage.setItem('drinksToken', JSON.stringify(1));
   }
   return (
     <form onSubmit={ handleSubmit }>
