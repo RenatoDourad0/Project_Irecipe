@@ -8,9 +8,13 @@ export default function Header() {
   return (
     <div>
       <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
-      <img src={ searchIcon } alt="search" data-testid="search-top-btn" />
+
+      { pathname === '/profile'
+      || pathname === '/done-recipes'
+      || pathname === '/favorite-recipes' ? null
+        : <img src={ searchIcon } alt="search" data-testid="search-top-btn" />}
+
       <h2 data-testid="page-title">
-        { pathname === '/' && 'LOGIN TESTE' }
         { pathname === '/meals' && 'Meals'}
         { pathname === '/drinks' && 'Drinks'}
         { pathname === '/profile' && 'Profile'}

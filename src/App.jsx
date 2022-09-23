@@ -9,7 +9,6 @@ import Favorites from './pages/Favorites';
 import Profile from './pages/Profile';
 import DoneRecipes from './pages/DoneRecipes';
 
-
 function App() {
   return (
     <Switch>
