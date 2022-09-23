@@ -20,7 +20,7 @@ describe('Testa tela de login', () => {
 
     userEvent.type(emailInput, 'email@gmail.com');
     userEvent.type(passInput, '1234567');
-    
+
     expect(loginBtn).toHaveProperty('disabled', false);
   });
 });
