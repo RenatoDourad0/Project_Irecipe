@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { minPassSize, rgx } from '../helpers/utilData';
+import { sendToLS } from '../helpers/localStorage';
 
 export default function Login() {
   const [isDisabled, setDisabled] = useState(true);
@@ -20,9 +21,9 @@ export default function Login() {
 
   function handleSubmit(e) {
     e.preventDefault();
-    localStorage.setItem('user', JSON.stringify({ email: user.email }));
-    localStorage.setItem('mealsToken', JSON.stringify(1));
-    localStorage.setItem('drinksToken', JSON.stringify(1));
+    sendToLS('user', { email: user.email });
+    sendToLS('mealsToken', 1);
+    sendToLS('drinksToken', 1);
   }
   return (
     <form onSubmit={ handleSubmit }>
