@@ -3,10 +3,10 @@ import { useLocation } from 'react-router-dom';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
+import SearchBar from './SearchBar';
 
 export default function Header() {
   const [showInputSearch, setShowInputSearch] = useState(false);
-  const [toSearch, setToSearch] = useState('');
 
   const { pathname } = useLocation();
 
@@ -33,16 +33,7 @@ export default function Header() {
             onClick={ () => setShowInputSearch(!showInputSearch) }
           />
         )}
-      {showInputSearch && (
-        <input
-          type="text"
-          name=""
-          value={ toSearch }
-          data-testid="search-input"
-          onChange={ ({ target: { value } }) => setToSearch(value) }
-        />
-      )}
-
+      {showInputSearch && <SearchBar /> }
       <h2 data-testid="page-title">
         { pathname === '/meals' && 'Meals'}
         { pathname === '/drinks' && 'Drinks'}

@@ -1,16 +1,11 @@
 import { render } from '@testing-library/react';
 import { createMemoryHistory } from 'history';
-import withRouter from './withRouter';
+import { Router } from 'react-router-dom';
 
-export default function renderWithRouter(
-  component,
-  {
-    initialPath = '/',
-    history = createMemoryHistory([initialPath]),
-  } = {},
-) {
-  return {
-    ...render(withRouter(component, history)),
-    history,
-  };
-}
+const renderWithRouter = (component, initialEntries = ['/']) => {
+  const history = createMemoryHistory({ initialEntries });
+  return ({
+    ...render(<Router history={ history }>{component}</Router>), history,
+  });
+};
+export default renderWithRouter;
