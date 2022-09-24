@@ -1,7 +1,7 @@
 import { screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import App from '../App';
-import { testEmail } from '../helpers/utilData';
+import { routes, testEmail } from '../helpers/utilData';
 import renderWithRouter from './helpers/renderWithRouter';
 
 let currHistory;
@@ -15,15 +15,57 @@ describe('Testa componente Header', () => {
     userEvent.type(screen.getByTestId('password-input'), '1234567');
     userEvent.click(screen.getByTestId('login-submit-btn'));
   });
-  test('Testa se o ícone de profile renderiza para `/profile`', () => {
+
+  test('Testa título do componente Header em todas as páginas que ele é renderizado', () => {
+    routes.forEach((item) => {
+      currHistory.push(item.route);
+      const { location: { pathname } } = currHistory;
+
+      if (routes.some(({ route }) => route === pathname)) {
+        const headerTitle = routes.find(({ route }) => route === pathname).title;
+
+        expect(screen.getByTestId('page-title').innerHTML).toBe(headerTitle);
+      }
+    });
+  });
+
+  test('Testa se o ícone de profile redirecionada para `/profile`', () => {
     expect(currHistory.location.pathname).toBe('/meals');
 
-    const profileIconBtn = screen.getByTestId('profile-top-btn');
+    const profileIcon = screen.getByTestId('profile-top-btn');
 
-    expect(profileIconBtn).toBeInTheDocument();
+    expect(profileIcon).toBeInTheDocument();
 
-    userEvent.click(profileIconBtn);
+    userEvent.click(profileIcon);
 
     expect(currHistory.location.pathname).toBe('/profile');
+  });
+
+  test('Testa se ícone de busca realiza toggle do input de busca', () => {
+    const searchIcon = screen.getByTestId('search-top-btn');
+
+    expect(searchIcon).toBeInTheDocument();
+
+    userEvent.click(searchIcon);
+
+    const searchInput = screen.getByTestId('search-input');
+
+    expect(searchInput).toBeInTheDocument();
+
+    userEvent.click(searchIcon);
+
+    expect(searchInput).not.toBeInTheDocument();
+  });
+
+  test('Testa se é possível digitar no input de busca', () => {
+    const searchIcon = screen.getByTestId('search-top-btn');
+
+    userEvent.click(searchIcon);
+
+    const searchInput = screen.getByTestId('search-input');
+
+    userEvent.type(searchInput, 'testando input');
+
+    expect(searchInput.value).toBe('testando input');
   });
 });

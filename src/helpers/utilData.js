@@ -3,3 +3,10 @@ export const minPassSize = 7;
 
 // constantes para testes
 export const testEmail = 'email@gmail.com';
+export const routes = [
+  { route: '/meals', title: 'Meals' },
+  { route: '/drinks', title: 'Drinks' },
+  { route: '/profile', title: 'Profile' },
+  { route: '/done-recipes', title: 'Done Recipes' },
+  { route: '/favorite-recipes', title: 'Favorite Recipes' },
+];
