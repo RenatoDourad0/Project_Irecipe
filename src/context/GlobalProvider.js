@@ -3,13 +3,13 @@ import PropTypes from 'prop-types';
 
 export const GlobalContext = createContext();
 
-const CATEGORIES_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
+const MEALS_CATEGORIES_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
 
 export function GlobalProvider({ children }) {
   const [mealCategories, setMealCaegories] = useState([]);
 
   useEffect(() => {
-    fetch(CATEGORIES_URL)
+    fetch(MEALS_CATEGORIES_URL)
       .then((res) => res.json())
       .then((data) => {
         console.log(data);

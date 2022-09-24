@@ -1,13 +1,16 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
 
 export default function Header() {
   const { pathname } = useLocation();
+
   return (
     <div>
-      <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
+      <Link to="/profile">
+        <img src={ profileIcon } alt="profile" data-testid="profile-top-btn" />
+      </Link>
 
       { pathname === '/profile'
       || pathname === '/done-recipes'
