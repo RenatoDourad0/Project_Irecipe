@@ -10,23 +10,24 @@ export default function SearchBar() {
   const [textToSearch, setTextToSearch] = useState('');
   const [filterToApply, setFilterToApply] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     switch (filterToApply) {
     case 'ingredientsRadio':
-      setSearchResult(fetchByIngredient(textToSearch, pagePath));
+      setSearchResult(await fetchByIngredient(textToSearch, pagePath));
       break;
     case 'nameRadio':
-      setSearchResult(fetchByName(textToSearch, pagePath));
+      setSearchResult(await fetchByName(textToSearch, pagePath));
       break;
     case 'firstLetterRadio':
       if (textToSearch.length !== 1) {
         global.alert('Your search must have only 1 (one) character');
         break;
       }
-      setSearchResult(fetchByLetter(textToSearch, pagePath));
+      setSearchResult(await fetchByLetter(textToSearch, pagePath));
       break;
     default:
+      global.alert('selecione um filtro');
       break;
     }
   };

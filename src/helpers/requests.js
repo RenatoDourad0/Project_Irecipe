@@ -5,7 +5,7 @@ export const fetchByIngredient = async (ingredient, pagePath) => {
   const data = await fetch(URL)
     .then((res) => res.json())
     .then((json) => json);
-  return data.meals;
+  return data;
 };
 
 export const fetchByName = async (name, pagePath) => {
@@ -15,7 +15,7 @@ export const fetchByName = async (name, pagePath) => {
   const data = await fetch(URL)
     .then((res) => res.json())
     .then((json) => json);
-  return data.meals;
+  return data;
 };
 
 export const fetchByLetter = async (letter, pagePath) => {
@@ -25,5 +25,5 @@ export const fetchByLetter = async (letter, pagePath) => {
   const data = await fetch(URL)
     .then((res) => res.json())
     .then((json) => json);
-  return data.meals;
+  return data;
 };
