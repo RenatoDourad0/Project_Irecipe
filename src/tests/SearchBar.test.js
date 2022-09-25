@@ -14,6 +14,7 @@ import oneDrink from '../../cypress/mocks/oneDrink';
 import App from '../App';
 
 let currHistory;
+
 const searchInput = 'search-input';
 const submitBtn = 'exec-search-btn';
 const firstLetterSearchRadio = 'first-letter-search-radio';
