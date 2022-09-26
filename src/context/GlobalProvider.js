@@ -9,7 +9,6 @@ const MEALS_CATEGORIES_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?c
 export function GlobalProvider({ children }) {
   const { push } = useHistory();
   const { pathname: pagePath } = useLocation();
-
   const [mealCategories, setMealCaegories] = useState([]);
   const [searchResult, setSearchResult] = useState(null);
 
