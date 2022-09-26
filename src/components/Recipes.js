@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { GlobalContext } from '../context/GlobalProvider';
 
 export default function Recipes(props) {
-  const { searchResult } = useContext(GlobalContext);
+  const { searchResult, mealCategories } = useContext(GlobalContext);
   const CARDS_MAX_LENGTH = 12;
   const { id } = props;
   const { image } = props;
@@ -11,7 +11,7 @@ export default function Recipes(props) {
   const { search } = props;
   return (
     <div>
-      {searchResult && searchResult[search] && searchResult[search]
+      {mealCategories && searchResult[search] && searchResult[search]
         .filter((food, index) => index < CARDS_MAX_LENGTH)
         .map((searchItem, index) => (
           <div
