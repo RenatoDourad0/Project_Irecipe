@@ -25,8 +25,8 @@ export default function Meals() {
     <div>
       <Header />
       <CatButtons search="meals" />
-      { searchResult && searchResult.meals && Object.values(searchResult)[0].length > 1
-        && <MealDetails /> }
+      { searchResult && searchResult.meals && Object.values(searchResult)[0].length > 0
+      && <MealDetails /> }
       <Footer />
     </div>
   );

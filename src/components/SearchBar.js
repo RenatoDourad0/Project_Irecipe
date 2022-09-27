@@ -4,7 +4,7 @@ import { fetchByIngredient, fetchByName, fetchByLetter } from '../helpers/reques
 import { GlobalContext } from '../context/GlobalProvider';
 
 export default function SearchBar() {
-  const { setSearchResult } = useContext(GlobalContext);
+  const { setSearchResult, setFromBtnFilter } = useContext(GlobalContext);
   const { pathname: pagePath } = useLocation();
 
   const [textToSearch, setTextToSearch] = useState('');
@@ -12,6 +12,7 @@ export default function SearchBar() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setFromBtnFilter(false);
     switch (filterToApply) {
     case 'ingredientsRadio':
       setSearchResult(await fetchByIngredient(textToSearch, pagePath));

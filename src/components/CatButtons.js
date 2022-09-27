@@ -1,25 +1,27 @@
 import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import { useLocation } from 'react-router-dom';
 import { GlobalContext } from '../context/GlobalProvider';
 import { fetchByCategoryName, fetchByName } from '../helpers/requests';
 
 export default function CatButtons(props) {
   const CATEGORIES_MAX_LENGTH = 5;
-  const { categories, setSearchResult } = useContext(GlobalContext);
+  const { categories, setSearchResult,
+    setFromBtnFilter } = useContext(GlobalContext);
   const { search } = props;
-  const history = useHistory();
-  const { pathname } = history.location;
-  const [hasRepeatClick, setRepeat] = useState(false);
+  const location = useLocation();
+  const { pathname } = location;
+  const [lasFilter, setLastFilter] = useState('');
 
   const handleClick = async ({ target: { id } }) => {
-    if (!hasRepeatClick) {
-      const newSearchResult = await fetchByCategoryName(pathname, id);
-      setSearchResult(newSearchResult);
+    setFromBtnFilter(true);
+    if (lasFilter !== id) {
+      setSearchResult(await fetchByCategoryName(pathname, id));
+      setLastFilter(id);
     } else {
       setSearchResult(await fetchByName('', pathname));
+      setLastFilter('');
     }
-    setRepeat(!hasRepeatClick);
   };
 
   const resetFilters = async () => {
