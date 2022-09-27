@@ -12,6 +12,7 @@ export function GlobalProvider({ children }) {
   const [mealCategories, setMealCaegories] = useState([]);
   const [searchResult, setSearchResult] = useState(null);
   const [categories, setCategories] = useState([]);
+  const [fromBtnFilter, setFromBtnFilter] = useState(false);
   useEffect(() => {
     fetch(MEALS_CATEGORIES_URL)
       .then((res) => res.json())
@@ -37,8 +38,8 @@ export function GlobalProvider({ children }) {
   }, [pagePath, push, searchResult]);
 
   useEffect(() => {
-    redirectToDetails();
-  }, [searchResult, redirectToDetails]);
+    if (!fromBtnFilter) redirectToDetails();
+  }, [searchResult, redirectToDetails, fromBtnFilter]);
 
   const context = {
     mealCategories,
@@ -48,6 +49,7 @@ export function GlobalProvider({ children }) {
     redirectToDetails,
     categories,
     setCategories,
+    setFromBtnFilter,
   };
 
   // useMemo(() => ({
