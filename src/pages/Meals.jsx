@@ -14,11 +14,13 @@ export default function Meals() {
   const fetchCatMeals = async () => {
     setCategories(await fetchCategories('/meals'));
   };
+
   useEffect(() => {
     fetchMealsOrDrinks();
     fetchCatMeals();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <div>
       <Header />

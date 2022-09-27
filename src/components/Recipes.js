@@ -5,10 +5,8 @@ import { GlobalContext } from '../context/GlobalProvider';
 export default function Recipes(props) {
   const { searchResult } = useContext(GlobalContext);
   const CARDS_MAX_LENGTH = 12;
-  const { id } = props;
-  const { image } = props;
-  const { str } = props;
-  const { search } = props;
+  const { id, image, str, search } = props;
+
   return (
     <div>
       {searchResult && searchResult[search] && searchResult[search]

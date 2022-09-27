@@ -9,6 +9,7 @@ export default function SearchBar() {
 
   const [textToSearch, setTextToSearch] = useState('');
   const [filterToApply, setFilterToApply] = useState('');
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     switch (filterToApply) {
