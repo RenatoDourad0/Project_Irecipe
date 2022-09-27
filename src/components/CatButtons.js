@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PropTypes from 'prop-types';
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
 import { GlobalContext } from '../context/GlobalProvider';
@@ -10,14 +10,19 @@ export default function CatButtons(props) {
   const { search } = props;
   const history = useHistory();
   const { pathname } = history.location;
+  const [hasRepeatClick, setRepeat] = useState(false);
 
   const handleClick = async ({ target: { id } }) => {
-    const newSearchResult = await fetchByCategoryName(pathname, id);
-    setSearchResult(newSearchResult);
+    if (!hasRepeatClick) {
+      const newSearchResult = await fetchByCategoryName(pathname, id);
+      setSearchResult(newSearchResult);
+    } else {
+      setSearchResult(await fetchByName('', pathname));
+    }
+    setRepeat(!hasRepeatClick);
   };
 
   const resetFilters = async () => {
-    console.log();
     setSearchResult(await fetchByName('', pathname));
   };
 
