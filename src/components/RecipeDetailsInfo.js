@@ -48,6 +48,14 @@ export default function RecipeDetailsInfo(props) {
       <p data-testid="instructions">
         { recipeDetails[typeProp][0].strInstructions }
       </p>
+      { typeProp === 'meals'
+      && (
+        <iframe
+          src={ recipeDetails.meals[0].strYoutube }
+          data-testid="video"
+          title={ recipeDetails[typeProp][0][titleProp] }
+        />
+      )}
       <button type="button" onClick={ navigateBack }>Voltar</button>
     </div>
   );
