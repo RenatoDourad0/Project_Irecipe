@@ -1,34 +1,36 @@
 import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { GlobalContext } from '../context/GlobalProvider';
 
 export default function Recipes(props) {
   const { searchResult } = useContext(GlobalContext);
   const CARDS_MAX_LENGTH = 12;
-  const { id } = props;
-  const { image } = props;
-  const { str } = props;
-  const { search } = props;
+  const { id, image, str, search } = props;
+  console.log(searchResult);
+
   return (
     <div>
       {searchResult && searchResult[search] && searchResult[search]
         .filter((food, index) => index < CARDS_MAX_LENGTH)
         .map((searchItem, index) => (
-          <div
-            key={ searchItem[id] }
-            data-testid={ `${index}-recipe-card` }
-          >
-            <img
-              src={ searchItem[image] }
-              alt={ searchItem[str] }
-              data-testid={ `${index}-card-img` }
-            />
-            <h3
-              data-testid={ `${index}-card-name` }
+          <Link to={ `/${search}/${searchItem[id]}` } key={ searchItem[id] }>
+            <div
+              data-testid={ `${index}-recipe-card` }
             >
-              { searchItem[str] }
-            </h3>
-          </div>
+              <img
+                src={ searchItem[image] }
+                alt={ searchItem[str] }
+                data-testid={ `${index}-card-img` }
+              />
+              <h3
+                data-testid={ `${index}-card-name` }
+              >
+                { searchItem[str] }
+              </h3>
+            </div>
+
+          </Link>
         ))}
     </div>
   );
