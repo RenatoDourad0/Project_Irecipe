@@ -43,10 +43,7 @@ export const fetchByCategoryName = (pagePath, categoryName) => {
     ? `https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryName}`
     : `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${categoryName}`;
   const data = fetch(URL)
-    .then((res) => {
-      console.log(res);
-      return res.json();
-    })
+    .then((res) => res.json())
     .then((json) => json);
   return data;
 };
