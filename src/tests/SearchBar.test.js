@@ -11,8 +11,8 @@ import drinksByIngredient from '../../cypress/mocks/drinksByIngredient';
 import ginDrinks from '../../cypress/mocks/ginDrinks';
 import emptyDrinks from '../../cypress/mocks/emptyDrinks';
 import oneDrink from '../../cypress/mocks/oneDrink';
-import meals from '../../cypress/mocks/meals';
-import ordinaryDrinks from '../../cypress/mocks/ordinaryDrinks';
+// import meals from '../../cypress/mocks/meals';
+// import ordinaryDrinks from '../../cypress/mocks/ordinaryDrinks';
 import drinkCategories from '../../cypress/mocks/drinkCategories';
 import App from '../App';
 
@@ -25,7 +25,7 @@ const nameSearchRadio = 'name-search-radio';
 const ingredientSearchRadio = 'ingredient-search-radio';
 const firstLetterURL = 'https://www.themealdb.com/api/json/v1/1/search.php?f=z';
 const mealCategoriesURL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
-const mealsURL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
+// const mealsURL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 
 describe('Testa searchBar', () => {
   beforeEach(() => {
