@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import Header from '../components/Header';
-import DrinkDetails from './DrinkDetails';
+import Recipes from '../components/Recipes';
 import { GlobalContext } from '../context/GlobalProvider';
 import Footer from '../components/Footer';
 import { fetchByName, fetchCategories } from '../helpers/requests';
@@ -24,7 +24,12 @@ export default function Drinks() {
       <Header />
       <CatButtons search="drinks" />
       { searchResult && searchResult.drinks && Object.values(searchResult)[0].length > 1
-      && <DrinkDetails /> }
+      && <Recipes
+        id="idDrink"
+        image="strDrinkThumb"
+        str="strDrink"
+        search="drinks"
+      /> }
       <Footer />
     </div>
   );
