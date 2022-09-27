@@ -1,11 +1,12 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState, useContext } from 'react';
 import { useLocation, useParams, useHistory } from 'react-router-dom';
 import { GlobalContext } from '../context/GlobalProvider';
-import { fetchById } from '../helpers/requests';
+import { fetchById, fetchByName } from '../helpers/requests';
 import RecipeDetailsInfo from '../components/RecipeDetailsInfo';
 
 export default function RecipeDetails() {
-  const { setSearchResult } = useContext(GlobalContext);
+  const { setSearchResult, setRecFoods } = useContext(GlobalContext);
   const [recipeDetails, setRecipeDetails] = useState(null);
   const [details, setDetails] = useState(null);
   const { id } = useParams();
@@ -15,6 +16,10 @@ export default function RecipeDetails() {
   useEffect(() => {
     async function renderFetch() {
       setRecipeDetails(await fetchById(id, pathname));
+      if (pathname.includes('/drinks') === true) {
+        return setRecFoods(await fetchByName('', '/meals'));
+      }
+      setRecFoods(await fetchByName('', '/drinks'));
     }
     renderFetch();
   }, []);

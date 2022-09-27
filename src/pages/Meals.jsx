@@ -7,17 +7,15 @@ import { fetchByName, fetchCategories } from '../helpers/requests';
 import CatButtons from '../components/CatButtons';
 
 export default function Meals() {
-  const { searchResult, setSearchResult, setCategories } = useContext(GlobalContext);
-  const fetchMealsOrDrinks = async () => {
+  const { searchResult, setSearchResult,
+    setCategories } = useContext(GlobalContext);
+  const fetchApis = async () => {
     setSearchResult(await fetchByName('', '/meals'));
-  };
-  const fetchCatMeals = async () => {
     setCategories(await fetchCategories('/meals'));
   };
 
   useEffect(() => {
-    fetchMealsOrDrinks();
-    fetchCatMeals();
+    fetchApis();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
