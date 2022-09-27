@@ -11,6 +11,9 @@ import drinksByIngredient from '../../cypress/mocks/drinksByIngredient';
 import ginDrinks from '../../cypress/mocks/ginDrinks';
 import emptyDrinks from '../../cypress/mocks/emptyDrinks';
 import oneDrink from '../../cypress/mocks/oneDrink';
+import meals from '../../cypress/mocks/meals';
+import ordinaryDrinks from '../../cypress/mocks/ordinaryDrinks';
+import drinkCategories from '../../cypress/mocks/drinkCategories';
 import App from '../App';
 
 let currHistory;
@@ -21,10 +24,13 @@ const firstLetterSearchRadio = 'first-letter-search-radio';
 const nameSearchRadio = 'name-search-radio';
 const ingredientSearchRadio = 'ingredient-search-radio';
 const firstLetterURL = 'https://www.themealdb.com/api/json/v1/1/search.php?f=z';
+const mealCategoriesURL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
+const mealsURL = 'https://www.themealdb.com/api/json/v1/1/search.php?s=';
 
 describe('Testa searchBar', () => {
   beforeEach(() => {
-    fetchMock.getOnce('https://www.themealdb.com/api/json/v1/1/list.php?c=list', mealCategories);
+    fetchMock.getOnce(mealCategoriesURL, mealCategories);
+    // fetchMock.getOnce(mealsURL, meals);
     const { history } = renderWithRouter(<App />);
     currHistory = history;
 
@@ -108,6 +114,7 @@ describe('Testa searchBar', () => {
 
   test('Testa se mostra alert quando não retornar nenhuma receita', async () => {
     fetchMock.getOnce(firstLetterURL, emptyMeals);
+    // fetchMock.getOnce(mealCategoriesURL, mealCategories);
     global.alert = jest.fn();
 
     const searchBar = screen.getByTestId(searchInput);
@@ -116,11 +123,15 @@ describe('Testa searchBar', () => {
 
     userEvent.type(searchBar, 'z');
     userEvent.click(letterRadio);
-
     userEvent.click(submitButton);
 
     expect(fetchMock.called()).toBeTruthy();
+    expect(fetchMock.lastUrl()).toBe(firstLetterURL);
     await waitFor(() => expect(global.alert).toHaveBeenCalled());
+    // expect(fetchMock.called()).toBeTruthy();
+    // expect(fetchMock.lastUrl()).toBe('https://www.themealdb.com/api/json/v1/1/search.php?s=');
+    expect(fetchMock.called()).toBeTruthy();
+    // expect(fetchMock.lastUrl()).toBe(mealCategoriesURL);
   });
 
   test('Testa se muda de rota quando retorna somente uma receita', async () => {
@@ -157,7 +168,8 @@ describe('Testa searchBar', () => {
 
 describe('teste da rota /drinks', () => {
   beforeEach(() => {
-    fetchMock.getOnce('https://www.themealdb.com/api/json/v1/1/list.php?c=list', mealCategories);
+    fetchMock.getOnce('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list', drinkCategories);
+    // fetchMock.getOnce('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=', ordinaryDrinks);
     const { history } = renderWithRouter(<App />, ['/drinks']);
     currHistory = history;
 

@@ -7,7 +7,6 @@ export default function Recipes(props) {
   const { searchResult } = useContext(GlobalContext);
   const CARDS_MAX_LENGTH = 12;
   const { id, image, str, search } = props;
-  console.log(searchResult);
 
   return (
     <div>
@@ -29,7 +28,6 @@ export default function Recipes(props) {
                 { searchItem[str] }
               </h3>
             </div>
-
           </Link>
         ))}
     </div>

@@ -43,13 +43,16 @@ export const fetchByCategoryName = (pagePath, categoryName) => {
     ? `https://www.themealdb.com/api/json/v1/1/filter.php?c=${categoryName}`
     : `https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=${categoryName}`;
   const data = fetch(URL)
-    .then((res) => res.json())
+    .then((res) => {
+      console.log(res);
+      return res.json();
+    })
     .then((json) => json);
   return data;
 };
 
 export const fetchById = async (id, pagePath) => {
-  const URL = pagePath === '/meals'
+  const URL = pagePath === `/meals/${id}`
     ? `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
     : `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
   const data = await fetch(URL)

@@ -26,7 +26,6 @@ export function GlobalProvider({ children }) {
     if (searchResult && Object.values(searchResult)[0] === null) {
       return global.alert('Sorry, we haven\'t found any recipes for these filters.');
     }
-    console.log(searchResult);
     if (searchResult && Object.values(searchResult)[0].length === 1) {
       if (pagePath === '/meals') {
         return push(`/meals/${searchResult.meals[0].idMeal}`);
