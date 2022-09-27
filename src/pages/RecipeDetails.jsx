@@ -4,6 +4,7 @@ import { useLocation, useParams, useHistory } from 'react-router-dom';
 import { GlobalContext } from '../context/GlobalProvider';
 import { fetchById, fetchByName } from '../helpers/requests';
 import RecipeDetailsInfo from '../components/RecipeDetailsInfo';
+import RecomItems from '../components/RecomItems';
 
 export default function RecipeDetails() {
   const { setSearchResult, setRecFoods } = useContext(GlobalContext);
@@ -52,21 +53,35 @@ export default function RecipeDetails() {
     <div>
       { recipeDetails && pathname === `/drinks/${id}`
         && (
-          <RecipeDetailsInfo
-            recipeDetails={ recipeDetails }
-            details={ details }
-            type="drinks"
-            navigateBack={ navigateBack }
-          />
+          <div>
+            <RecipeDetailsInfo
+              recipeDetails={ recipeDetails }
+              details={ details }
+              type="drinks"
+              navigateBack={ navigateBack }
+              className="card-food"
+            />
+            <h1>Recomendado</h1>
+            <RecomItems id="idMeal" thumb="strMealThumb" search="meals" str="strMeal" />
+          </div>
         )}
       { recipeDetails && pathname === `/meals/${id}`
       && (
-        <RecipeDetailsInfo
-          recipeDetails={ recipeDetails }
-          details={ details }
-          type="meals"
-          navigateBack={ navigateBack }
-        />
+        <div>
+          <RecipeDetailsInfo
+            recipeDetails={ recipeDetails }
+            details={ details }
+            type="meals"
+            navigateBack={ navigateBack }
+          />
+          <h1>Recomendado</h1>
+          <RecomItems
+            id="idDrink"
+            thumb="strDrinkThumb"
+            search="drinks"
+            str="strDrink"
+          />
+        </div>
       )}
     </div>
   );
