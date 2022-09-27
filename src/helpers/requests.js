@@ -47,3 +47,13 @@ export const fetchByCategoryName = (pagePath, categoryName) => {
     .then((json) => json);
   return data;
 };
+
+export const fetchById = async (id, pagePath) => {
+  const URL = pagePath === `/meals/${id}`
+    ? `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
+    : `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
+  const data = await fetch(URL)
+    .then((res) => res.json())
+    .then((json) => json);
+  return data;
+};

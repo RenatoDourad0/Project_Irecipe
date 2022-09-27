@@ -28,7 +28,6 @@ export default function Recipes(props) {
                 { searchItem[str] }
               </h3>
             </div>
-
           </Link>
         ))}
     </div>
