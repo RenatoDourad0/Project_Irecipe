@@ -1,48 +1,30 @@
-import React, { useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useContext, useEffect } from 'react';
 import Header from '../components/Header';
-// import DrinkDetails from './DrinkDetails';
+import DrinkDetails from './DrinkDetails';
 import { GlobalContext } from '../context/GlobalProvider';
 import Footer from '../components/Footer';
+import { fetchByName, fetchCategories } from '../helpers/requests';
+import CatButtons from '../components/CatButtons';
 
 export default function Drinks() {
-  const { searchResult, setSearchResult } = useContext(GlobalContext);
-  const { push } = useHistory();
-
-  const CARDS_MAX_LENGTH = 12;
-
+  const { searchResult, setSearchResult, setCategories } = useContext(GlobalContext);
+  const fetchMealsOrDrinks = async () => {
+    setSearchResult(await fetchByName('', '/drinks'));
+  };
+  const fetchCatDrinks = async () => {
+    setCategories(await fetchCategories('/drinks'));
+  };
+  useEffect(() => {
+    fetchMealsOrDrinks();
+    fetchCatDrinks();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <div>
       <Header />
-      { searchResult && searchResult.drinks
-        && Object.values(searchResult)[0].length > 1 && searchResult.drinks
-        .filter((drink, index) => index < CARDS_MAX_LENGTH)
-        .map((searchItem, index) => (
-          <div
-            key={ searchItem.idDrink }
-            data-testid={ `${index}-recipe-card` }
-          >
-            <img
-              src={ searchItem.strDrinkThumb }
-              alt={ searchItem.strDrink }
-              data-testid={ `${index}-card-img` }
-            />
-            <h3
-              data-testid={ `${index}-card-name` }
-            >
-              { searchItem.strDrink }
-            </h3>
-            <button
-              type="button"
-              onClick={ () => {
-                setSearchResult(null);
-                push('/drinks');
-              } }
-            >
-              Voltar
-            </button>
-          </div>
-        ))}
+      <CatButtons search="drinks" />
+      { searchResult && searchResult.drinks && Object.values(searchResult)[0].length > 1
+      && <DrinkDetails /> }
       <Footer />
     </div>
   );

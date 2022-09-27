@@ -9,10 +9,9 @@ const MEALS_CATEGORIES_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?c
 export function GlobalProvider({ children }) {
   const { push } = useHistory();
   const { pathname: pagePath } = useLocation();
-
   const [mealCategories, setMealCaegories] = useState([]);
   const [searchResult, setSearchResult] = useState(null);
-
+  const [categories, setCategories] = useState([]);
   useEffect(() => {
     fetch(MEALS_CATEGORIES_URL)
       .then((res) => res.json())
@@ -48,6 +47,8 @@ export function GlobalProvider({ children }) {
     searchResult,
     setSearchResult,
     redirectToDetails,
+    categories,
+    setCategories,
   };
 
   // useMemo(() => ({
