@@ -11,7 +11,7 @@ export function GlobalProvider({ children }) {
   const { pathname: pagePath } = useLocation();
   const [mealCategories, setMealCaegories] = useState([]);
   const [searchResult, setSearchResult] = useState(null);
-
+  const [categories, setCategories] = useState([]);
   useEffect(() => {
     fetch(MEALS_CATEGORIES_URL)
       .then((res) => res.json())
@@ -46,6 +46,8 @@ export function GlobalProvider({ children }) {
     searchResult,
     setSearchResult,
     redirectToDetails,
+    categories,
+    setCategories,
   };
 
   // useMemo(() => ({
