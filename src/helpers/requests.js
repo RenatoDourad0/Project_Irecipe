@@ -48,11 +48,11 @@ export const fetchByCategoryName = (pagePath, categoryName) => {
   return data;
 };
 
-export const fetchById = async (id, pagePath) => {
+export const fetchById = (id, pagePath) => {
   const URL = pagePath === `/meals/${id}`
     ? `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
     : `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
-  const data = await fetch(URL)
+  const data = fetch(URL)
     .then((res) => res.json())
     .then((json) => json);
   return data;

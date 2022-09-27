@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useLocation, useParams, useHistory } from 'react-router-dom';
+import { GlobalContext } from '../context/GlobalProvider';
 import { fetchById } from '../helpers/requests';
+import RecipeDetailsInfo from '../components/RecipeDetailsInfo';
 
 export default function RecipeDetails() {
-  const [recipeDetails, setRecipeDetails] = useState();
-  const [details, setDetails] = useState();
+  const { setSearchResult } = useContext(GlobalContext);
+  const [recipeDetails, setRecipeDetails] = useState(null);
+  const [details, setDetails] = useState(null);
   const { id } = useParams();
   const { pathname } = useLocation();
   const { push } = useHistory();
@@ -17,6 +20,7 @@ export default function RecipeDetails() {
   }, []);
 
   const navigateBack = () => {
+    setSearchResult(null);
     setRecipeDetails(null);
     return pathname === `/drinks/${id}` ? push('/drinks') : push('/meals');
   };
@@ -37,88 +41,28 @@ export default function RecipeDetails() {
       });
       setDetails(result.filter((r) => !r.includes('null')));
     }
-  }, [recipeDetails]);
+  }, [recipeDetails, id, pathname]);
 
   return (
     <div>
       { recipeDetails && pathname === `/drinks/${id}`
         && (
-          <div>
-            <img
-              src={ recipeDetails.drinks[0].strDrinkThumb }
-              alt={ recipeDetails.drinks[0].strDrink }
-              data-testid="recipe-photo"
-            />
-            <h3
-              data-testid="recipe-title"
-            >
-              { recipeDetails.drinks[0].strDrink }
-            </h3>
-            <h3
-              data-testid="recipe-category"
-            >
-              { `${recipeDetails.drinks[0].strAlcoholic}  
-              ${recipeDetails.drinks[0].strCategory}` }
-            </h3>
-            <ul>
-              { details && details
-                .map((info, index) => (
-                  <li
-                    key={ index }
-                    data-testid={ `${index}-ingredient-name-and-measure` }
-                  >
-                    { info }
-                  </li>
-                ))}
-            </ul>
-            <p data-testid="instructions">
-              { recipeDetails.drinks[0].strInstructions }
-            </p>
-            <button type="button" onClick={ navigateBack }>Voltar</button>
-          </div>
+          <RecipeDetailsInfo
+            recipeDetails={ recipeDetails }
+            details={ details }
+            type="drinks"
+            navigateBack={ navigateBack }
+          />
         )}
       { recipeDetails && pathname === `/meals/${id}`
-        && (
-          <div>
-            <img
-              src={ recipeDetails.meals[0].strMealThumb }
-              alt={ recipeDetails.meals[0].strMeal }
-              data-testid="recipe-photo"
-            />
-            <h3
-              data-testid="recipe-title"
-            >
-              { recipeDetails.meals[0].strMeal }
-            </h3>
-            <h3
-              data-testid="recipe-category"
-            >
-              { recipeDetails.meals[0].strCategory }
-            </h3>
-            <p data-testid="instructions">
-              { recipeDetails.meals[0].strInstructions }
-            </p>
-            <ul>
-              { details && details
-                .map((information, index) => (
-                  <li
-                    key={ index }
-                    data-testid={ `${index}-ingredient-name-and-measure` }
-                  >
-                    { information }
-                  </li>
-                ))}
-            </ul>
-            <iframe
-              src={ recipeDetails.meals[0].strYoutube }
-              title={ recipeDetails.meals[0].strMeal }
-              width="420"
-              height="315"
-              data-testid="video"
-            />
-            <button type="button" onClick={ navigateBack }>Voltar</button>
-          </div>
-        )}
+      && (
+        <RecipeDetailsInfo
+          recipeDetails={ recipeDetails }
+          details={ details }
+          type="meals"
+          navigateBack={ navigateBack }
+        />
+      )}
     </div>
   );
 }
