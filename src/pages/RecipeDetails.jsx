@@ -6,6 +6,8 @@ import { fetchById, fetchByName } from '../helpers/requests';
 import RecipeDetailsInfo from '../components/RecipeDetailsInfo';
 import RecomItems from '../components/RecomItems';
 
+const copy = require('clipboard-copy');
+
 export default function RecipeDetails() {
   const {
     setSearchResult,
@@ -15,6 +17,7 @@ export default function RecipeDetails() {
   } = useContext(GlobalContext);
   const [recipeDetails, setRecipeDetails] = useState(null);
   const [details, setDetails] = useState(null);
+  const [linkCopied, setLinkCopied] = useState(false);
   const { id } = useParams();
   const { pathname } = useLocation();
   const { push } = useHistory();
@@ -80,6 +83,16 @@ export default function RecipeDetails() {
     }
   };
 
+  const handleShare = () => {
+    const timeShowingMsg = 5000;
+    const drinkOrMeal = pathname === `/drinks/${id}` ? 'drinks' : 'meals';
+    copy(recipeDetails[drinkOrMeal][0].strSource);
+    setLinkCopied(true);
+    setTimeout(() => {
+      setLinkCopied(false);
+    }, timeShowingMsg);
+  };
+
   return (
     <div>
       { recipeDetails && pathname === `/drinks/${id}`
@@ -114,6 +127,20 @@ export default function RecipeDetails() {
           />
         </div>
       )}
+      <button
+        type="button"
+        data-testid="share-btn"
+        onClick={ handleShare }
+      >
+        <img src="/src/images/shareIcon.svg" alt="share-icon" />
+      </button>
+      <button
+        type="button"
+        data-testid="favorite-btn"
+      >
+        Favorita
+      </button>
+      { linkCopied && <h1>Link copied!</h1> }
       { recipeDetails && RepValidation() === true && (
         <button
           type="button"
