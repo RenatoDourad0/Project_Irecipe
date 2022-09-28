@@ -6,11 +6,13 @@ import { fetchByCategoryName, fetchByName } from '../helpers/requests';
 
 export default function CatButtons(props) {
   const CATEGORIES_MAX_LENGTH = 5;
-  const { categories, setSearchResult,
-    setFromBtnFilter } = useContext(GlobalContext);
+  const {
+    categories,
+    setSearchResult,
+    setFromBtnFilter,
+  } = useContext(GlobalContext);
+  const { pathname } = useLocation();
   const { search } = props;
-  const location = useLocation();
-  const { pathname } = location;
   const [lasFilter, setLastFilter] = useState('');
 
   const handleClick = async ({ target: { id } }) => {

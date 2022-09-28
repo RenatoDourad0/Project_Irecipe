@@ -82,6 +82,13 @@ describe('Testa recipieDetails na rota meals', () => {
     // userEvent.click(button);
     // expect(screen.getByText('Link copied!')).toBeInTheDocument();
   });
+  test('se entrar em uma receita finalizada não tem botão start recipe', async () => {
+    localStorage.setItem('doneRecipes', JSON.stringify([{ id: 52968 }]));
+    await waitFor(() => {
+      const button = screen.queryByRole('button', { name: startRecipe });
+      expect(button).not.toBeInTheDocument();
+    });
+  });
 });
 
 describe('Testa recipieDetails na rota drinks', () => {

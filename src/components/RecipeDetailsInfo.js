@@ -54,7 +54,6 @@ export default function RecipeDetailsInfo(props) {
           width="320"
           height="240"
           controls
-          autoPlay="false"
           data-testid="video"
         >
           <source src={ recipeDetails.meals[0].strYoutube } type="video/mp4" />

@@ -19,7 +19,7 @@ export function GlobalProvider({ children }) {
   const [doneRecipes, setDoneRep] = useState([]);
   const [inProgressRecipes, setProgress] = useState({
     meals: {
-      52977: [],
+      52777: [],
     },
     drinks: {},
   });
@@ -58,7 +58,7 @@ export function GlobalProvider({ children }) {
       setProgress(getFromLS('inProgressRecipes'));
     }
     if (getFromLS('doneRecipes')) {
-      setProgress(getFromLS('doneRecipes'));
+      setDoneRep(getFromLS('doneRecipes'));
     }
   }, []);
 
