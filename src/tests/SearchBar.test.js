@@ -14,6 +14,7 @@ import oneDrink from '../../cypress/mocks/oneDrink';
 import meals from '../../cypress/mocks/meals';
 import ordinaryDrinks from '../../cypress/mocks/ordinaryDrinks';
 import drinkCategories from '../../cypress/mocks/drinkCategories';
+import breakfastMeals from '../../cypress/mocks/breakfastMeals';
 import App from '../App';
 
 const searchInput = 'search-input';
@@ -23,6 +24,7 @@ const nameSearchRadio = 'name-search-radio';
 const ingredientSearchRadio = 'ingredient-search-radio';
 const firstLetterURL = 'https://www.themealdb.com/api/json/v1/1/search.php?f=z';
 const mealCategoriesURL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
+const Card0 = '0-card-img';
 
 let currHistory;
 
@@ -35,6 +37,8 @@ describe('Testa searchBar', () => {
     fetchMock.get('https://www.themealdb.com/api/json/v1/1/filter.php?i=Chicken', mealsByIngredient);
     fetchMock.get(firstLetterURL, emptyMeals);
     fetchMock.get('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list', drinkCategories);
+    fetchMock.get('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=', ordinaryDrinks);
+    fetchMock.get('https://www.themealdb.com/api/json/v1/1/filter.php?c=Breakfast', breakfastMeals);
 
     const { history } = renderWithRouter(<App />);
     currHistory = history;
@@ -154,10 +158,24 @@ describe('Testa searchBar', () => {
 
     await waitFor(() => expect(global.alert).toHaveBeenCalled());
   });
+
+  test('os filtros de categorias', async () => {
+    const categoryButton = screen.getByTestId('Breakfast-category-filter');
+
+    userEvent.click(categoryButton);
+
+    await waitFor(() => expect(screen.getByTestId(Card0)).toBeInTheDocument());
+    expect(screen.getByText('Breakfast Potatoes')).toBeInTheDocument();
+
+    userEvent.click(categoryButton);
+
+    await waitFor(() => expect(screen.getByTestId(Card0)).toBeInTheDocument());
+    expect(screen.getByText('Corba')).toBeInTheDocument();
+  });
 });
 
 describe('teste da rota /drinks', () => {
-  beforeEach(() => {
+  beforeEach(async () => {
     fetchMock.get('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=', ordinaryDrinks);
     fetchMock.get('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list', drinkCategories);
     fetchMock.get('https://www.themealdb.com/api/json/v1/1/list.php?c=list', mealCategories);
@@ -167,6 +185,7 @@ describe('teste da rota /drinks', () => {
     fetchMock.get('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=Aquamarine', oneDrink);
     fetchMock.get('https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=178319', oneDrink);
     fetchMock.get('https://www.themealdb.com/api/json/v1/1/search.php?s=', meals);
+    fetchMock.get('https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=OrdinaryDrink', ordinaryDrinks);
 
     const { history } = renderWithRouter(<App />);
     currHistory = history;
@@ -177,7 +196,7 @@ describe('teste da rota /drinks', () => {
     userEvent.click(screen.getByTestId('drinks-bottom-btn'));
 
     expect(fetchMock.called()).toBeTruthy();
-    expect(history.location.pathname).toBe('/drinks');
+    await waitFor(() => { expect(history.location.pathname).toBe('/drinks'); });
     userEvent.click(screen.getByTestId('search-top-btn'));
   });
 
@@ -239,5 +258,27 @@ describe('teste da rota /drinks', () => {
     const returnButton = screen.getByRole('button', { name: 'Voltar' });
     userEvent.click(returnButton);
     // await waitFor(() => expect(currHistory.location.pathname).toBe('/drinks'));
+  });
+  test('os filtros de categorias', async () => {
+    await waitFor(() => expect(screen.getByTestId('0-card-img')).toBeInTheDocument());
+    const categoryButton = screen.getByTestId('Ordinary Drink-category-filter');
+
+    userEvent.click(categoryButton);
+
+    await waitFor(() => expect(screen.getByTestId(Card0)).toBeInTheDocument());
+    expect(screen.getByText('3-Mile Long Island Iced Tea')).toBeInTheDocument();
+
+    userEvent.click(categoryButton);
+
+    await waitFor(() => expect(screen.getByTestId(Card0)).toBeInTheDocument());
+    expect(screen.getByText('GG')).toBeInTheDocument();
+
+    userEvent.click(categoryButton);
+
+    const Allbutton = screen.getByTestId('All-category-filter');
+    userEvent.click(Allbutton);
+
+    await waitFor(() => expect(screen.getByTestId(Card0)).toBeInTheDocument());
+    expect(screen.getByText('GG')).toBeInTheDocument();
   });
 });
