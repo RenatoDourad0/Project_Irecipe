@@ -14,6 +14,7 @@ export function GlobalProvider({ children }) {
   const [categories, setCategories] = useState([]);
   const [fromBtnFilter, setFromBtnFilter] = useState(false);
   const [fetchRecFoods, setRecFoods] = useState({});
+  const [doneRecipes, setDoneRep] = useState([]);
   useEffect(() => {
     fetch(MEALS_CATEGORIES_URL)
       .then((res) => res.json())
@@ -53,6 +54,8 @@ export function GlobalProvider({ children }) {
     setFromBtnFilter,
     fetchRecFoods,
     setRecFoods,
+    doneRecipes,
+    setDoneRep,
   };
 
   // useMemo(() => ({
