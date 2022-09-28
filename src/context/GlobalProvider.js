@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { createContext, useEffect, useState, useCallback } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { getFromLS } from '../helpers/localStorage';
 
 export const GlobalContext = createContext();
 
@@ -15,6 +17,15 @@ export function GlobalProvider({ children }) {
   const [fromBtnFilter, setFromBtnFilter] = useState(false);
   const [fetchRecFoods, setRecFoods] = useState({});
   const [doneRecipes, setDoneRep] = useState([]);
+  const [inProgressRecipes, setProgress] = useState({
+    meals: {},
+    drinks: {},
+  });
+  const [recipeToEdit, setRecipeToEdit] = useState({
+    id: '',
+    type: '',
+  });
+
   useEffect(() => {
     fetch(MEALS_CATEGORIES_URL)
       .then((res) => res.json())
@@ -43,6 +54,16 @@ export function GlobalProvider({ children }) {
     if (!fromBtnFilter) redirectToDetails();
   }, [searchResult, redirectToDetails, fromBtnFilter]);
 
+  // toda vez que abre a página, pega o local Storage
+  useEffect(() => {
+    if (getFromLS('inProgressRecipes')) {
+      setProgress(getFromLS('inProgressRecipes'));
+    }
+    if (getFromLS('doneRecipes')) {
+      setDoneRep(getFromLS('doneRecipes'));
+    }
+  }, []);
+
   const context = {
     mealCategories,
     setMealCaegories,
@@ -56,15 +77,11 @@ export function GlobalProvider({ children }) {
     setRecFoods,
     doneRecipes,
     setDoneRep,
+    inProgressRecipes,
+    setProgress,
+    recipeToEdit,
+    setRecipeToEdit,
   };
-
-  // useMemo(() => ({
-  //   mealCategories,
-  //   setMealCaegories,
-  //   searchResult,
-  //   setSearchResult,
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }), []);
 
   return (
     <GlobalContext.Provider value={ context }>
