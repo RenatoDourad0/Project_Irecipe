@@ -5,6 +5,7 @@ import { GlobalContext } from '../context/GlobalProvider';
 import { fetchById, fetchByName } from '../helpers/requests';
 import RecipeDetailsInfo from '../components/RecipeDetailsInfo';
 import RecomItems from '../components/RecomItems';
+import image from '../images/shareIcon.svg';
 
 const copy = require('clipboard-copy');
 
@@ -131,7 +132,7 @@ export default function RecipeDetails() {
         data-testid="share-btn"
         onClick={ handleShare }
       >
-        <img src="/src/images/shareIcon.svg" alt="share-icon" />
+        <img src={ image } alt="share-icon" />
       </button>
       <button
         type="button"
