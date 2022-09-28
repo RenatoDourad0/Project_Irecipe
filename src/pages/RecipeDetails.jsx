@@ -30,11 +30,9 @@ export default function RecipeDetails() {
     const drinkOrMeal = pathname === `/drinks/${id}` ? 'drinks' : 'meals';
     if (recipeDetails) {
       const quantidades = Object.keys(recipeDetails[drinkOrMeal][0])
-        .filter((property) => property
-          .match(/strMeasure*/));
+        .filter((property) => property.match(/strMeasure*/));
       const ingredientes = Object.keys(recipeDetails[drinkOrMeal][0])
-        .filter((property) => property
-          .match(/strIngredient*/));
+        .filter((property) => property.match(/strIngredient*/));
       quantidades.forEach((element, index) => {
         result.push(`${recipeDetails[drinkOrMeal][0][element]} 
         ${recipeDetails[drinkOrMeal][0][ingredientes[index]]}`);
