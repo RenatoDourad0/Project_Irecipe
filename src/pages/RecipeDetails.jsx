@@ -85,8 +85,7 @@ export default function RecipeDetails() {
 
   const handleShare = () => {
     const timeShowingMsg = 5000;
-    const drinkOrMeal = pathname === `/drinks/${id}` ? 'drinks' : 'meals';
-    copy(recipeDetails[drinkOrMeal][0].strSource);
+    copy(global.document.location.href);
     setLinkCopied(true);
     setTimeout(() => {
       setLinkCopied(false);

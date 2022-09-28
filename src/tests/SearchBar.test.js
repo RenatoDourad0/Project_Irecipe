@@ -35,6 +35,7 @@ describe('Testa searchBar', () => {
     fetchMock.get('https://www.themealdb.com/api/json/v1/1/filter.php?i=Chicken', mealsByIngredient);
     fetchMock.get(firstLetterURL, emptyMeals);
     fetchMock.get('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list', drinkCategories);
+    fetchMock.get('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=', ordinaryDrinks);
 
     const { history } = renderWithRouter(<App />);
     currHistory = history;
