@@ -8,7 +8,7 @@ import RecomItems from '../components/RecomItems';
 
 export default function RecipeDetails() {
   const { setSearchResult, setRecFoods,
-    doneRecipes, setDoneRep } = useContext(GlobalContext);
+    doneRecipes, inProgressRecipes } = useContext(GlobalContext);
   const [recipeDetails, setRecipeDetails] = useState(null);
   const [details, setDetails] = useState(null);
   const { id } = useParams();
@@ -48,15 +48,12 @@ export default function RecipeDetails() {
       setDetails(result.filter((r) => !r.includes('null')));
     }
   }, [recipeDetails, id, pathname]);
-  const saveDoneRep = () => {
-    if (pathname.includes('/meals')) {
-      return setDoneRep([...doneRecipes, ...recipeDetails.meals]);
-    }
-    return setDoneRep([...doneRecipes, ...recipeDetails.drinks]);
+  const goInProgress = () => {
+    push(`${pathname}/in-progress`);
   };
-  const RepValidation = () => {
+  const RepValidation = (array) => {
     if (pathname.includes('/meals')) {
-      return !doneRecipes.some((e) => {
+      return !array.some((e) => {
         try {
           return e.idMeal === recipeDetails.meals[0].idMeal;
         } catch (error) {
@@ -65,7 +62,7 @@ export default function RecipeDetails() {
       });
     }
     if (pathname.includes('/drinks')) {
-      return !doneRecipes.some((e) => {
+      return !array.some((e) => {
         try {
           return e.idMeal === recipeDetails.drinks[0].idDrink;
         } catch (error) {
@@ -73,6 +70,14 @@ export default function RecipeDetails() {
         }
       });
     }
+  };
+  const inProgressValidation = () => {
+    const drinkOrMeal = pathname === `/drinks/${id}` ? 'drinks' : 'meals';
+    if (inProgressRecipes && inProgressRecipes[drinkOrMeal].length === 0) {
+      return false;
+    }
+    const keys = Object.keys(inProgressRecipes[drinkOrMeal]);
+    return keys.some((e) => e === id);
   };
   return (
     <div>
@@ -108,14 +113,28 @@ export default function RecipeDetails() {
           />
         </div>
       )}
-      { recipeDetails && RepValidation() === true && (
+      { recipeDetails
+      && RepValidation(doneRecipes) === true
+      && inProgressValidation() === false
+      && (
         <button
           type="button"
           data-testid="start-recipe-btn"
           className="btn-start-recipe"
-          onClick={ saveDoneRep }
+          onClick={ goInProgress }
         >
           Start Recipe
+        </button>)}
+      { recipeDetails
+      && inProgressValidation() === true
+      && (
+        <button
+          type="button"
+          data-testid="start-recipe-btn"
+          className="btn-start-recipe"
+          onClick={ goInProgress }
+        >
+          Continue Recipe
         </button>)}
     </div>
   );
