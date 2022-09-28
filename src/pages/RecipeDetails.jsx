@@ -9,6 +9,7 @@ import RecomItems from '../components/RecomItems';
 export default function RecipeDetails() {
   const { setSearchResult, setRecFoods } = useContext(GlobalContext);
   const [recipeDetails, setRecipeDetails] = useState(null);
+  const [btnText] = useState('Start Recipe');
   const [details, setDetails] = useState(null);
   const { id } = useParams();
   const { pathname } = useLocation();
@@ -83,6 +84,9 @@ export default function RecipeDetails() {
           />
         </div>
       )}
+      <button type="button" data-testid="start-recipe-btn" className="btn-start-recipe">
+        {btnText}
+      </button>
     </div>
   );
 }

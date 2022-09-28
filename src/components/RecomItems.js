@@ -13,12 +13,8 @@ export default function RecomItems(props) {
   const { lower, high } = showIndex;
   const REC_MAX_LENGTH = 6;
   const changeRecom = () => {
-    if (lower === 0) {
-      return setIndex({ lower: 2, high: 3 });
-    }
-    if (lower === 2) {
-      return setIndex({ lower: 4, high: 5 });
-    }
+    if (lower === 0) return setIndex({ lower: 2, high: 3 });
+    if (lower === 2) return setIndex({ lower: 4, high: 5 });
     setIndex({ lower: 0, high: 1 });
   };
   return (

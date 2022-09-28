@@ -83,3 +83,8 @@
 .card-food img {
   height: 50px;
 }
+
+.btn-start-recipe {
+  bottom: 0;
+  position: fixed;
+}
