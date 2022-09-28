@@ -50,11 +50,15 @@ export default function RecipeDetailsInfo(props) {
       </p>
       { typeProp === 'meals'
       && (
-        <iframe
-          src={ recipeDetails.meals[0].strYoutube }
+        <video
+          width="320"
+          height="240"
+          controls
           data-testid="video"
-          title={ recipeDetails[typeProp][0][titleProp] }
-        />
+        >
+          <source src={ recipeDetails.meals[0].strYoutube } type="video/mp4" />
+          <track kind="captions" />
+        </video>
       )}
       <button type="button" onClick={ navigateBack }>Voltar</button>
     </div>
