@@ -48,12 +48,9 @@ export default function RecipeDetails() {
       setDetails(result.filter((r) => !r.includes('null')));
     }
   }, [recipeDetails, id, pathname]);
-  // const saveDoneRep = () => {
-  //   if (pathname.includes('/meals')) {
-  //     return setProgress([...doneRecipes, ...recipeDetails.meals]);
-  //   }
-  //   return setProgress([...doneRecipes, ...recipeDetails.drinks]);
-  // };
+  const goInProgress = () => {
+    push(`${pathname}/in-progress`);
+  };
   const RepValidation = (array) => {
     if (pathname.includes('/meals')) {
       return !array.some((e) => {
@@ -124,7 +121,7 @@ export default function RecipeDetails() {
           type="button"
           data-testid="start-recipe-btn"
           className="btn-start-recipe"
-          // onClick={ saveDoneRep }
+          onClick={ goInProgress }
         >
           Start Recipe
         </button>)}
@@ -135,7 +132,7 @@ export default function RecipeDetails() {
           type="button"
           data-testid="start-recipe-btn"
           className="btn-start-recipe"
-          // onClick={ saveDoneRep }
+          onClick={ goInProgress }
         >
           Continue Recipe
         </button>)}
