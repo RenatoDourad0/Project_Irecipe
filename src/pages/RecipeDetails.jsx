@@ -7,8 +7,12 @@ import RecipeDetailsInfo from '../components/RecipeDetailsInfo';
 import RecomItems from '../components/RecomItems';
 
 export default function RecipeDetails() {
-  const { setSearchResult, setRecFoods,
-    doneRecipes, setDoneRep } = useContext(GlobalContext);
+  const {
+    setSearchResult,
+    setRecFoods,
+    doneRecipes,
+    setDoneRep,
+  } = useContext(GlobalContext);
   const [recipeDetails, setRecipeDetails] = useState(null);
   const [details, setDetails] = useState(null);
   const { id } = useParams();
@@ -31,6 +35,7 @@ export default function RecipeDetails() {
     setRecipeDetails(null);
     return pathname === `/drinks/${id}` ? push('/drinks') : push('/meals');
   };
+
   useEffect(() => {
     const result = [];
     const drinkOrMeal = pathname === `/drinks/${id}` ? 'drinks' : 'meals';
@@ -46,12 +51,14 @@ export default function RecipeDetails() {
       setDetails(result.filter((r) => !r.includes('null')));
     }
   }, [recipeDetails, id, pathname]);
+
   const saveDoneRep = () => {
     if (pathname.includes('/meals')) {
       return setDoneRep([...doneRecipes, ...recipeDetails.meals]);
     }
     return setDoneRep([...doneRecipes, ...recipeDetails.drinks]);
   };
+
   const RepValidation = () => {
     if (pathname.includes('/meals')) {
       return !doneRecipes.some((e) => {
@@ -72,6 +79,7 @@ export default function RecipeDetails() {
       });
     }
   };
+
   return (
     <div>
       { recipeDetails && pathname === `/drinks/${id}`

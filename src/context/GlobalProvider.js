@@ -15,6 +15,7 @@ export function GlobalProvider({ children }) {
   const [fromBtnFilter, setFromBtnFilter] = useState(false);
   const [fetchRecFoods, setRecFoods] = useState({});
   const [doneRecipes, setDoneRep] = useState([]);
+
   useEffect(() => {
     fetch(MEALS_CATEGORIES_URL)
       .then((res) => res.json())
@@ -57,14 +58,6 @@ export function GlobalProvider({ children }) {
     doneRecipes,
     setDoneRep,
   };
-
-  // useMemo(() => ({
-  //   mealCategories,
-  //   setMealCaegories,
-  //   searchResult,
-  //   setSearchResult,
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }), []);
 
   return (
     <GlobalContext.Provider value={ context }>
