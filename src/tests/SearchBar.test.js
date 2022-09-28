@@ -24,6 +24,7 @@ const nameSearchRadio = 'name-search-radio';
 const ingredientSearchRadio = 'ingredient-search-radio';
 const firstLetterURL = 'https://www.themealdb.com/api/json/v1/1/search.php?f=z';
 const mealCategoriesURL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
+const Card0 = '0-card-img';
 
 let currHistory;
 
@@ -163,12 +164,12 @@ describe('Testa searchBar', () => {
 
     userEvent.click(categoryButton);
 
-    await waitFor(() => expect(screen.getByTestId('0-card-img')).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByTestId(Card0)).toBeInTheDocument());
     expect(screen.getByText('Breakfast Potatoes')).toBeInTheDocument();
 
     userEvent.click(categoryButton);
 
-    await waitFor(() => expect(screen.getByTestId('0-card-img')).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByTestId(Card0)).toBeInTheDocument());
     expect(screen.getByText('Corba')).toBeInTheDocument();
   });
 });
@@ -264,12 +265,12 @@ describe('teste da rota /drinks', () => {
 
     userEvent.click(categoryButton);
 
-    await waitFor(() => expect(screen.getByTestId('0-card-img')).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByTestId(Card0)).toBeInTheDocument());
     expect(screen.getByText('3-Mile Long Island Iced Tea')).toBeInTheDocument();
 
     userEvent.click(categoryButton);
 
-    await waitFor(() => expect(screen.getByTestId('0-card-img')).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByTestId(Card0)).toBeInTheDocument());
     expect(screen.getByText('GG')).toBeInTheDocument();
 
     userEvent.click(categoryButton);
@@ -277,7 +278,7 @@ describe('teste da rota /drinks', () => {
     const Allbutton = screen.getByTestId('All-category-filter');
     userEvent.click(Allbutton);
 
-    await waitFor(() => expect(screen.getByTestId('0-card-img')).toBeInTheDocument());
+    await waitFor(() => expect(screen.getByTestId(Card0)).toBeInTheDocument());
     expect(screen.getByText('GG')).toBeInTheDocument();
   });
 });
