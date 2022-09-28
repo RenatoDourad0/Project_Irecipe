@@ -75,3 +75,11 @@
   text-align: center;
   width: 100%;
 }
+
+.card-food {
+  display: flex;
+}
+
+.card-food img {
+  height: 50px;
+}
