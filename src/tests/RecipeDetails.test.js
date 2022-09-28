@@ -18,9 +18,7 @@ import App from '../App';
 
 const searchInput = 'search-input';
 const submitBtn = 'exec-search-btn';
-const firstLetterSearchRadio = 'first-letter-search-radio';
 const nameSearchRadio = 'name-search-radio';
-const ingredientSearchRadio = 'ingredient-search-radio';
 const firstLetterURL = 'https://www.themealdb.com/api/json/v1/1/search.php?f=z';
 const mealCategoriesURL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
 const shareIcon = 'share-icon';
