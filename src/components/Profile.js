@@ -2,11 +2,8 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 function Profile() {
-  const Email = () => {
-    if (JSON.parse(localStorage.getItem('user'))) {
-      return JSON.parse(localStorage.getItem('user')).email;
-    }
-  };
+  const Email = (JSON.parse(localStorage.getItem('user')))
+    ? JSON.parse(localStorage.getItem('user')).email : '';
   const history = useHistory();
   const RedirectToLoginAndClearLocalStorage = () => {
     localStorage.clear();

@@ -11,6 +11,8 @@ describe('Testes da tela de perfil', () => {
     global.fetch = jest.fn().mockResolvedValue({
       json: () => Promise.resolve(meals),
     });
+  });
+  const loginEvent = () => {
     const { history } = renderWithRouter(<App />);
     currHistory = history;
     userEvent.type(screen.getByTestId('email-input'), testEmail);
@@ -18,30 +20,39 @@ describe('Testes da tela de perfil', () => {
     userEvent.click(screen.getByTestId('login-submit-btn'));
     const profileIcon = screen.getByTestId('profile-top-btn');
     userEvent.click(profileIcon);
-  });
-
+  };
   it('Testa se Email do usuario é renderizado', () => {
+    loginEvent();
     const getUserEmail = screen.getByTestId('profile-email');
     expect(getUserEmail).toBeInTheDocument();
     expect(localStorage.getItem('user'));
   });
   it('Testa se o botão DoneRecipes foi renderizado e redireciona para o caminho correto', () => {
+    loginEvent();
     const buttonDoneRecipes = screen.getByTestId('profile-done-btn');
     expect(buttonDoneRecipes).toBeInTheDocument();
     userEvent.click(buttonDoneRecipes);
     expect(currHistory.location.pathname).toBe('/done-recipes');
   });
   it('Testa se o botão FavoriteRecipes foi renderizado e redireciona para o caminho correto', () => {
+    loginEvent();
     const buttonFavoriteRecipes = screen.getByTestId('profile-favorite-btn');
     expect(buttonFavoriteRecipes).toBeInTheDocument();
     userEvent.click(buttonFavoriteRecipes);
     expect(currHistory.location.pathname).toBe('/favorite-recipes');
   });
   it('Testa se o botão LogOut foi renderizado e redireciona para o caminho correto ', () => {
+    loginEvent();
     const buttonLogOut = screen.getByTestId('profile-logout-btn');
     expect(buttonLogOut).toBeInTheDocument();
     userEvent.click(buttonLogOut);
     expect(currHistory.location.pathname).toBe('/');
     expect(localStorage.getItem(null));
+  });
+  it('Testa se não tiver localStorage, fica vazio o elemento de email ', () => {
+    const { history } = renderWithRouter(<App />);
+    history.push('/profile');
+    const getUserEmail = screen.getByTestId('profile-email');
+    expect(getUserEmail.innerHTML).toBe('');
   });
 });
