@@ -1,69 +1,65 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useContext } from 'react';
+import React, { useContext } from 'react';
 import { useLocation, useParams } from 'react-router-dom';
 import { GlobalContext } from '../context/GlobalProvider';
-import { getFromLS } from '../helpers/localStorage';
+import { sendToLS } from '../helpers/localStorage';
+// import { getFromLS } from '../helpers/localStorage';
 
 export default function RecipeInProgress() {
-  const { searchResult, setSearchResult } = useContext(GlobalContext);
+  const { inProgressRecipes, doneRecipe } = useContext(GlobalContext);
   const { id } = useParams();
   const { pathname } = useLocation();
   // const { push } = useHistory();
-  useEffect(() => {
-    setSearchResult(getFromLS('inProgressRecipes').filter((rep) => {
-      try {
-        return rep.idMeal === id;
-      } catch (error) {
-        return rep.idDrink === id;
-      }
-    }));
-  }, []);
   const drinkOrMeal = pathname === `/drinks/${id}` ? 'drinks' : 'meals';
   const imgSrc = pathname === `/drinks/${id}` ? 'strDrinkThumb' : 'strMealThumb';
   const title = pathname === `/drinks/${id}` ? 'strDrink' : 'strMeal';
+  const saveDoneRecipe = () => {
+    sendToLS('doneRecipe', [...doneRecipe, ...inProgressRecipes]);
+    setDoneRep([...doneRecipe, ...inProgressRecipes]);
+  };
   return (
     <div>
-      {searchResult !== null && (
+      {inProgressRecipes && (
         <div>
           <img
-            src={ searchResult[drinkOrMeal][0][imgSrc] }
-            alt={ searchResult[drinkOrMeal][0][title] }
+            src={ inProgressRecipes[0][imgSrc] }
+            alt={ inProgressRecipes[0][title] }
             data-testid="recipe-photo"
           />
           <h3
             data-testid="recipe-title"
           >
-            { searchResult[drinkOrMeal][0][title] }
+            { inProgressRecipes[0][title] }
           </h3>
           { drinkOrMeal === 'drinks'
             ? (
               <h3
                 data-testid="recipe-category"
               >
-                { `${searchResult.drinks[0].strAlcoholic}  
-            ${searchResult.drinks[0].strCategory}` }
+                { `${inProgressRecipes[0].strAlcoholic}  
+            ${inProgressRecipes[0].strCategory}` }
               </h3>
             ) : (
               <h3
                 data-testid="recipe-category"
               >
-                { searchResult.meals[0].strCategory }
+                { inProgressRecipes[0].strCategory }
               </h3>
             )}
           <p data-testid="instructions">
-            { searchResult[drinkOrMeal][0].strInstructions }
+            { inProgressRecipes[0].strInstructions }
           </p>
           <button
             type="button"
-            onClick={ shareRecipe }
+            // onClick={ shareRecipe }
             data-testid="share-btn"
           >
-            Finalizar
+            Compartilhar
 
           </button>
           <button
             type="button"
-            onClick={ DoneRecipe }
+            onClick={ saveDoneRecipe }
             data-testid="finish-recipe-btn"
           >
             Finalizar

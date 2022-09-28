@@ -2,6 +2,7 @@
 import React, { createContext, useEffect, useState, useCallback } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
+import { getFromLS } from '../helpers/localStorage';
 
 export const GlobalContext = createContext();
 
@@ -16,6 +17,12 @@ export function GlobalProvider({ children }) {
   const [fromBtnFilter, setFromBtnFilter] = useState(false);
   const [fetchRecFoods, setRecFoods] = useState({});
   const [doneRecipes, setDoneRep] = useState([]);
+  const [inProgressRecipes, setProgress] = useState({
+    meals: {
+      52977: [],
+    },
+    drinks: {},
+  });
   useEffect(() => {
     fetch(MEALS_CATEGORIES_URL)
       .then((res) => res.json())
@@ -59,7 +66,18 @@ export function GlobalProvider({ children }) {
     setRecFoods,
     doneRecipes,
     setDoneRep,
+    inProgressRecipes,
+    setProgress,
   };
+
+  useEffect(() => {
+    if (getFromLS('inProgressRecipes')) {
+      setProgress(getFromLS('inProgressRecipes'));
+    }
+    if (getFromLS('doneRecipes')) {
+      setProgress(getFromLS('doneRecipes'));
+    }
+  }, []);
 
   // useMemo(() => ({
   //   mealCategories,
