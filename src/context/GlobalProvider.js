@@ -7,30 +7,6 @@ import { getFromLS } from '../helpers/localStorage';
 export const GlobalContext = createContext();
 
 const MEALS_CATEGORIES_URL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
-const test = [
-  {
-    id: '52771',
-    type: 'meal',
-    nationality: 'Italian',
-    category: 'Vegetarian',
-    alcoholicOrNot: '',
-    name: 'Spicy Arrabiata Penne',
-    image: 'https://www.themealdb.com/images/media/meals/ustsqw1468250014.jpg',
-    doneDate: '23/06/2020',
-    tags: ['Pasta', 'Curry'],
-  },
-  {
-    id: '178319',
-    type: 'drink',
-    nationality: '',
-    category: 'Cocktail',
-    alcoholicOrNot: 'Alcoholic',
-    name: 'Aquamarine',
-    image: 'https://www.thecocktaildb.com/images/media/drink/zvsre31572902738.jpg',
-    doneDate: '23/06/2020',
-    tags: [],
-  },
-];
 
 export function GlobalProvider({ children }) {
   const { push } = useHistory();
@@ -40,7 +16,7 @@ export function GlobalProvider({ children }) {
   const [categories, setCategories] = useState([]);
   const [fromBtnFilter, setFromBtnFilter] = useState(false);
   const [fetchRecFoods, setRecFoods] = useState({});
-  const [doneRecipes, setDoneRep] = useState(test);
+  const [doneRecipes, setDoneRep] = useState([]);
   const [inProgressRecipes, setProgress] = useState({
     meals: {
       52977: [],
