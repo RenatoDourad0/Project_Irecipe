@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { copy } from 'clipboard-copy';
 import image from '../images/shareIcon.svg';
+
+const copy = require('clipboard-copy');
 
 export default function ShareButton() {
   const [linkCopied, setLinkCopied] = useState(false);
