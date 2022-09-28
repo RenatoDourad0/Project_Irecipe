@@ -15,6 +15,7 @@ export default function RecipeDetails() {
     setRecFoods,
     doneRecipes,
     setDoneRep,
+    inProgressRecipes,
   } = useContext(GlobalContext);
   const [recipeDetails, setRecipeDetails] = useState(null);
   const [details, setDetails] = useState(null);
@@ -63,9 +64,13 @@ export default function RecipeDetails() {
     return setDoneRep([...doneRecipes, ...recipeDetails.drinks]);
   };
 
-  const RepValidation = () => {
+  const goInProgress = () => {
+    push(`${pathname}/in-progress`);
+  };
+
+  const RepValidation = (array) => {
     if (pathname.includes('/meals')) {
-      return !doneRecipes.some((e) => {
+      return !array.some((e) => {
         try {
           return e.idMeal === recipeDetails.meals[0].idMeal;
         } catch (error) {
@@ -74,7 +79,7 @@ export default function RecipeDetails() {
       });
     }
     if (pathname.includes('/drinks')) {
-      return !doneRecipes.some((e) => {
+      return !array.some((e) => {
         try {
           return e.idMeal === recipeDetails.drinks[0].idDrink;
         } catch (error) {
@@ -91,6 +96,15 @@ export default function RecipeDetails() {
     setTimeout(() => {
       setLinkCopied(false);
     }, timeShowingMsg);
+  };
+
+  const inProgressValidation = () => {
+    const drinkOrMeal = pathname === `/drinks/${id}` ? 'drinks' : 'meals';
+    if (inProgressRecipes && inProgressRecipes[drinkOrMeal].length === 0) {
+      return false;
+    }
+    const keys = Object.keys(inProgressRecipes[drinkOrMeal]);
+    return keys.some((e) => e === id);
   };
 
   return (
@@ -141,15 +155,28 @@ export default function RecipeDetails() {
         Favorita
       </button>
       { linkCopied && <h1>Link copied!</h1> }
-      { recipeDetails && RepValidation() === true && (
+      { recipeDetails && RepValidation() === true && inProgressValidation() === false
+      && (
         <button
           type="button"
           data-testid="start-recipe-btn"
           className="btn-start-recipe"
-          onClick={ saveDoneRep }
+          onClick={ goInProgress }
         >
           Start Recipe
-        </button>)}
+        </button>
+      )}
+      { recipeDetails && inProgressValidation() === true
+      && (
+        <button
+          type="button"
+          data-testid="start-recipe-btn"
+          className="btn-start-recipe"
+          onClick={ goInProgress }
+        >
+          Continue Recipe
+        </button>
+      )}
     </div>
   );
 }
