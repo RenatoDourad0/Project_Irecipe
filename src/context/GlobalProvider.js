@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { createContext, useEffect, useState, useCallback } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -42,6 +43,8 @@ export function GlobalProvider({ children }) {
   useEffect(() => {
     if (!fromBtnFilter) redirectToDetails();
   }, [searchResult, redirectToDetails, fromBtnFilter]);
+
+  // toda vez que abre a página, pega o local Storage
 
   const context = {
     mealCategories,
