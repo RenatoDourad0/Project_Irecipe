@@ -8,7 +8,7 @@ import RecomItems from '../components/RecomItems';
 
 export default function RecipeDetails() {
   const { setSearchResult, setRecFoods,
-    doneRecipes, inProgressRecipes, setProgress } = useContext(GlobalContext);
+    doneRecipes, inProgressRecipes } = useContext(GlobalContext);
   const [recipeDetails, setRecipeDetails] = useState(null);
   const [details, setDetails] = useState(null);
   const { id } = useParams();
