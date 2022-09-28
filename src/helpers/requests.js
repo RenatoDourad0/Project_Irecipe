@@ -49,7 +49,7 @@ export const fetchByCategoryName = (pagePath, categoryName) => {
 };
 
 export const fetchById = (id, pagePath) => {
-  const URL = pagePath === `/meals/${id}`
+  const URL = pagePath.includes('/meals')
     ? `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
     : `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
   const data = fetch(URL)

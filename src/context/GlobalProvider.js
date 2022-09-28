@@ -18,10 +18,12 @@ export function GlobalProvider({ children }) {
   const [fetchRecFoods, setRecFoods] = useState({});
   const [doneRecipes, setDoneRep] = useState([]);
   const [inProgressRecipes, setProgress] = useState({
-    meals: {
-      52777: [],
-    },
+    meals: {},
     drinks: {},
+  });
+  const [recipeToEdit, setRecipeToEdit] = useState({
+    id: '',
+    type: '',
   });
 
   useEffect(() => {
@@ -77,6 +79,8 @@ export function GlobalProvider({ children }) {
     setDoneRep,
     inProgressRecipes,
     setProgress,
+    recipeToEdit,
+    setRecipeToEdit,
   };
 
   return (

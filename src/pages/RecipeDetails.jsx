@@ -8,11 +8,8 @@ import RecomItems from '../components/RecomItems';
 import ShareButton from '../components/ShareButton';
 
 export default function RecipeDetails() {
-  const {
-    setSearchResult,
-    setRecFoods,
-    doneRecipes,
-    inProgressRecipes,
+  const { setSearchResult, setRecFoods,
+    doneRecipes, inProgressRecipes,
   } = useContext(GlobalContext);
   const [recipeDetails, setRecipeDetails] = useState(null);
   const [details, setDetails] = useState(null);
