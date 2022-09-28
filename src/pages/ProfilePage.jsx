@@ -7,8 +7,8 @@ export default function ProfilePage() {
   return (
     <div>
       <Header />
-      <Footer />
       <Profile />
+      <Footer />
     </div>
   );
 }
