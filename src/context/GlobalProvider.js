@@ -55,6 +55,14 @@ export function GlobalProvider({ children }) {
   }, [searchResult, redirectToDetails, fromBtnFilter]);
 
   // toda vez que abre a página, pega o local Storage
+  useEffect(() => {
+    if (getFromLS('inProgressRecipes')) {
+      setProgress(getFromLS('inProgressRecipes'));
+    }
+    if (getFromLS('doneRecipes')) {
+      setDoneRep(getFromLS('doneRecipes'));
+    }
+  }, []);
 
   const context = {
     mealCategories,
@@ -74,23 +82,6 @@ export function GlobalProvider({ children }) {
     recipeToEdit,
     setRecipeToEdit,
   };
-
-  useEffect(() => {
-    if (getFromLS('inProgressRecipes')) {
-      setProgress(getFromLS('inProgressRecipes'));
-    }
-    if (getFromLS('doneRecipes')) {
-      setProgress(getFromLS('doneRecipes'));
-    }
-  }, []);
-
-  // useMemo(() => ({
-  //   mealCategories,
-  //   setMealCaegories,
-  //   searchResult,
-  //   setSearchResult,
-  // // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }), []);
 
   return (
     <GlobalContext.Provider value={ context }>
