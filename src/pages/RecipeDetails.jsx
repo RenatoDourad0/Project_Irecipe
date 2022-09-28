@@ -7,9 +7,9 @@ import RecipeDetailsInfo from '../components/RecipeDetailsInfo';
 import RecomItems from '../components/RecomItems';
 
 export default function RecipeDetails() {
-  const { setSearchResult, setRecFoods } = useContext(GlobalContext);
+  const { setSearchResult, setRecFoods,
+    doneRecipes, setDoneRep } = useContext(GlobalContext);
   const [recipeDetails, setRecipeDetails] = useState(null);
-  const [btnText] = useState('Start Recipe');
   const [details, setDetails] = useState(null);
   const { id } = useParams();
   const { pathname } = useLocation();
@@ -31,7 +31,6 @@ export default function RecipeDetails() {
     setRecipeDetails(null);
     return pathname === `/drinks/${id}` ? push('/drinks') : push('/meals');
   };
-
   useEffect(() => {
     const result = [];
     const drinkOrMeal = pathname === `/drinks/${id}` ? 'drinks' : 'meals';
@@ -49,7 +48,32 @@ export default function RecipeDetails() {
       setDetails(result.filter((r) => !r.includes('null')));
     }
   }, [recipeDetails, id, pathname]);
-
+  const saveDoneRep = () => {
+    if (pathname.includes('/meals')) {
+      return setDoneRep([...doneRecipes, ...recipeDetails.meals]);
+    }
+    return setDoneRep([...doneRecipes, ...recipeDetails.drinks]);
+  };
+  const RepValidation = () => {
+    if (pathname.includes('/meals')) {
+      return !doneRecipes.some((e) => {
+        try {
+          return e.idMeal === recipeDetails.meals[0].idMeal;
+        } catch (error) {
+          return e.idDrink === recipeDetails.meals[0].idMeal;
+        }
+      });
+    }
+    if (pathname.includes('/drinks')) {
+      return !doneRecipes.some((e) => {
+        try {
+          return e.idMeal === recipeDetails.drinks[0].idDrink;
+        } catch (error) {
+          return e.idDrink === recipeDetails.drinks[0].idDrink;
+        }
+      });
+    }
+  };
   return (
     <div>
       { recipeDetails && pathname === `/drinks/${id}`
@@ -84,9 +108,15 @@ export default function RecipeDetails() {
           />
         </div>
       )}
-      <button type="button" data-testid="start-recipe-btn" className="btn-start-recipe">
-        {btnText}
-      </button>
+      { recipeDetails && RepValidation() === true && (
+        <button
+          type="button"
+          data-testid="start-recipe-btn"
+          className="btn-start-recipe"
+          onClick={ saveDoneRep }
+        >
+          Start Recipe
+        </button>)}
     </div>
   );
 }
