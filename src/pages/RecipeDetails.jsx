@@ -8,7 +8,8 @@ import RecomItems from '../components/RecomItems';
 
 export default function RecipeDetails() {
   const { setSearchResult, setRecFoods,
-    doneRecipes, inProgressRecipes } = useContext(GlobalContext);
+    doneRecipes, inProgressRecipes,
+  } = useContext(GlobalContext);
   const [recipeDetails, setRecipeDetails] = useState(null);
   const [details, setDetails] = useState(null);
   const { id } = useParams();
@@ -31,6 +32,7 @@ export default function RecipeDetails() {
     setRecipeDetails(null);
     return pathname === `/drinks/${id}` ? push('/drinks') : push('/meals');
   };
+
   useEffect(() => {
     const result = [];
     const drinkOrMeal = pathname === `/drinks/${id}` ? 'drinks' : 'meals';
@@ -48,9 +50,11 @@ export default function RecipeDetails() {
       setDetails(result.filter((r) => !r.includes('null')));
     }
   }, [recipeDetails, id, pathname]);
+
   const goInProgress = () => {
     push(`${pathname}/in-progress`);
   };
+
   const RepValidation = (array) => {
     if (pathname.includes('/meals')) {
       return !array.some((e) => {

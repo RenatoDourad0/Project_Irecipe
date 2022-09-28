@@ -18,11 +18,14 @@ export function GlobalProvider({ children }) {
   const [fetchRecFoods, setRecFoods] = useState({});
   const [doneRecipes, setDoneRep] = useState([]);
   const [inProgressRecipes, setProgress] = useState({
-    meals: {
-      52977: [],
-    },
+    meals: {},
     drinks: {},
   });
+  const [recipeToEdit, setRecipeToEdit] = useState({
+    id: '',
+    type: '',
+  });
+
   useEffect(() => {
     fetch(MEALS_CATEGORIES_URL)
       .then((res) => res.json())
@@ -68,6 +71,8 @@ export function GlobalProvider({ children }) {
     setDoneRep,
     inProgressRecipes,
     setProgress,
+    recipeToEdit,
+    setRecipeToEdit,
   };
 
   useEffect(() => {
