@@ -1,16 +1,11 @@
-import React, { useContext, useState, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import { GlobalContext } from '../context/GlobalProvider';
 import ShareButton from '../components/ShareButton';
 
 export default function DoneRecipes() {
-  const { doneRecipes } = useContext(GlobalContext);
-  const [showRecipes, setShowRecipes] = useState([]);
-  useEffect(() => {
-    setShowRecipes(doneRecipes);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  const { showRecipes, setShowRecipes, doneRecipes } = useContext(GlobalContext);
   const showPerType = (ty) => setShowRecipes(doneRecipes.filter((e) => e.type === ty));
 
   return (
