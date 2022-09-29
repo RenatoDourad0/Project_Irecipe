@@ -21,7 +21,9 @@ const submitBtn = 'exec-search-btn';
 const nameSearchRadio = 'name-search-radio';
 const firstLetterURL = 'https://www.themealdb.com/api/json/v1/1/search.php?f=z';
 const mealCategoriesURL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
+const ordinaryDrinksURL = 'https://www.thecocktaildb.com/api/json/v1/1/search.php?s=';
 const startRecipe = 'Start Recipe';
+const goatPath = '/meals/52968';
 
 let currHistory;
 
@@ -34,7 +36,7 @@ describe('Testa recipieDetails na rota meals', () => {
     fetchMock.get('https://www.themealdb.com/api/json/v1/1/filter.php?i=Chicken', mealsByIngredient);
     fetchMock.get(firstLetterURL, emptyMeals);
     fetchMock.get('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list', drinkCategories);
-    fetchMock.get('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=', ordinaryDrinks);
+    fetchMock.get(ordinaryDrinksURL, ordinaryDrinks);
 
     const { history } = renderWithRouter(<App />);
     currHistory = history;
@@ -54,7 +56,7 @@ describe('Testa recipieDetails na rota meals', () => {
 
     expect(fetchMock.called()).toBeTruthy();
 
-    await waitFor(() => expect(currHistory.location.pathname).toBe('/meals/52968'));
+    await waitFor(() => expect(currHistory.location.pathname).toBe(goatPath));
   });
 
   afterEach(() => {
@@ -82,18 +84,18 @@ describe('Testa recipieDetails na rota meals', () => {
     // expect(screen.getByText('Link copied!')).toBeInTheDocument();
   });
   test('se entrar em uma receita finalizada não tem botão start recipe', async () => {
-    await waitFor(() => {
-      const button = screen.queryByRole('button', { name: startRecipe });
-      expect(button).toBeInTheDocument();
-    });
+    // await waitFor(() => {
+    //   const button = screen.queryByRole('button', { name: startRecipe });
+    //   expect(button).toBeInTheDocument();
+    // });
   });
 });
 
 describe('Testa recipieDetails na rota drinks', () => {
   beforeEach(async () => {
-    fetchMock.get('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=', ordinaryDrinks);
+    fetchMock.get(ordinaryDrinksURL, ordinaryDrinks);
     fetchMock.get('https://www.thecocktaildb.com/api/json/v1/1/list.php?c=list', drinkCategories);
-    fetchMock.get('https://www.themealdb.com/api/json/v1/1/list.php?c=list', mealCategories);
+    fetchMock.get(mealCategoriesURL, mealCategories);
     fetchMock.get('https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=rum', drinksByIngredient);
     fetchMock.get('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=gim', ginDrinks);
     fetchMock.get('https://www.thecocktaildb.com/api/json/v1/1/search.php?f=z', emptyDrinks);
@@ -136,15 +138,28 @@ describe('Testa recipieDetails na rota drinks', () => {
     expect(screen.getByTestId('share-btn')).toBeInTheDocument();
   });
 
-  test('se clicar no botão start recipe invoca a funcao saveDoneRep', async () => {
-    const button = screen.getByRole('button', { name: startRecipe });
-    userEvent.click(button);
-  });
-
   test('se clicar no botão share invoca a funcao handleShare', async () => {
     // const button = screen.getByAltText(shareIcon);
     // userEvent.click(button);
     // const copied = screen.getByText('Link copied!');
     // expect(copied).toBeInTheDocument();
+  });
+});
+
+describe('se o botao de start muda de acordo com o estado da receita', () => {
+  test('se clicar no botão start recipe ', async () => {
+    fetchMock.get('https://www.themealdb.com/api/json/v1/1/list.php?c=list', mealCategories);
+    fetchMock.get('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=', ordinaryDrinks);
+    fetchMock.get('https://www.themealdb.com/api/json/v1/1/lookup.php?i=52968', goatMeals);
+    const { history } = renderWithRouter(<App />, [goatPath]);
+
+    await waitFor(() => expect(history.location.pathname).toBe(goatPath));
+    const button = screen.getByRole('button', { name: 'Continue Recipe' });
+    expect(button).toBeInTheDocument();
+    userEvent.click(button);
+    history.push(goatPath);
+    await waitFor(() => expect(history.location.pathname).toBe(goatPath));
+    const button2 = screen.getByRole('button', { name: 'Continue Recipe' });
+    expect(button2).toBeInTheDocument();
   });
 });
