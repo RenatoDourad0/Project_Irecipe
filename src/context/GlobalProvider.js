@@ -70,6 +70,10 @@ export function GlobalProvider({ children }) {
     } else { setFavoriteRecipes([]); }
   }, [pagePath]);
 
+  // useEffect(() => {
+  //   sendToLS('setProgress', inProgressRecipes);
+  // }, [inProgressRecipes]);
+
   const context = {
     mealCategories,
     setMealCaegories,
