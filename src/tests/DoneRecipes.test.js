@@ -37,6 +37,9 @@ describe('testa a pagina de receitas feitas', () => {
     global.fetch = jest.fn().mockResolvedValue({
       json: () => Promise.resolve(meals),
     });
+    document.execCommand = jest.fn().mockResolvedValue({
+      json: () => Promise.resolve(),
+    });
     const { history } = renderWithRouter(<App />);
     localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
     currHistory = history;
@@ -68,11 +71,12 @@ describe('testa a pagina de receitas feitas', () => {
     expect(screen.getByTestId('1-horizontal-share-btn')).toBeInTheDocument();
     expect(screen.getByTestId('1-horizontal-done-date')).toBeInTheDocument();
   });
-});
-test('testa se ao clicar no botão, copia o link para o usuário', async () => {
-  await waitFor(() => {});
-  currHistory.push('/done-recipes');
-  const btnLink = screen.getByTestId('0-horizontal-share-btn');
-  userEvent.click(btnLink);
-  await waitFor(() => {});
+  test('testa se ao clicar no botão, copia o link para o usuário', async () => {
+    await waitFor(() => {});
+    currHistory.push('/done-recipes');
+    const btnLink = screen.getByTestId('0-horizontal-share-btn');
+    userEvent.click(btnLink);
+    await waitFor(() => {});
+    expect(document.execCommand).toHaveBeenCalledWith('copy');
+  });
 });

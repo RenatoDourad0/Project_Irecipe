@@ -33,6 +33,14 @@ export default function DoneRecipes() {
                 {' '}
               </span>
             )}
+            { dR.type === 'drink' && (
+              <span>
+                { dR.alcoholicOrNot }
+                {' '}
+                -
+                {' '}
+              </span>
+            )}
             { dR.category }
           </h3>
           <h3 data-testid={ `${index}-horizontal-name` }>{ dR.name }</h3>

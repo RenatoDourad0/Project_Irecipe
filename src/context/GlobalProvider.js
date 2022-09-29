@@ -62,7 +62,7 @@ export function GlobalProvider({ children }) {
     if (getFromLS('doneRecipes')) {
       setDoneRep(getFromLS('doneRecipes'));
     }
-  }, []);
+  }, [pagePath]);
 
   const context = {
     mealCategories,
