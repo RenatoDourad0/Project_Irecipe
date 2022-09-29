@@ -31,7 +31,7 @@ const doneRecipes = [
 ];
 
 let currHistory;
-
+const link = '/done-recipes';
 describe('testa a pagina de receitas feitas', () => {
   beforeEach(() => {
     global.fetch = jest.fn().mockResolvedValue({
@@ -49,13 +49,13 @@ describe('testa a pagina de receitas feitas', () => {
   });
 
   test('testa se os elementos foram carregados com o testid certo', async () => {
+    currHistory.push(link);
     await waitFor(() => {});
-    currHistory.push('/done-recipes');
     expect(screen.getByTestId('filter-by-all-btn')).toBeInTheDocument();
     expect(screen.getByTestId('filter-by-meal-btn')).toBeInTheDocument();
+    expect(screen.getByTestId('filter-by-drink-btn')).toBeInTheDocument();
+
     expect(screen.getByTestId('0-horizontal-image')).toBeInTheDocument();
-    expect(screen.getByTestId('0-horizontal-top-text')).toBeInTheDocument();
-    expect(screen.getByTestId('0-horizontal-name')).toBeInTheDocument();
     expect(screen.getByTestId('0-horizontal-top-text')).toBeInTheDocument();
     expect(screen.getByTestId('0-horizontal-name')).toBeInTheDocument();
     expect(screen.getByTestId('0-horizontal-share-btn')).toBeInTheDocument();
@@ -66,17 +66,28 @@ describe('testa a pagina de receitas feitas', () => {
     expect(screen.getByTestId('1-horizontal-image')).toBeInTheDocument();
     expect(screen.getByTestId('1-horizontal-top-text')).toBeInTheDocument();
     expect(screen.getByTestId('1-horizontal-name')).toBeInTheDocument();
-    expect(screen.getByTestId('1-horizontal-top-text')).toBeInTheDocument();
-    expect(screen.getByTestId('1-horizontal-name')).toBeInTheDocument();
     expect(screen.getByTestId('1-horizontal-share-btn')).toBeInTheDocument();
     expect(screen.getByTestId('1-horizontal-done-date')).toBeInTheDocument();
   });
   test('testa se ao clicar no botão, copia o link para o usuário', async () => {
+    currHistory.push(link);
     await waitFor(() => {});
-    currHistory.push('/done-recipes');
     const btnLink = screen.getByTestId('0-horizontal-share-btn');
     userEvent.click(btnLink);
     await waitFor(() => {});
     expect(document.execCommand).toHaveBeenCalledWith('copy');
+  });
+  test('testa se os filtros funcionam', async () => {
+    currHistory.push(link);
+    await waitFor(() => {});
+    const semFiltro = screen.getByTestId('filter-by-all-btn');
+    const filtroPorComida = screen.getByTestId('filter-by-meal-btn');
+    const filtroPorBebida = screen.getByTestId('filter-by-drink-btn');
+    userEvent.click(filtroPorBebida);
+    expect(screen.getAllByAltText('recipeDone').length).toBe(1);
+    userEvent.click(semFiltro);
+    expect(screen.getAllByAltText('recipeDone').length).toBe(2);
+    userEvent.click(filtroPorComida);
+    expect(screen.getAllByAltText('recipeDone').length).toBe(1);
   });
 });

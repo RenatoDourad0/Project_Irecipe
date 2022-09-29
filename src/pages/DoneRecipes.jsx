@@ -38,7 +38,7 @@ export default function DoneRecipes() {
         Drinks
       </button>
       { showRecipes && showRecipes.map((dR, index) => (
-        <div key={ dR.id }>
+        <div key={ dR.id } alt="done-recipe">
           <Link to={ `/${dR.type}s/${dR.id}` } className="card-food">
             <img
               src={ dR.image }
