@@ -83,6 +83,7 @@ export default function RecipeDetails() {
 
   const RepValidation = (array) => {
     if (pathname.includes('/meals')) {
+      console.log(array);
       return !array.some((e) => {
         try {
           return e.id === recipeDetails.meals[0].idMeal;
