@@ -60,24 +60,6 @@ export default function RecipeDetails() {
   };
 
   const goInProgress = () => {
-    if (drinkOrMeal === 'meals') {
-      sendToLS('inProgressRecipes', {
-        ...inProgressRecipes,
-        meals: {
-          ...inProgressRecipes.meals,
-          [id]: details,
-        },
-      });
-    }
-    if (drinkOrMeal === 'drinks') {
-      sendToLS('inProgressRecipes', {
-        ...inProgressRecipes,
-        drinks: {
-          ...inProgressRecipes.drinks,
-          [id]: details,
-        },
-      });
-    }
     push(`${pathname}/in-progress`);
   };
 
