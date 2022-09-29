@@ -3,7 +3,6 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useLocation, useParams, useHistory } from 'react-router-dom';
 import { GlobalContext } from '../context/GlobalProvider';
 import { fetchById, fetchByName } from '../helpers/requests';
-import { sendToLS } from '../helpers/localStorage';
 import RecipeDetailsInfo from '../components/RecipeDetailsInfo';
 import RecomItems from '../components/RecomItems';
 import ShareButton from '../components/ShareButton';

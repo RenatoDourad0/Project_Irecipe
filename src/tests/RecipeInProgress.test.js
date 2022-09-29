@@ -5,6 +5,7 @@ import renderWithRouter from './helpers/renderWithRouter';
 import App from '../App';
 import meals from '../../cypress/mocks/meals';
 import { getFromLS, sendToLS } from '../helpers/localStorage';
+
 let currHistory;
 const startRecipeBtnTestId = 'start-recipe-btn';
 const cardRecipeTestId = '0-recipe-card';
