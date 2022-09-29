@@ -7,6 +7,8 @@ import meals from '../../cypress/mocks/meals';
 import { getFromLS, sendToLS } from '../helpers/localStorage';
 
 let currHistory;
+const startRecipeBtnTestId = 'start-recipe-btn';
+const cardRecipeTestId = '0-recipe-card';
 
 describe('testa o componente Recipes', () => {
   beforeEach(() => {
@@ -25,7 +27,7 @@ describe('testa o componente Recipes', () => {
   });
 
   test('Testa redirecionamento para rota dinâmica de `.../:id/inprogress`', async () => {
-    const cardRecipe = screen.getByTestId('0-recipe-card');
+    const cardRecipe = screen.getByTestId(cardRecipeTestId);
     expect(cardRecipe).toBeInTheDocument();
 
     userEvent.click(cardRecipe);
@@ -36,7 +38,7 @@ describe('testa o componente Recipes', () => {
       expect(fetch).toHaveBeenCalled();
     });
 
-    const startRecipeBtn = screen.getByTestId('start-recipe-btn');
+    const startRecipeBtn = screen.getByTestId(startRecipeBtnTestId);
     expect(startRecipeBtn).toBeInTheDocument();
 
     userEvent.click(startRecipeBtn);
@@ -45,14 +47,14 @@ describe('testa o componente Recipes', () => {
   });
 
   test('Testa se é possível compartilhar link da receita e favoritá-la', async () => {
-    const cardRecipe = screen.getByTestId('0-recipe-card');
+    const cardRecipe = screen.getByTestId(cardRecipeTestId);
     expect(cardRecipe).toBeInTheDocument();
     userEvent.click(cardRecipe);
     expect(currHistory.location.pathname).toBe('/meals/52977');
     await waitFor(() => {
       expect(fetch).toHaveBeenCalled();
     });
-    const startRecipeBtn = screen.getByTestId('start-recipe-btn');
+    const startRecipeBtn = screen.getByTestId(startRecipeBtnTestId);
     userEvent.click(startRecipeBtn);
     expect(currHistory.location.pathname).toBe('/meals/52977/in-progress');
     const shareBtn = screen.getByTestId('share-btn');
@@ -92,7 +94,7 @@ describe('testa o componente Recipes', () => {
       drinks: {},
     });
 
-    const cardRecipe = screen.getByTestId('0-recipe-card');
+    const cardRecipe = screen.getByTestId(cardRecipeTestId);
 
     userEvent.click(cardRecipe);
 
@@ -100,7 +102,7 @@ describe('testa o componente Recipes', () => {
       expect(fetch).toHaveBeenCalled();
     });
 
-    const startRecipeBtn = screen.getByTestId('start-recipe-btn');
+    const startRecipeBtn = screen.getByTestId(startRecipeBtnTestId);
 
     userEvent.click(startRecipeBtn);
     await waitFor(() => {
