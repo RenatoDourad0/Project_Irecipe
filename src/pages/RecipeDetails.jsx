@@ -17,6 +17,8 @@ export default function RecipeDetails() {
   const { pathname } = useLocation();
   const { push } = useHistory();
 
+  const drinkOrMeal = pathname === `/drinks/${id}` ? 'drinks' : 'meals';
+
   useEffect(() => {
     async function renderFetch() {
       setRecipeDetails(await fetchById(id, pathname));
@@ -30,7 +32,6 @@ export default function RecipeDetails() {
 
   useEffect(() => {
     const result = [];
-    const drinkOrMeal = pathname === `/drinks/${id}` ? 'drinks' : 'meals';
     if (recipeDetails) {
       const quantidades = Object.keys(recipeDetails[drinkOrMeal][0])
         .filter((property) => property.match(/strMeasure*/));
@@ -76,7 +77,6 @@ export default function RecipeDetails() {
   };
 
   const inProgressValidation = () => {
-    const drinkOrMeal = pathname === `/drinks/${id}` ? 'drinks' : 'meals';
     if (inProgressRecipes && Object.keys(inProgressRecipes[drinkOrMeal]).length === 0) {
       return false;
     }

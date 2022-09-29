@@ -1,9 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import ShareButton from '../components/ShareButton';
+import { GlobalContext } from '../context/GlobalProvider';
+import { getFromLS, sendToLS } from '../helpers/localStorage';
 
 export default function RecipeInProgress() {
+  const { inProgressRecipes } = useContext(GlobalContext);
   const [recipe, setRecipe] = useState({});
   const [checkBoxes, setCheckboxes] = useState([]);
+  const [checkedIngredients, setCheckedIngredients] = useState([]);
+
+  // console.log(inProgressRecipes);
 
   const { pathname } = useLocation();
   const id = pathname.split('/')[2];
@@ -44,7 +51,48 @@ export default function RecipeInProgress() {
     setCheckboxes(itemsArr);
   }, [recipe]);
 
-  console.log(recipe);
+  useEffect(() => {
+    if (getFromLS('inProgressRecipes')) {
+      const currCheckedIngredients = getFromLS('inProgressRecipes')[type]
+        .find((el) => el.id === id)?.checkedIngredients || [];
+      setCheckedIngredients(currCheckedIngredients);
+    }
+  }, []);
+
+  useEffect(() => {
+    const filteredRecipes = inProgressRecipes[type].filter((el) => el.id !== id);
+    if (filteredRecipes) {
+      sendToLS('inProgressRecipes', {
+        ...inProgressRecipes,
+        [type]: [...filteredRecipes, { id, checkedIngredients: [] }],
+      });
+    }
+  }, []);
+
+  useEffect(() => {
+    if (checkedIngredients.length) {
+      const filteredRecipes = inProgressRecipes[type].filter((el) => el.id !== id);
+      sendToLS('inProgressRecipes', {
+        ...inProgressRecipes,
+        [type]: [...filteredRecipes, { id, checkedIngredients }],
+      });
+    }
+  }, [checkedIngredients]);
+
+  function handleChange({ target: { name, checked } }) {
+    if (checked) {
+      setCheckedIngredients([...checkedIngredients, name]);
+    }
+  }
+
+  const URLFilter = () => {
+    const URL = global.document.location.href;
+    if (URL.includes('/in-progress')) {
+      const filteredURL = URL.split('/in-progress');
+      filteredURL.pop();
+      return filteredURL[0];
+    } return link;
+  };
 
   return (
     <div>
@@ -54,7 +102,7 @@ export default function RecipeInProgress() {
         data-testid="recipe-photo"
       />
       <h1 data-testid="recipe-title">{recipe.strMeal}</h1>
-      <button type="button" data-testid="share-btn">Share</button>
+      <ShareButton link={ URLFilter() } testid="share-btn" />
       <button type="button" data-testid="favorite-btn">Fav</button>
       <p data-testid="recipe-category">
         {recipe.strCategory}
@@ -67,10 +115,22 @@ export default function RecipeInProgress() {
           data-testid={ `${index}-ingredient-step` }
         >
           {`${checkbox.ingredient} ${checkbox.qnty}`}
-          <input type="checkbox" name={ checkbox.ingredient } id="" />
+          <input
+            type="checkbox"
+            name={ checkbox.ingredient }
+            checked={ checkedIngredients.includes(checkbox.ingredient) }
+            onChange={ handleChange }
+          />
         </label>
       ))}
-      <button type="button" data-testid="finish-recipe-btn">Finish</button>
+      <button
+        type="button"
+        data-testid="finish-recipe-btn"
+        disabled={ checkBoxes.length !== checkedIngredients.length }
+      >
+        Finish
+
+      </button>
     </div>
   );
 }

@@ -18,8 +18,8 @@ export function GlobalProvider({ children }) {
   const [fetchRecFoods, setRecFoods] = useState({});
   const [doneRecipes, setDoneRep] = useState([]);
   const [inProgressRecipes, setProgress] = useState({
-    meals: {},
-    drinks: {},
+    meals: [],
+    drinks: [],
   });
   const [recipeToEdit, setRecipeToEdit] = useState({
     id: '',
@@ -63,7 +63,11 @@ export function GlobalProvider({ children }) {
       setShowRecipes(getFromLS('doneRecipes'));
       setDoneRep(getFromLS('doneRecipes'));
     }
-  }, [pagePath]);
+  }, [pagePath, localStorage]);
+
+  // useEffect(() => {
+  //   sendToLS('setProgress', inProgressRecipes);
+  // }, [inProgressRecipes]);
 
   const context = {
     mealCategories,

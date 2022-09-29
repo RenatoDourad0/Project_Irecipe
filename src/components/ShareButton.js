@@ -7,6 +7,7 @@ const copy = require('clipboard-copy');
 export default function ShareButton(props) {
   const [linkCopied, setLinkCopied] = useState(false);
   const { testid, link } = props;
+
   const handleShare = () => {
     const timeShowingMsg = 5000;
     copy(link);
