@@ -1,4 +1,5 @@
 import React, { useContext, useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import { GlobalContext } from '../context/GlobalProvider';
 import ShareButton from '../components/ShareButton';
@@ -10,9 +11,8 @@ export default function DoneRecipes() {
     setShowRecipes(doneRecipes);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  const showPerType = (type) => {
-    setShowRecipes(doneRecipes.filter((e) => e.type === type));
-  };
+  const showPerType = (ty) => setShowRecipes(doneRecipes.filter((e) => e.type === ty));
+
   return (
     <div>
       <Header />
@@ -39,11 +39,14 @@ export default function DoneRecipes() {
       </button>
       { showRecipes && showRecipes.map((dR, index) => (
         <div key={ dR.id }>
-          <img
-            src={ dR.image }
-            alt="recipeDone"
-            data-testid={ `${index}-horizontal-image` }
-          />
+          <Link to={ `/${dR.type}s/${dR.id}` } className="card-food">
+            <img
+              src={ dR.image }
+              alt="recipeDone"
+              role="presentation"
+              data-testid={ `${index}-horizontal-image` }
+            />
+          </Link>
           <h3
             data-testid={ `${index}-horizontal-top-text` }
           >
@@ -65,7 +68,9 @@ export default function DoneRecipes() {
             )}
             { dR.category }
           </h3>
-          <h3 data-testid={ `${index}-horizontal-name` }>{ dR.name }</h3>
+          <Link to={ `/${dR.type}s/${dR.id}` } data-testid={ `${index}-horizontal-name` }>
+            { dR.name }
+          </Link>
           <h3 data-testid={ `${index}-horizontal-done-date` }>{ dR.doneDate }</h3>
           { dR.tags && dR.tags
             .filter((tags, number) => number < 2)
