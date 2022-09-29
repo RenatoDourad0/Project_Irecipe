@@ -24,6 +24,8 @@ describe('Testa recipieDetails', () => {
     fetchMock.get('https://www.themealdb.com/api/json/v1/1/lookup.php?i=52968', goatMeals);
     fetchMock.get('https://www.thecocktaildb.com/api/json/v1/1/search.php?s=', ordinaryDrinks);
 
+    const white = 'whiteHeartIcon.svg';
+
     const { history } = renderWithRouter(<App />, ['/meals/52968']);
 
     expect(fetchMock.called()).toBeTruthy();
@@ -32,9 +34,11 @@ describe('Testa recipieDetails', () => {
 
     const favBtn = screen.getByTestId('favorite-btn');
 
-    expect(favBtn).toHaveAttribute('src', 'whiteHeartIcon.svg');
+    expect(favBtn).toHaveAttribute('src', white);
     userEvent.click(favBtn);
     expect(favBtn).toHaveAttribute('src', 'blackHeartIcon.svg');
+    userEvent.click(favBtn);
+    expect(favBtn).toHaveAttribute('src', white);
   });
 
   test('se é possivel clicar no favoriteButton e se muda de cor na rota drinks', async () => {
