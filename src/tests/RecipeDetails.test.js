@@ -21,7 +21,6 @@ const submitBtn = 'exec-search-btn';
 const nameSearchRadio = 'name-search-radio';
 const firstLetterURL = 'https://www.themealdb.com/api/json/v1/1/search.php?f=z';
 const mealCategoriesURL = 'https://www.themealdb.com/api/json/v1/1/list.php?c=list';
-const shareIcon = 'share-icon';
 const startRecipe = 'Start Recipe';
 
 let currHistory;
@@ -67,9 +66,9 @@ describe('Testa recipieDetails na rota meals', () => {
     expect(screen.getByText('Mbuzi Choma (Roasted Goat)')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Voltar' })).toBeInTheDocument();
     expect(screen.getByTestId('0-recommendation-card')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Favorita' })).toBeInTheDocument();
+    expect(screen.getByTestId('favorite-btn')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: startRecipe })).toBeInTheDocument();
-    expect(screen.getByAltText(shareIcon)).toBeInTheDocument();
+    expect(screen.getByTestId('share-btn')).toBeInTheDocument();
   });
 
   test('se clicar no botão start recipe invoca a funcao saveDoneRep', async () => {
@@ -83,10 +82,9 @@ describe('Testa recipieDetails na rota meals', () => {
     // expect(screen.getByText('Link copied!')).toBeInTheDocument();
   });
   test('se entrar em uma receita finalizada não tem botão start recipe', async () => {
-    localStorage.setItem('doneRecipes', JSON.stringify([{ id: 52968 }]));
     await waitFor(() => {
       const button = screen.queryByRole('button', { name: startRecipe });
-      expect(button).not.toBeInTheDocument();
+      expect(button).toBeInTheDocument();
     });
   });
 });
@@ -133,9 +131,9 @@ describe('Testa recipieDetails na rota drinks', () => {
     expect(screen.getByText('Aquamarine')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: 'Voltar' })).toBeInTheDocument();
     expect(screen.getByTestId('0-recommendation-card')).toBeInTheDocument();
-    expect(screen.getByRole('button', { name: 'Favorita' })).toBeInTheDocument();
+    expect(screen.getByTestId('favorite-btn')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: startRecipe })).toBeInTheDocument();
-    expect(screen.getByAltText(shareIcon)).toBeInTheDocument();
+    expect(screen.getByTestId('share-btn')).toBeInTheDocument();
   });
 
   test('se clicar no botão start recipe invoca a funcao saveDoneRep', async () => {

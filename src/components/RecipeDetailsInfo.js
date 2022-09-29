@@ -41,7 +41,7 @@ export default function RecipeDetailsInfo(props) {
               key={ index }
               data-testid={ `${index}-ingredient-name-and-measure` }
             >
-              { info }
+              { `${info.ingredient} ${info.qnty}` }
             </li>
           ))}
       </ul>
