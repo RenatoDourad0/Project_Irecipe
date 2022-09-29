@@ -32,11 +32,9 @@ describe('Testa recipieDetails', () => {
 
     const favBtn = screen.getByTestId('favorite-btn');
 
-    expect(favBtn).toHaveAttribute('src');
-    console.log(favBtn.child);
-    expect(favBtn.child.memoizedProps.src).toBe('whiteHeartIcon.svg');
+    expect(favBtn).toHaveAttribute('src', 'whiteHeartIcon.svg');
     userEvent.click(favBtn);
-    expect(favBtn.child.memoizedProps.src).toBe('blackHeartIcon.svg');
+    expect(favBtn).toHaveAttribute('src', 'blackHeartIcon.svg');
   });
 
   test('se é possivel clicar no favoriteButton e se muda de cor na rota drinks', async () => {
@@ -50,12 +48,10 @@ describe('Testa recipieDetails', () => {
 
     await waitFor(() => expect(history.location.pathname).toBe('/drinks/178319'));
 
-    // await waitFor(() => {
-    //   const favBtn = screen.getByTestId('favorite-btn');
-    //   expect(favBtn).toHaveAttribute('src');
-    //   expect(favBtn.src).toBe('/static/media/whiteHeartIcon.2b822118952dc5140129c6349fcd0472.svg');
-    //   userEvent.click(favBtn);
-    //   expect(favBtn.src).toBe('/static/media/blackHeartIcon.083cb006913d197c95857ebfa2161db7.svg');
-    // });
+    const favBtn = screen.getByTestId('favorite-btn');
+
+    expect(favBtn).toHaveAttribute('src', 'whiteHeartIcon.svg');
+    userEvent.click(favBtn);
+    expect(favBtn).toHaveAttribute('src', 'blackHeartIcon.svg');
   });
 });
