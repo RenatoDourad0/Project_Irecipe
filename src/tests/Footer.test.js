@@ -12,7 +12,6 @@ describe('Testa o componente Footer', () => {
   beforeEach(() => {
     const { history } = renderWithRouter(<App />);
     currHistory = history;
-    console.log(currHistory.location);
 
     userEvent.type(screen.getByTestId('email-input'), testEmail);
     userEvent.type(screen.getByTestId('password-input'), '1234567');

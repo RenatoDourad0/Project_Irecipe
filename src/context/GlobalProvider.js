@@ -25,7 +25,7 @@ export function GlobalProvider({ children }) {
     id: '',
     type: '',
   });
-
+  const [showRecipes, setShowRecipes] = useState(doneRecipes);
   useEffect(() => {
     fetch(MEALS_CATEGORIES_URL)
       .then((res) => res.json())
@@ -60,9 +60,10 @@ export function GlobalProvider({ children }) {
       setProgress(getFromLS('inProgressRecipes'));
     }
     if (getFromLS('doneRecipes')) {
+      setShowRecipes(getFromLS('doneRecipes'));
       setDoneRep(getFromLS('doneRecipes'));
     }
-  }, []);
+  }, [pagePath]);
 
   const context = {
     mealCategories,
@@ -81,6 +82,8 @@ export function GlobalProvider({ children }) {
     setProgress,
     recipeToEdit,
     setRecipeToEdit,
+    showRecipes,
+    setShowRecipes,
   };
 
   return (

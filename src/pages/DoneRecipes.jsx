@@ -1,27 +1,47 @@
 import React, { useContext } from 'react';
-import copy from 'clipboard-copy';
+import { Link } from 'react-router-dom';
 import Header from '../components/Header';
 import { GlobalContext } from '../context/GlobalProvider';
-import shareImage from '../images/shareIcon.svg';
+import ShareButton from '../components/ShareButton';
 
 export default function DoneRecipes() {
-  const { doneRecipes } = useContext(GlobalContext);
-  const copyLink = (element) => {
-    copy(`http://localhost:3000/${element.type}s/${element.id}`);
-  };
+  const { showRecipes, setShowRecipes, doneRecipes } = useContext(GlobalContext);
+  const showPerType = (ty) => setShowRecipes(doneRecipes.filter((e) => e.type === ty));
+
   return (
     <div>
       <Header />
-      <button data-testid="filter-by-all-btn" type="button">All</button>
-      <button data-testid="filter-by-meal-btn" type="button">Meals</button>
-      <button data-testid="filter-by-drink-btn" type="button">Drinks</button>
-      { doneRecipes && doneRecipes.map((dR, index) => (
-        <div key={ dR.id }>
-          <img
-            src={ dR.image }
-            alt="recipeDone"
-            data-testid={ `${index}-horizontal-image` }
-          />
+      <button
+        data-testid="filter-by-all-btn"
+        type="button"
+        onClick={ () => setShowRecipes(doneRecipes) }
+      >
+        All
+      </button>
+      <button
+        data-testid="filter-by-meal-btn"
+        type="button"
+        onClick={ () => showPerType('meal') }
+      >
+        Meals
+      </button>
+      <button
+        data-testid="filter-by-drink-btn"
+        type="button"
+        onClick={ () => showPerType('drink') }
+      >
+        Drinks
+      </button>
+      { showRecipes && showRecipes.map((dR, index) => (
+        <div key={ dR.id } alt="done-recipe">
+          <Link to={ `/${dR.type}s/${dR.id}` } className="card-food">
+            <img
+              src={ dR.image }
+              alt="recipeDone"
+              role="presentation"
+              data-testid={ `${index}-horizontal-image` }
+            />
+          </Link>
           <h3
             data-testid={ `${index}-horizontal-top-text` }
           >
@@ -33,9 +53,19 @@ export default function DoneRecipes() {
                 {' '}
               </span>
             )}
+            { dR.type === 'drink' && (
+              <span>
+                { dR.alcoholicOrNot }
+                {' '}
+                -
+                {' '}
+              </span>
+            )}
             { dR.category }
           </h3>
-          <h3 data-testid={ `${index}-horizontal-name` }>{ dR.name }</h3>
+          <Link to={ `/${dR.type}s/${dR.id}` } data-testid={ `${index}-horizontal-name` }>
+            { dR.name }
+          </Link>
           <h3 data-testid={ `${index}-horizontal-done-date` }>{ dR.doneDate }</h3>
           { dR.tags && dR.tags
             .filter((tags, number) => number < 2)
@@ -47,14 +77,7 @@ export default function DoneRecipes() {
                 { tag }
               </p>
             ))}
-          <button
-            data-testid={ `${index}-horizontal-share-btn` }
-            onClick={ () => copyLink(dR) }
-            type="button"
-            src={ shareImage }
-          >
-            <img src={ shareImage } alt="share-icon" />
-          </button>
+          <ShareButton link={ `http://localhost:3000/${dR.type}s/${dR.id}` } testid={ `${index}-horizontal-share-btn` } />
         </div>
       ))}
 

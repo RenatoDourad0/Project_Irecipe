@@ -120,21 +120,13 @@ export default function RecipeDetails() {
           />
         </div>
       )}
-      <ShareButton />
-      {/* <button
-        type="button"
-        data-testid="share-btn"
-        onClick={ handleShare }
-      >
-        <img src={ image } alt="share-icon" />
-      </button> */}
+      <ShareButton link={ global.document.location.href } testid="share-btn" />
       <button
         type="button"
         data-testid="favorite-btn"
       >
         Favorita
       </button>
-      {/* { linkCopied && <h1>Link copied!</h1> } */}
       { recipeDetails
       && RepValidation(doneRecipes) === true
       && inProgressValidation() === false
