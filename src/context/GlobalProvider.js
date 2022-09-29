@@ -26,6 +26,8 @@ export function GlobalProvider({ children }) {
     type: '',
   });
   const [showRecipes, setShowRecipes] = useState(doneRecipes);
+  const [favoriteRecipes, setFavoriteRecipes] = useState(null);
+
   useEffect(() => {
     fetch(MEALS_CATEGORIES_URL)
       .then((res) => res.json())
@@ -63,6 +65,9 @@ export function GlobalProvider({ children }) {
       setShowRecipes(getFromLS('doneRecipes'));
       setDoneRep(getFromLS('doneRecipes'));
     }
+    if (getFromLS('favoriteRecipes')) {
+      setFavoriteRecipes(getFromLS('favoriteRecipes'));
+    } else { setFavoriteRecipes([]); }
   }, [pagePath]);
 
   const context = {
@@ -84,6 +89,8 @@ export function GlobalProvider({ children }) {
     setRecipeToEdit,
     showRecipes,
     setShowRecipes,
+    favoriteRecipes,
+    setFavoriteRecipes,
   };
 
   return (
