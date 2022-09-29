@@ -3,9 +3,11 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useLocation, useParams, useHistory } from 'react-router-dom';
 import { GlobalContext } from '../context/GlobalProvider';
 import { fetchById, fetchByName } from '../helpers/requests';
+import { sendToLS } from '../helpers/localStorage';
 import RecipeDetailsInfo from '../components/RecipeDetailsInfo';
 import RecomItems from '../components/RecomItems';
 import ShareButton from '../components/ShareButton';
+import FavoriteButton from '../components/FavoriteButton';
 
 export default function RecipeDetails() {
   const { setSearchResult, setRecFoods,
@@ -31,19 +33,25 @@ export default function RecipeDetails() {
   }, []);
 
   useEffect(() => {
-    const result = [];
+    const itemsArr = [];
     if (recipeDetails) {
-      const quantidades = Object.keys(recipeDetails[drinkOrMeal][0])
-        .filter((property) => property.match(/strMeasure*/));
-      const ingredientes = Object.keys(recipeDetails[drinkOrMeal][0])
-        .filter((property) => property.match(/strIngredient*/));
-      quantidades.forEach((element, index) => {
-        result.push(`${recipeDetails[drinkOrMeal][0][element]} 
-        ${recipeDetails[drinkOrMeal][0][ingredientes[index]]}`);
+      const ingredientsArr = Object.keys(recipeDetails[drinkOrMeal][0])
+        .filter((el) => el.includes('strIngredient'));
+      const qntyArr = Object.keys(recipeDetails[drinkOrMeal][0])
+        .filter((el) => el.includes('strMeasure'));
+      ingredientsArr.forEach((el, i) => {
+        if (recipeDetails[drinkOrMeal][0][el]
+          && recipeDetails[drinkOrMeal][0][qntyArr[i]]) {
+          const obj = {
+            ingredient: recipeDetails[drinkOrMeal][0][el],
+            qnty: recipeDetails[drinkOrMeal][0][qntyArr[i]],
+          };
+          itemsArr.push(obj);
+        }
       });
-      setDetails(result.filter((r) => !r.includes('null')));
+      setDetails(itemsArr);
     }
-  }, [recipeDetails, id, pathname]);
+  }, [recipeDetails]);
 
   const navigateBack = () => {
     setSearchResult(null);
@@ -52,11 +60,30 @@ export default function RecipeDetails() {
   };
 
   const goInProgress = () => {
+    if (drinkOrMeal === 'meals') {
+      sendToLS('inProgressRecipes', {
+        ...inProgressRecipes,
+        meals: {
+          ...inProgressRecipes.meals,
+          [id]: details,
+        },
+      });
+    }
+    if (drinkOrMeal === 'drinks') {
+      sendToLS('inProgressRecipes', {
+        ...inProgressRecipes,
+        drinks: {
+          ...inProgressRecipes.drinks,
+          [id]: details,
+        },
+      });
+    }
     push(`${pathname}/in-progress`);
   };
 
   const RepValidation = (array) => {
     if (pathname.includes('/meals')) {
+      console.log(array);
       return !array.some((e) => {
         try {
           return e.id === recipeDetails.meals[0].idMeal;
@@ -121,12 +148,7 @@ export default function RecipeDetails() {
         </div>
       )}
       <ShareButton link={ global.document.location.href } testid="share-btn" />
-      <button
-        type="button"
-        data-testid="favorite-btn"
-      >
-        Favorita
-      </button>
+      <FavoriteButton id={ id } recipeDetails={ recipeDetails } />
       { recipeDetails
       && RepValidation(doneRecipes) === true
       && inProgressValidation() === false
