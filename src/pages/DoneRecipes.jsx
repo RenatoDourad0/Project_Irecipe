@@ -1,14 +1,10 @@
 import React, { useContext } from 'react';
-import copy from 'clipboard-copy';
 import Header from '../components/Header';
 import { GlobalContext } from '../context/GlobalProvider';
-import shareImage from '../images/shareIcon.svg';
+import ShareButton from '../components/ShareButton';
 
 export default function DoneRecipes() {
   const { doneRecipes } = useContext(GlobalContext);
-  const copyLink = (element) => {
-    copy(`http://localhost:3000/${element.type}s/${element.id}`);
-  };
   return (
     <div>
       <Header />
@@ -55,14 +51,7 @@ export default function DoneRecipes() {
                 { tag }
               </p>
             ))}
-          <button
-            data-testid={ `${index}-horizontal-share-btn` }
-            onClick={ () => copyLink(dR) }
-            type="button"
-            src={ shareImage }
-          >
-            <img src={ shareImage } alt="share-icon" />
-          </button>
+          <ShareButton link={ `http://localhost:3000/${dR.type}s/${dR.id}` } testid={ `${index}-horizontal-share-btn` } />
         </div>
       ))}
 
