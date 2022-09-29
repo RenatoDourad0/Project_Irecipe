@@ -18,14 +18,16 @@ export function GlobalProvider({ children }) {
   const [fetchRecFoods, setRecFoods] = useState({});
   const [doneRecipes, setDoneRep] = useState([]);
   const [inProgressRecipes, setProgress] = useState({
-    meals: [],
-    drinks: [],
+    meals: {},
+    drinks: {},
   });
   const [recipeToEdit, setRecipeToEdit] = useState({
     id: '',
     type: '',
   });
   const [showRecipes, setShowRecipes] = useState(doneRecipes);
+  const [favoriteRecipes, setFavoriteRecipes] = useState(null);
+
   useEffect(() => {
     fetch(MEALS_CATEGORIES_URL)
       .then((res) => res.json())
@@ -63,7 +65,10 @@ export function GlobalProvider({ children }) {
       setShowRecipes(getFromLS('doneRecipes'));
       setDoneRep(getFromLS('doneRecipes'));
     }
-  }, [pagePath, localStorage]);
+    if (getFromLS('favoriteRecipes')) {
+      setFavoriteRecipes(getFromLS('favoriteRecipes'));
+    } else { setFavoriteRecipes([]); }
+  }, [pagePath]);
 
   // useEffect(() => {
   //   sendToLS('setProgress', inProgressRecipes);
@@ -88,6 +93,8 @@ export function GlobalProvider({ children }) {
     setRecipeToEdit,
     showRecipes,
     setShowRecipes,
+    favoriteRecipes,
+    setFavoriteRecipes,
   };
 
   return (

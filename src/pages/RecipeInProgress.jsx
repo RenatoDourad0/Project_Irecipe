@@ -1,35 +1,30 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import FavoriteButton from '../components/FavoriteButton';
 import ShareButton from '../components/ShareButton';
 import { GlobalContext } from '../context/GlobalProvider';
 import { getFromLS, sendToLS } from '../helpers/localStorage';
+import { fetchById } from '../helpers/requests';
 
 export default function RecipeInProgress() {
   const { inProgressRecipes } = useContext(GlobalContext);
   const [recipe, setRecipe] = useState({});
+  const [recipeClone, setRecipeClone] = useState({});
   const [checkBoxes, setCheckboxes] = useState([]);
   const [checkedIngredients, setCheckedIngredients] = useState([]);
-
-  // console.log(inProgressRecipes);
+  const { push } = useHistory();
 
   const { pathname } = useLocation();
   const id = pathname.split('/')[2];
   const type = pathname.split('/')[1];
 
   useEffect(() => {
-    const fetchById = async () => {
-      const URL = pathname.includes('/meals')
-        ? `https://www.themealdb.com/api/json/v1/1/lookup.php?i=${id}`
-        : `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`;
-      const data = fetch(URL)
-        .then((res) => res.json())
-        .then((json) => json[type][0]);
-
-      if (pathname.includes('meals')) setRecipe(await data);
-      else setRecipe(await data);
-    };
-    fetchById();
-  }, [id, pathname, type]);
+    fetchById(id, pathname).then((res) => {
+      setRecipeClone(res);
+      setRecipe(res[type][0]);
+    });
+  }, [id, type, pathname]);
+  // console.log(recipe);
 
   useEffect(() => {
     const itemsArr = [];
@@ -51,30 +46,22 @@ export default function RecipeInProgress() {
     setCheckboxes(itemsArr);
   }, [recipe]);
 
+  // console.log(checkBoxes);
   useEffect(() => {
     if (getFromLS('inProgressRecipes')) {
-      const currCheckedIngredients = getFromLS('inProgressRecipes')[type]
-        .find((el) => el.id === id)?.checkedIngredients || [];
+      const currCheckedIngredients = getFromLS('inProgressRecipes')[type]?.[id] || [];
       setCheckedIngredients(currCheckedIngredients);
-    }
-  }, []);
-
-  useEffect(() => {
-    const filteredRecipes = inProgressRecipes[type].filter((el) => el.id !== id);
-    if (filteredRecipes) {
-      sendToLS('inProgressRecipes', {
-        ...inProgressRecipes,
-        [type]: [...filteredRecipes, { id, checkedIngredients: [] }],
-      });
+    } else {
+      sendToLS('inProgressRecipes', { meals: {}, drinks: {} });
     }
   }, []);
 
   useEffect(() => {
     if (checkedIngredients.length) {
-      const filteredRecipes = inProgressRecipes[type].filter((el) => el.id !== id);
+      const filteredRecipes = delete inProgressRecipes[type][id];
       sendToLS('inProgressRecipes', {
         ...inProgressRecipes,
-        [type]: [...filteredRecipes, { id, checkedIngredients }],
+        [type]: { ...filteredRecipes[type], [id]: checkedIngredients },
       });
     }
   }, [checkedIngredients]);
@@ -85,15 +72,6 @@ export default function RecipeInProgress() {
     }
   }
 
-  const URLFilter = () => {
-    const URL = global.document.location.href;
-    if (URL.includes('/in-progress')) {
-      const filteredURL = URL.split('/in-progress');
-      filteredURL.pop();
-      return filteredURL[0];
-    } return link;
-  };
-
   return (
     <div>
       <img
@@ -102,8 +80,12 @@ export default function RecipeInProgress() {
         data-testid="recipe-photo"
       />
       <h1 data-testid="recipe-title">{recipe.strMeal}</h1>
-      <ShareButton link={ URLFilter() } testid="share-btn" />
-      <button type="button" data-testid="favorite-btn">Fav</button>
+      <ShareButton link={ global.document.location.href } testid="share-btn" />
+      <FavoriteButton
+        data-testid="favorite-btn"
+        recipeDetails={ recipeClone }
+        id={ id }
+      />
       <p data-testid="recipe-category">
         {recipe.strCategory}
       </p>
@@ -127,9 +109,9 @@ export default function RecipeInProgress() {
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ checkBoxes.length !== checkedIngredients.length }
+        onClick={ () => push('/done-recipes') }
       >
         Finish
-
       </button>
     </div>
   );

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { PropTypes } from 'prop-types';
 import image from '../images/shareIcon.svg';
 
@@ -7,10 +7,19 @@ const copy = require('clipboard-copy');
 export default function ShareButton(props) {
   const [linkCopied, setLinkCopied] = useState(false);
   const { testid, link } = props;
+  const [URL, setURL] = useState('');
+
+  useEffect(() => {
+    if (link.includes('/in-progress')) {
+      const filteredURL = link.split('/in-progress');
+      filteredURL.pop();
+      setURL(filteredURL[0]);
+    } else setURL(link);
+  }, [link]);
 
   const handleShare = () => {
     const timeShowingMsg = 5000;
-    copy(link);
+    copy(URL);
     setLinkCopied(true);
     setTimeout(() => {
       setLinkCopied(false);
