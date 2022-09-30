@@ -73,15 +73,17 @@ describe('testa a pagina de receitas feitas', () => {
   test('testa se os filtros funcionam', async () => {
     currHistory.push(link);
     await waitFor(() => {});
+    const nomeDaComida = 'Spicy Arrabiata Penne';
+    const nomeDaBebida = 'Aquamarine';
     const semFiltro = screen.getByTestId('filter-by-all-btn');
     const filtroPorComida = screen.getByTestId('filter-by-meal-btn');
     const filtroPorBebida = screen.getByTestId('filter-by-drink-btn');
     userEvent.click(filtroPorBebida);
-    expect(screen.queryByText('Spicy Arrabiata Penne')).not.toBeInTheDocument();
+    expect(screen.queryByText(nomeDaComida)).not.toBeInTheDocument();
     userEvent.click(filtroPorComida);
-    expect(screen.queryByText('Aquamarine')).not.toBeInTheDocument();
+    expect(screen.queryByText(nomeDaBebida)).not.toBeInTheDocument();
     userEvent.click(semFiltro);
-    expect(screen.queryByText('Aquamarine')).toBeInTheDocument();
-    expect(screen.queryByText('Spicy Arrabiata Penne')).toBeInTheDocument();
+    expect(screen.queryByText(nomeDaBebida)).toBeInTheDocument();
+    expect(screen.queryByText(nomeDaComida)).toBeInTheDocument();
   });
 });
