@@ -17,7 +17,7 @@ export default function RecipeInProgress() {
   const { pathname } = useLocation();
   const id = pathname.split('/')[2];
   const type = pathname.split('/')[1];
-  const drinkOrMeal = pathname === `/drinks/${id}/in-progress` ? 'drinks' : 'meals';
+
   useEffect(() => {
     fetchById(id, pathname).then((res) => {
       setRecipeClone(res);
@@ -47,13 +47,10 @@ export default function RecipeInProgress() {
 
   useEffect(() => {
     if (getFromLS('inProgressRecipes')) {
-      const currCheckedIngredients = getFromLS('inProgressRecipes')[type][id];
+      const currCheckedIngredients = getFromLS('inProgressRecipes')[type]?.[id] || [];
       setCheckedIngredients(currCheckedIngredients);
     } else {
-      sendToLS(
-        'inProgressRecipes',
-        { ...inProgressRecipes, [drinkOrMeal]: { [id]: [] } },
-      );
+      sendToLS('inProgressRecipes', { meals: {}, drinks: {} });
     }
   }, []);
 
@@ -72,6 +69,14 @@ export default function RecipeInProgress() {
       setCheckedIngredients([...checkedIngredients, name]);
     }
   }
+
+  // const handleFinish = () => {
+  //   const drinkOrMeal = pathname === `/drinks/${id}/in-progress` ? 'drinks' : 'meals';
+  //   const filteredInProgress = getFromLS('inProgressRecipes')[drinkOrMeal]
+  //     .filter((element) => )
+  //   sendToLS('inProgressRecipes', filteredInProgress);
+  //   push('/done-recipes');
+  // };
 
   return (
     <div>
@@ -110,7 +115,7 @@ export default function RecipeInProgress() {
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ checkBoxes.length !== checkedIngredients.length }
-        onClick={ () => push('/done-recipes') }
+        onClick={ handleChange }
       >
         Finish
       </button>
