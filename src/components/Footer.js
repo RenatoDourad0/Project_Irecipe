@@ -6,7 +6,7 @@ import mealIcon from '../images/mealIcon.svg';
 export default function Footer() {
   const history = useHistory();
   return (
-    <div data-testid="footer" className="footer">
+    <footer data-testid="footer" className="footer">
       <input
         type="image"
         src={ drinkIcon }
@@ -25,6 +25,6 @@ export default function Footer() {
           history.push('/meals');
         } }
       />
-    </div>
+    </footer>
   );
 }

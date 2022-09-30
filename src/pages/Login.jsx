@@ -30,9 +30,10 @@ export default function Login() {
   }
   return (
 
-    <form onSubmit={ handleSubmit }>
+    <form onSubmit={ handleSubmit } className="login-form">
       <label htmlFor="email">
         Email:
+        <br />
         <input
           type="text"
           name="email"
@@ -43,6 +44,7 @@ export default function Login() {
       </label>
       <label htmlFor="pass">
         Senha:
+        <br />
         <input
           type="password"
           name="pass"

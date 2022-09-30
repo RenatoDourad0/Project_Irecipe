@@ -13,7 +13,7 @@ export default function Header() {
   const history = useHistory();
 
   return (
-    <div>
+    <header>
       <input
         type="image"
         src={ profileIcon }
@@ -41,6 +41,6 @@ export default function Header() {
         { pathname === '/done-recipes' && 'Done Recipes' }
         { pathname === '/favorite-recipes' && 'Favorite Recipes' }
       </h2>
-    </div>
+    </header>
   );
 }
