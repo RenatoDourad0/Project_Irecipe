@@ -80,18 +80,6 @@ describe('Testa recipieDetails na rota meals', () => {
     const button = screen.getByRole('button', { name: startRecipe });
     userEvent.click(button);
   });
-
-  test('se clicar no botão share invoca a funcao handleShare', async () => {
-    // const button = screen.getByAltText(shareIcon);
-    // userEvent.click(button);
-    // expect(screen.getByText('Link copied!')).toBeInTheDocument();
-  });
-  test('se entrar em uma receita finalizada não tem botão start recipe', async () => {
-    // await waitFor(() => {
-    //   const button = screen.queryByRole('button', { name: startRecipe });
-    //   expect(button).toBeInTheDocument();
-    // });
-  });
 });
 
 describe('Testa recipieDetails na rota drinks', () => {
@@ -139,13 +127,6 @@ describe('Testa recipieDetails na rota drinks', () => {
     expect(screen.getByTestId('favorite-btn')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: startRecipe })).toBeInTheDocument();
     expect(screen.getByTestId('share-btn')).toBeInTheDocument();
-  });
-
-  test('se clicar no botão share invoca a funcao handleShare', async () => {
-    // const button = screen.getByAltText(shareIcon);
-    // userEvent.click(button);
-    // const copied = screen.getByText('Link copied!');
-    // expect(copied).toBeInTheDocument();
   });
 });
 

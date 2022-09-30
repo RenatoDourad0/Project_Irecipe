@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './pages/Login';
 import Meals from './pages/Meals';
 import Drinks from './pages/Drinks';
-import Favorites from './pages/Favorites';
+import FavoritesRecipes from './pages/FavoriteRecipes';
 import ProfilePage from './pages/ProfilePage';
 import DoneRecipes from './pages/DoneRecipes';
 import RecipeDetails from './pages/RecipeDetails';
@@ -25,7 +25,7 @@ function App() {
         <Route exact path="/meals/:id/in-progress" component={ RecipeInProgress } />
         <Route exact path="/drinks/:id/in-progress" component={ RecipeInProgress } />
         <Route exact path="/done-recipes" component={ DoneRecipes } />
-        <Route exact path="/favorite-recipes" component={ Favorites } />
+        <Route exact path="/favorite-recipes" component={ FavoritesRecipes } />
       </Switch>
     </GlobalProvider>
   );
