@@ -134,7 +134,7 @@ export default function RecipeDetails() {
         </div>
       )}
       <ShareButton link={ global.document.location.href } testid="share-btn" />
-      <FavoriteButton id={ id } recipeDetails={ recipeDetails } />
+      <FavoriteButton id={ id } recipeDetails={ recipeDetails } testid="favorite-btn" />
       { recipeDetails
       && RepValidation(doneRecipes) === true
       && inProgressValidation() === false
