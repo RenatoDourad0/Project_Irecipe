@@ -59,18 +59,11 @@ button {
   padding: 0.5em 1em;
 }
 
-input[ type = 'text' ], input[ type = 'password' ] {
-  border-radius: 0.3em;
-  box-shadow: 0 0 0.2 0.5em var(--dark-gray);
-  margin: 0.5em;
-  padding: 0.5em 1em;
-}
-
-input[ type = 'checkbox' ], input[ type = 'radio' ] {
+/* input[ type = 'checkbox' ], input[ type = 'radio' ] {
   height: 1em;
   margin: 0 0.2em;
   width: 1em;
-}
+} */
 
 p {
   padding: 2em;
@@ -122,6 +115,13 @@ footer {
   margin: auto;
   margin-top: 25vh;
   width: 70vw;
+}
+
+.login-form input {
+  border-radius: 0.3em;
+  box-shadow: 0 0 0.2 0.5em var(--dark-gray);
+  margin: 0.5em;
+  padding: 0.5em 1em;
 }
 
 .login-form label input {
