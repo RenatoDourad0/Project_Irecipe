@@ -7,6 +7,7 @@ import RecipeDetailsInfo from '../components/RecipeDetailsInfo';
 import RecomItems from '../components/RecomItems';
 import ShareButton from '../components/ShareButton';
 import FavoriteButton from '../components/FavoriteButton';
+import { sendToLS } from '../helpers/localStorage';
 
 export default function RecipeDetails() {
   const { setSearchResult, setRecFoods,
@@ -59,6 +60,11 @@ export default function RecipeDetails() {
   };
 
   const goInProgress = () => {
+    push(`${pathname}/in-progress`);
+    sendToLS('inProgressRecipes', { ...inProgressRecipes, [drinkOrMeal]: { [id]: [] } });
+  };
+
+  const goInProgressContinue = () => {
     push(`${pathname}/in-progress`);
   };
 
@@ -128,7 +134,7 @@ export default function RecipeDetails() {
         </div>
       )}
       <ShareButton link={ global.document.location.href } testid="share-btn" />
-      <FavoriteButton id={ id } recipeDetails={ recipeDetails } />
+      <FavoriteButton id={ id } recipeDetails={ recipeDetails } testid="favorite-btn" />
       { recipeDetails
       && RepValidation(doneRecipes) === true
       && inProgressValidation() === false
@@ -148,7 +154,7 @@ export default function RecipeDetails() {
           type="button"
           data-testid="start-recipe-btn"
           className="btn-start-recipe"
-          onClick={ goInProgress }
+          onClick={ goInProgressContinue }
         >
           Continue Recipe
         </button>

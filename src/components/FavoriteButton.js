@@ -8,7 +8,7 @@ import blackImage from '../images/blackHeartIcon.svg';
 
 export default function FavoriteButton(props) {
   const { pathname } = useLocation();
-  const { id, recipeDetails } = props;
+  const { id, recipeDetails, testid } = props;
   const { favoriteRecipes, setFavoriteRecipes } = useContext(GlobalContext);
   const isFavorite = favoriteRecipes
     ? favoriteRecipes.some((recipe) => recipe.id === id) : false;
@@ -40,12 +40,15 @@ export default function FavoriteButton(props) {
     if (favoriteRecipes !== null) {
       sendToLS('favoriteRecipes', favoriteRecipes);
     }
+    return () => {
+      sendToLS('favoriteRecipes', favoriteRecipes);
+    };
   }, [favoriteRecipes]);
 
   return (
     <button
       type="button"
-      data-testid="favorite-btn"
+      data-testid={ testid }
       onClick={ handleFavorite }
       src={ isFavorite ? blackImage : whiteImage }
     >

@@ -68,9 +68,6 @@ describe('Testa searchBar', () => {
     userEvent.click(submitButton);
 
     expect(fetchMock.called()).toBeTruthy();
-
-    // const firstCard = await waitFor(() => screen.getByTestId('0-recipe-card'));
-    // expect(firstCard).toBeInTheDocument();
   });
 
   test('Testa se faz requisicao por nome na pagina /meals ', () => {
@@ -144,7 +141,6 @@ describe('Testa searchBar', () => {
 
     const returnButton = screen.getByRole('button', { name: 'Voltar' });
     userEvent.click(returnButton);
-    // await waitFor(() => expect(currHistory.location.pathname).toBe('/meals'));
   });
 
   test('Testa se mostra alert quando não selecionar um filtro', async () => {
@@ -257,28 +253,12 @@ describe('teste da rota /drinks', () => {
 
     const returnButton = screen.getByRole('button', { name: 'Voltar' });
     userEvent.click(returnButton);
-    // await waitFor(() => expect(currHistory.location.pathname).toBe('/drinks'));
   });
   test('os filtros de categorias', async () => {
-    // await waitFor(() => expect(screen.getByTestId('0-card-img')).toBeInTheDocument(), { timeout: 5000 });
-    // const categoryButton = screen.getByTestId('Ordinary Drink-category-filter');
-
-    // userEvent.click(categoryButton);
-
-    // await waitFor(() => expect(screen.getByTestId(Card0)).toBeInTheDocument());
-    // expect(screen.getByText('3-Mile Long Island Iced Tea')).toBeInTheDocument();
-
-    // userEvent.click(categoryButton);
-
-    // await waitFor(() => expect(screen.getByTestId(Card0)).toBeInTheDocument());
-    // expect(screen.getByText('GG')).toBeInTheDocument();
-
-    // userEvent.click(categoryButton);
-
     const Allbutton = screen.getByTestId('All-category-filter');
     userEvent.click(Allbutton);
 
     await waitFor(() => expect(screen.getByTestId(Card0)).toBeInTheDocument());
-    expect(screen.getByText('GG')).toBeInTheDocument();
+    expect(screen.getByText('69 Special')).toBeInTheDocument();
   });
 });
