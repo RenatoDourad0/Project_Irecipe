@@ -5,7 +5,7 @@ import { GlobalContext } from '../context/GlobalProvider';
 import ShareButton from '../components/ShareButton';
 import FavoriteButton from '../components/FavoriteButton';
 
-export default function Favorites() {
+export default function FavoritesRecipes() {
   const { favoriteRecipes } = useContext(GlobalContext);
   const [showFavorites, setShowFavorites] = useState([]);
   useEffect(() => {

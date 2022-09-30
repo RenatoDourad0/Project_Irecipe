@@ -83,7 +83,7 @@ export default function RecipeInProgress() {
       <h1 data-testid="recipe-title">{recipe.strMeal}</h1>
       <ShareButton link={ global.document.location.href } testid="share-btn" />
       <FavoriteButton
-        data-testid="favorite-btn"
+        testid="favorite-btn"
         recipeDetails={ recipeClone }
         id={ id }
       />
