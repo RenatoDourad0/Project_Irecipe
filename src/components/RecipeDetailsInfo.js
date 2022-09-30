@@ -56,7 +56,10 @@ export default function RecipeDetailsInfo(props) {
           controls
           data-testid="video"
         >
-          <source src={ recipeDetails.meals[0].strYoutube } type="video/mp4" />
+          <source
+            src={ `${recipeDetails.meals[0].strYoutube}&origin=http://localhost:3000/` }
+            type="video/mp4"
+          />
           <track kind="captions" />
         </video>
       )}
