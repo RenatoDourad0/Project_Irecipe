@@ -17,14 +17,13 @@ export default function RecipeInProgress() {
   const { pathname } = useLocation();
   const id = pathname.split('/')[2];
   const type = pathname.split('/')[1];
-
+  const drinkOrMeal = pathname === `/drinks/${id}/in-progress` ? 'drinks' : 'meals';
   useEffect(() => {
     fetchById(id, pathname).then((res) => {
       setRecipeClone(res);
       setRecipe(res[type][0]);
     });
   }, [id, type, pathname]);
-  // console.log(recipe);
 
   useEffect(() => {
     const itemsArr = [];
@@ -46,13 +45,15 @@ export default function RecipeInProgress() {
     setCheckboxes(itemsArr);
   }, [recipe]);
 
-  // console.log(checkBoxes);
   useEffect(() => {
     if (getFromLS('inProgressRecipes')) {
-      const currCheckedIngredients = getFromLS('inProgressRecipes')[type]?.[id] || [];
+      const currCheckedIngredients = getFromLS('inProgressRecipes')[type][id];
       setCheckedIngredients(currCheckedIngredients);
     } else {
-      sendToLS('inProgressRecipes', { meals: {}, drinks: {} });
+      sendToLS(
+        'inProgressRecipes',
+        { ...inProgressRecipes, [drinkOrMeal]: { [id]: [] } },
+      );
     }
   }, []);
 
