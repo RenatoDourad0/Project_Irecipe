@@ -3,7 +3,6 @@ import React, { useEffect, useState, useContext } from 'react';
 import { useLocation, useParams, useHistory } from 'react-router-dom';
 import { GlobalContext } from '../context/GlobalProvider';
 import { fetchById, fetchByName } from '../helpers/requests';
-import { sendToLS } from '../helpers/localStorage';
 import RecipeDetailsInfo from '../components/RecipeDetailsInfo';
 import RecomItems from '../components/RecomItems';
 import ShareButton from '../components/ShareButton';
@@ -60,24 +59,6 @@ export default function RecipeDetails() {
   };
 
   const goInProgress = () => {
-    if (drinkOrMeal === 'meals') {
-      sendToLS('inProgressRecipes', {
-        ...inProgressRecipes,
-        meals: {
-          ...inProgressRecipes.meals,
-          [id]: details,
-        },
-      });
-    }
-    if (drinkOrMeal === 'drinks') {
-      sendToLS('inProgressRecipes', {
-        ...inProgressRecipes,
-        drinks: {
-          ...inProgressRecipes.drinks,
-          [id]: details,
-        },
-      });
-    }
     push(`${pathname}/in-progress`);
   };
 
