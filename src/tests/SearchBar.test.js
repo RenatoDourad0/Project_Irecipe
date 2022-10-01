@@ -15,7 +15,7 @@ import meals from '../../cypress/mocks/meals';
 import ordinaryDrinks from '../../cypress/mocks/ordinaryDrinks';
 import drinkCategories from '../../cypress/mocks/drinkCategories';
 import breakfastMeals from '../../cypress/mocks/breakfastMeals';
-import { ggDrinkResponse } from '../../cypress/mocks/ggDrink';
+import ggDrinkResponse from './helpers/ggDrink';
 import { getFromLS } from '../helpers/localStorage';
 import App from '../App';
 
