@@ -73,6 +73,7 @@ describe('testa o componente Recipes', () => {
     userEvent.click(shareBtn);
     userEvent.click(finishBtn);
     expect(currHistory.location.pathname).toBe('/done-recipes');
+    expect(getFromLS('doneRecipes')[0].id).toBe('52977');
   });
   test('', async () => {
     sendToLS('inProgressRecipes', {

@@ -15,6 +15,8 @@ import meals from '../../cypress/mocks/meals';
 import ordinaryDrinks from '../../cypress/mocks/ordinaryDrinks';
 import drinkCategories from '../../cypress/mocks/drinkCategories';
 import breakfastMeals from '../../cypress/mocks/breakfastMeals';
+import { ggDrinkResponse } from '../../cypress/mocks/ggDrink';
+import { getFromLS } from '../helpers/localStorage';
 import App from '../App';
 
 const searchInput = 'search-input';
@@ -182,6 +184,10 @@ describe('teste da rota /drinks', () => {
     fetchMock.get('https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=178319', oneDrink);
     fetchMock.get('https://www.themealdb.com/api/json/v1/1/search.php?s=', meals);
     fetchMock.get('https://www.thecocktaildb.com/api/json/v1/1/filter.php?c=Ordinary%20Drink', ordinaryDrinks);
+    fetchMock.get('https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=15300', ggDrinkResponse);
+    document.execCommand = jest.fn().mockResolvedValue({
+      json: () => Promise.resolve(),
+    });
 
     const { history } = renderWithRouter(<App />);
     currHistory = history;
@@ -260,5 +266,46 @@ describe('teste da rota /drinks', () => {
 
     await waitFor(() => expect(screen.getByTestId(Card0)).toBeInTheDocument());
     expect(screen.getByText('69 Special')).toBeInTheDocument();
+  });
+
+  test('', async () => {
+    const cardRecipe = screen.getByTestId('0-recipe-card');
+    expect(cardRecipe).toBeInTheDocument();
+    userEvent.click(cardRecipe);
+    expect(currHistory.location.pathname).toBe('/drinks/15300');
+    await waitFor(() => {
+      expect(fetchMock.called()).toBeTruthy();
+    });
+    const startRecipeBtn = screen.getByTestId('start-recipe-btn');
+    userEvent.click(startRecipeBtn);
+    await waitFor(() => {
+      expect(currHistory.location.pathname).toBe('/drinks/15300/in-progress');
+    });
+    const shareBtn = screen.getByTestId('share-btn');
+    expect(shareBtn).toBeInTheDocument();
+    const favBtn = screen.getByTestId('favorite-btn');
+    expect(favBtn).toBeInTheDocument();
+    const finishBtn = screen.getByTestId('finish-recipe-btn');
+    expect(finishBtn).toBeInTheDocument();
+    await waitFor(() => {
+      expect(fetchMock.called()).toBeTruthy();
+    });
+    expect(finishBtn).toBeDisabled();
+    const checkboxes = screen.getAllByRole('checkbox');
+    await waitFor(() => {
+      expect(checkboxes.length).toEqual(9);
+    });
+    checkboxes.forEach((el) => {
+      userEvent.click(el);
+      expect(el).toBeChecked();
+    });
+    expect(checkboxes[checkboxes.length - 1]).toBeChecked();
+    expect(Object.values(getFromLS('inProgressRecipes').drinks).length).toEqual(1);
+    expect(getFromLS('inProgressRecipes').drinks['15300'].length).toEqual(9);
+    expect(finishBtn).toBeEnabled();
+    userEvent.click(shareBtn);
+    userEvent.click(finishBtn);
+    expect(currHistory.location.pathname).toBe('/done-recipes');
+    expect(getFromLS('doneRecipes')[0].id).toBe('15300');
   });
 });
