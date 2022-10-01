@@ -86,7 +86,8 @@ export default function RecipeInProgress() {
       nationality: recipe.strArea || '',
       category: recipe.strCategory || '',
     };
-    sendToLS('doneRecipes', [...getFromLS('doneRecipes'), newDoneRecipe]);
+    const doneRecipes = getFromLS('doneRecipes') || [];
+    sendToLS('doneRecipes', [...doneRecipes, newDoneRecipe]);
     push('/done-recipes');
   };
 

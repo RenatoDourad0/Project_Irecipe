@@ -62,11 +62,11 @@ describe('testa o componente Recipes', () => {
     await waitFor(() => {
       expect(checkboxes.length).toEqual(13);
     });
-    expect(Object.values(getFromLS('inProgressRecipes').meals).length).toEqual(1);
     checkboxes.forEach((el) => {
       userEvent.click(el);
       expect(el).toBeChecked();
     });
+    expect(Object.values(getFromLS('inProgressRecipes').meals).length).toEqual(1);
     expect(checkboxes[checkboxes.length - 1]).toBeChecked();
     expect(getFromLS('inProgressRecipes').meals['52977'].length).toEqual(13);
     expect(finishBtn).toBeEnabled();

@@ -6,8 +6,8 @@ function Profile() {
     ? JSON.parse(localStorage.getItem('user')).email : '';
   const history = useHistory();
   const RedirectToLoginAndClearLocalStorage = () => {
-    localStorage.clear();
     history.push('/');
+    localStorage.clear();
   };
   return (
     <div>
