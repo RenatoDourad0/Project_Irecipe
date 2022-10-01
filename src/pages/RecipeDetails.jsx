@@ -7,7 +7,6 @@ import RecipeDetailsInfo from '../components/RecipeDetailsInfo';
 import RecomItems from '../components/RecomItems';
 import ShareButton from '../components/ShareButton';
 import FavoriteButton from '../components/FavoriteButton';
-import { sendToLS } from '../helpers/localStorage';
 
 export default function RecipeDetails() {
   const { setSearchResult, setRecFoods,
@@ -61,7 +60,7 @@ export default function RecipeDetails() {
 
   const goInProgress = () => {
     push(`${pathname}/in-progress`);
-    sendToLS('inProgressRecipes', { ...inProgressRecipes, [drinkOrMeal]: { [id]: [] } });
+    // sendToLS('inProgressRecipes', { ...inProgressRecipes, [drinkOrMeal]: { [id]: [] } });
   };
 
   const goInProgressContinue = () => {

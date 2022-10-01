@@ -2,7 +2,7 @@
 import React, { createContext, useEffect, useState, useCallback } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { getFromLS } from '../helpers/localStorage';
+import { getFromLS, sendToLS } from '../helpers/localStorage';
 
 export const GlobalContext = createContext();
 
@@ -64,7 +64,7 @@ export function GlobalProvider({ children }) {
     if (getFromLS('doneRecipes')) {
       setShowRecipes(getFromLS('doneRecipes'));
       setDoneRep(getFromLS('doneRecipes'));
-    }
+    } else { sendToLS('doneRecipes', []); }
     if (getFromLS('favoriteRecipes')) {
       setFavoriteRecipes(getFromLS('favoriteRecipes'));
     } else { setFavoriteRecipes([]); }

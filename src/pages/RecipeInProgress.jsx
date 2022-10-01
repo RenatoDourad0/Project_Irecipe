@@ -1,13 +1,11 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
 import FavoriteButton from '../components/FavoriteButton';
 import ShareButton from '../components/ShareButton';
-import { GlobalContext } from '../context/GlobalProvider';
 import { getFromLS, sendToLS } from '../helpers/localStorage';
 import { fetchById } from '../helpers/requests';
 
 export default function RecipeInProgress() {
-  const { inProgressRecipes } = useContext(GlobalContext);
   const [recipe, setRecipe] = useState({});
   const [recipeClone, setRecipeClone] = useState({});
   const [checkBoxes, setCheckboxes] = useState([]);
@@ -56,13 +54,14 @@ export default function RecipeInProgress() {
 
   useEffect(() => {
     if (checkedIngredients.length) {
-      const filteredRecipes = delete inProgressRecipes[type][id];
+      const recipes = getFromLS('inProgressRecipes');
+      // const filteredRecipes = delete inProgressRecipes[type][id];
       sendToLS('inProgressRecipes', {
-        ...inProgressRecipes,
-        [type]: { ...filteredRecipes[type], [id]: checkedIngredients },
+        ...recipes,
+        [type]: { ...recipes[type], [id]: checkedIngredients },
       });
     }
-  }, [checkedIngredients]);
+  }, [checkedIngredients, id, type]);
 
   function handleChange({ target: { name, checked } }) {
     if (checked) {
@@ -70,13 +69,26 @@ export default function RecipeInProgress() {
     }
   }
 
-  // const handleFinish = () => {
-  //   const drinkOrMeal = pathname === `/drinks/${id}/in-progress` ? 'drinks' : 'meals';
-  //   const filteredInProgress = getFromLS('inProgressRecipes')[drinkOrMeal]
-  //     .filter((element) => )
-  //   sendToLS('inProgressRecipes', filteredInProgress);
-  //   push('/done-recipes');
-  // };
+  const handleFinish = () => {
+    const inProgressRec = getFromLS('inProgressRecipes');
+    delete inProgressRec[type][id];
+    sendToLS('inProgressRecipes', inProgressRec);
+    const newDoneRecipe = {
+      id,
+      type: type === 'meals'
+        ? 'meal' : 'drink',
+      alcoholicOrNot: type === 'meals'
+        ? '' : recipe.strAlcoholic,
+      name: type === 'meals'
+        ? recipe.strMeal : recipe.strDrink,
+      image: type === 'meals'
+        ? recipe.strMealThumb : recipe.strDrinkThumb,
+      nationality: recipe.strArea || '',
+      category: recipe.strCategory || '',
+    };
+    sendToLS('doneRecipes', [...getFromLS('doneRecipes'), newDoneRecipe]);
+    push('/done-recipes');
+  };
 
   return (
     <div>
@@ -115,7 +127,7 @@ export default function RecipeInProgress() {
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ checkBoxes.length !== checkedIngredients.length }
-        onClick={ handleChange }
+        onClick={ handleFinish }
       >
         Finish
       </button>
