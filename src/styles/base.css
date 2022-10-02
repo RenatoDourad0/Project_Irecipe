@@ -60,13 +60,12 @@ button {
   font-size: 18px;
   margin: 0.2em 0.5em;
   padding: 0.5em 1em;
-  width: 100%;
+  width: 80vw;
 }
 
 button:disabled {
   background-color: #f38189;
   color: var(--white);
-  width: 80vw;
 }
 
 /* input[ type = 'checkbox' ], input[ type = 'radio' ] {
@@ -157,3 +156,57 @@ footer {
 .email-icon {
   background-image: url('./images-style/email-icon.png');
 }
+
+.header {
+  padding-left: 16px;
+  padding-right: 16px;
+}
+
+.btn-category {
+  width: 28%;
+}
+
+.nav-category {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card-food-details {
+  border-bottom: var(--light-blue) 1px solid;
+  display: flex;
+  padding: 8px;
+}
+
+.card-food-details img {
+  border-radius: 0 50%;
+  height: 100%;
+  width: 16vh;
+}
+
+.recipe-details {
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.title-des-rep {
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+}
+
+.title-des-rep h3 {
+  height: 20%;
+}
+
+.title-des-rep p {
+  color: var(--white);
+  font-size: 12px;
+  margin-left: 20px;
+  margin-top: 1.6em;
+  overflow: hidden;
+  padding: 0;
+  text-overflow: ellipsis;
+  width: 80%;
+}
+

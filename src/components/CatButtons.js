@@ -31,7 +31,7 @@ export default function CatButtons(props) {
   };
 
   return (
-    <div>
+    <div className="nav-category">
       {categories && categories[search] && categories[search]
         .filter((food, index) => index < CATEGORIES_MAX_LENGTH)
         .map((searchItem, index) => (
@@ -41,6 +41,7 @@ export default function CatButtons(props) {
             data-testid={ `${searchItem.strCategory}-category-filter` }
             type="button"
             onClick={ handleClick }
+            className="btn-category"
           >
             { searchItem.strCategory }
           </button>
@@ -49,6 +50,7 @@ export default function CatButtons(props) {
         type="button"
         data-testid="All-category-filter"
         onClick={ resetFilters }
+        className="btn-category"
       >
         All
       </button>

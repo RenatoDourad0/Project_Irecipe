@@ -14,25 +14,30 @@ export default function Header() {
 
   return (
     <header>
-      <input
-        type="image"
-        src={ profileIcon }
-        alt="profile"
-        data-testid="profile-top-btn"
-        onClick={ () => history.push('/profile') }
-      />
-      { pathname === '/profile'
+      <div className="logo-div header">
+        <input
+          type="image"
+          src={ profileIcon }
+          alt="profile"
+          data-testid="profile-top-btn"
+          onClick={ () => history.push('/profile') }
+        />
+        <div className="logo-div">
+          <h1>irecipe</h1>
+        </div>
+        { pathname === '/profile'
       || pathname === '/done-recipes'
       || pathname === '/favorite-recipes' ? null
-        : (
-          <input
-            type="image"
-            src={ searchIcon }
-            alt="search"
-            data-testid="search-top-btn"
-            onClick={ () => setShowInputSearch(!showInputSearch) }
-          />
-        )}
+          : (
+            <input
+              type="image"
+              src={ searchIcon }
+              alt="search"
+              data-testid="search-top-btn"
+              onClick={ () => setShowInputSearch(!showInputSearch) }
+            />
+          )}
+      </div>
       {showInputSearch && <SearchBar /> }
       <h2 data-testid="page-title">
         { pathname === '/meals' && 'Meals'}
