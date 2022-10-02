@@ -31,28 +31,27 @@ export default function Login() {
   return (
 
     <form onSubmit={ handleSubmit } className="login-form">
-      <label htmlFor="email">
-        Email:
-        <br />
-        <input
-          type="text"
-          name="email"
-          data-testid="email-input"
-          value={ user.email }
-          onChange={ handleChange }
-        />
-      </label>
-      <label htmlFor="pass">
-        Senha:
-        <br />
-        <input
-          type="password"
-          name="pass"
-          data-testid="password-input"
-          value={ user.pass }
-          onChange={ handleChange }
-        />
-      </label>
+      <div className="logo-div">
+        <h1>irecipe</h1>
+      </div>
+      <input
+        type="text"
+        name="email"
+        data-testid="email-input"
+        className="email-icon"
+        placeholder="Email"
+        value={ user.email }
+        onChange={ handleChange }
+      />
+      <input
+        type="password"
+        name="pass"
+        data-testid="password-input"
+        className="login-icon"
+        placeholder="Password"
+        value={ user.pass }
+        onChange={ handleChange }
+      />
       <button
         type="submit"
         data-testid="login-submit-btn"
