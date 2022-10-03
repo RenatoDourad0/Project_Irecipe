@@ -29,7 +29,7 @@ export default function CatButtons(props) {
   const resetFilters = async () => {
     setSearchResult(await fetchByName('', pathname));
   };
-
+  const changeNameCat = (category) => category === 'Other/Unknown';
   return (
     <div className="nav-category">
       {categories && categories[search] && categories[search]
@@ -43,7 +43,7 @@ export default function CatButtons(props) {
             onClick={ handleClick }
             className="btn-category"
           >
-            { searchItem.strCategory }
+            { changeNameCat(searchItem.strCategory) ? 'Others' : searchItem.strCategory }
           </button>
         ))}
       <button

@@ -2,12 +2,36 @@ import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { GlobalContext } from '../context/GlobalProvider';
+import '../styles/mealsdrinks.css';
 
 export default function Recipes(props) {
   const { searchResult } = useContext(GlobalContext);
   const CARDS_MAX_LENGTH = 12;
+  const ARRAY_LENGTH = 20;
   const { id, image, str, search } = props;
-
+  const generatorNmb = () => {
+    const array = [];
+    for (let x = 0; x < ARRAY_LENGTH; x += 1) {
+      array.push(x);
+    }
+    return array;
+  };
+  const renderIngredients = (ingre) => generatorNmb().map((e) => {
+    const objName = `strIngredient${e}`;
+    const string = `${ingre[objName]}`;
+    console.log('oi');
+    if (string === '' || string === 'undefined' || string === 'null') {
+      return '';
+    }
+    return (
+      <span
+        key={ string }
+      >
+        { string }
+        {', '}
+      </span>
+    );
+  });
   return (
     <div>
       {searchResult && searchResult[search] && searchResult[search]
@@ -33,24 +57,9 @@ export default function Recipes(props) {
                   { searchItem[str] }
                 </h3>
                 <p className="recipe-details">
-                  Ingredients:
+                  <span className="ingredients-md">Ingredients: </span>
                   {' '}
-                  { searchItem.strIngredient1 }
-                  {' '}
-                  { searchItem.strIngredient2 }
-                  {' '}
-                  { searchItem.strIngredient3 }
-                  {' '}
-                  { searchItem.strIngredient4 }
-                  {' '}
-                  { searchItem.strIngredient5 }
-                  {' '}
-                  { searchItem.strIngredient6 }
-                  {' '}
-                  { searchItem.strIngredient7 }
-                  {' '}
-                  { searchItem.strIngredient8 }
-                  {' '}
+                  { renderIngredients(searchItem) }
                 </p>
               </div>
             </div>
