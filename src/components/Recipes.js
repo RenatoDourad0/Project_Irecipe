@@ -9,7 +9,7 @@ export default function Recipes(props) {
   const { id, image, str, search } = props;
 
   return (
-    <div>
+    <div className="recipe-card-container">
       {searchResult && searchResult[search] && searchResult[search]
         .filter((food, index) => index < CARDS_MAX_LENGTH)
         .map((searchItem, index) => (

@@ -8,33 +8,36 @@ export default function RecipeDetailsInfo(props) {
   const titleProp = typeProp === 'drinks' ? 'strDrink' : 'strMeal';
 
   return (
-    <div>
-      <img
-        src={ recipeDetails[typeProp][0][imgSrcProp] }
-        alt={ recipeDetails[typeProp][0][titleProp] }
-        data-testid="recipe-photo"
-      />
-      <h3
-        data-testid="recipe-title"
-      >
-        { recipeDetails[typeProp][0][titleProp] }
-      </h3>
-      { typeProp === 'drinks'
-        ? (
-          <h3
-            data-testid="recipe-category"
-          >
-            { `${recipeDetails.drinks[0].strAlcoholic}  
-            ${recipeDetails.drinks[0].strCategory}` }
-          </h3>
-        ) : (
-          <h3
-            data-testid="recipe-category"
-          >
-            { recipeDetails.meals[0].strCategory }
-          </h3>
-        )}
-      <ul>
+    <div className="recipe-details-page">
+      <div className="recipe-details-header-container">
+        <img
+          src={ recipeDetails[typeProp][0][imgSrcProp] }
+          alt={ recipeDetails[typeProp][0][titleProp] }
+          data-testid="recipe-photo"
+        />
+        <h3
+          data-testid="recipe-title"
+        >
+          { recipeDetails[typeProp][0][titleProp] }
+        </h3>
+        { typeProp === 'drinks'
+          ? (
+            <h3
+              data-testid="recipe-category"
+            >
+              { `${recipeDetails.drinks[0].strAlcoholic}  
+              ${recipeDetails.drinks[0].strCategory}` }
+            </h3>
+          ) : (
+            <h3
+              data-testid="recipe-category"
+            >
+              { recipeDetails.meals[0].strCategory }
+            </h3>
+          )}
+      </div>
+      <h3>Ingredients</h3>
+      <ul className="recipe-details-list-container">
         { details && details
           .map((info, index) => (
             <li
@@ -45,7 +48,8 @@ export default function RecipeDetailsInfo(props) {
             </li>
           ))}
       </ul>
-      <p data-testid="instructions">
+      <h3>Instructions</h3>
+      <p data-testid="instructions" className="recipe-details-text">
         { recipeDetails[typeProp][0].strInstructions }
       </p>
       { typeProp === 'meals'
@@ -63,7 +67,13 @@ export default function RecipeDetailsInfo(props) {
           <track kind="captions" />
         </video>
       )}
-      <button type="button" onClick={ navigateBack }>Voltar</button>
+      <button
+        className="recipe-details-voltar-btn"
+        type="button"
+        onClick={ navigateBack }
+      >
+        Back
+      </button>
     </div>
   );
 }

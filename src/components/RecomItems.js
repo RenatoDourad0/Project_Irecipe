@@ -25,7 +25,7 @@ export default function RecomItems(props) {
           <div
             key={ e[id] }
             data-testid={ `${index}-recommendation-card` }
-            className="card-food"
+            className="recomended-items-card"
             style={ { display: index !== high && lower !== index ? 'none' : 'block' } }
             display="none"
           >
@@ -33,7 +33,13 @@ export default function RecomItems(props) {
             <img src={ e[thumb] } alt="recomendElement" />
           </div>
         ))}
-      <button type="button" onClick={ changeRecom }>Next</button>
+      <button
+        className="sugestion-card-btn"
+        type="button"
+        onClick={ changeRecom }
+      >
+        Next
+      </button>
     </div>
   );
 }

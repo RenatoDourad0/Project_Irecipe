@@ -33,10 +33,11 @@ export default function ShareButton(props) {
         data-testid={ testid }
         onClick={ handleShare }
         src={ image }
+        className="share-btn"
       >
         <img src={ image } alt="share-icon" />
       </button>
-      { linkCopied && <p>Link copied!</p> }
+      { linkCopied && <p className="share-message">Link copied!</p> }
     </>
   );
 }

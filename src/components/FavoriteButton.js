@@ -51,6 +51,7 @@ export default function FavoriteButton(props) {
       data-testid={ testid }
       onClick={ handleFavorite }
       src={ isFavorite ? blackImage : whiteImage }
+      className="favorite-btn"
     >
       <img src={ isFavorite ? blackImage : whiteImage } alt="share-icon" />
     </button>
