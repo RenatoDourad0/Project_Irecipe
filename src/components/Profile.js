@@ -1,5 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
+import '../styles/profile.css';
 
 function Profile() {
   const Email = (JSON.parse(localStorage.getItem('user')))
@@ -10,33 +11,41 @@ function Profile() {
     localStorage.clear();
   };
   return (
-    <div>
+    <div className="profile-container">
       <h1
         data-testid="profile-email"
+        className="profile-email"
       >
+        Ola,
         {Email}
       </h1>
       <button
         type="button"
         data-testid="profile-done-btn"
         onClick={ () => history.push('/done-recipes') }
+        className="profile-button"
       >
         Done Recipes
       </button>
+
       <button
         type="button"
         data-testid="profile-favorite-btn"
         onClick={ () => history.push('/favorite-recipes') }
+        className="profile-button"
       >
         Favorite Recipes
       </button>
+
       <button
         type="button"
         data-testid="profile-logout-btn"
         onClick={ RedirectToLoginAndClearLocalStorage }
+        className="profile-button"
       >
         Logout
       </button>
+
     </div>
   );
 }
