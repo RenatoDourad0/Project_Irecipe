@@ -60,7 +60,6 @@ export default function Recipes(props) {
                     <span className="ingredients-md">Ingredients: </span>
                     {' '}
                     { renderIngredients(searchItem) }
-                    { console.log(searchItem)}
                   </p>
                 )}
               </div>

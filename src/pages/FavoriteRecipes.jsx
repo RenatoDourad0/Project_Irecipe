@@ -14,7 +14,6 @@ export default function FavoritesRecipes() {
   }, [favoriteRecipes]);
   const showPerType = (ty) => setShowFavorites(favoriteRecipes.filter((e) => e
     .type === ty));
-  console.log(showFavorites);
   return (
     <div className="favorite-recipes-container">
       <div className="favorite-recipes-header">
