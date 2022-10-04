@@ -12,13 +12,12 @@ function Profile() {
   };
   return (
     <div className="profile-container">
-      <h1
+      <p
         data-testid="profile-email"
         className="profile-email"
       >
-        Ola,
-        {Email}
-      </h1>
+        {`Olá ${Email}`}
+      </p>
       <button
         type="button"
         data-testid="profile-done-btn"
