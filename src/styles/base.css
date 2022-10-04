@@ -27,6 +27,7 @@
 
 body {
   background-color: var(--dark-gray);
+
   /* height: 100%;
   width: 100%; */
 }
@@ -203,7 +204,7 @@ a {
 }
 
 .heading-page-title {
-  text-align: center;
   font-size: 3em;
   padding: 0;
+  text-align: center;
 }
