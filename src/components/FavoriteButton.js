@@ -45,13 +45,16 @@ export default function FavoriteButton(props) {
     };
   }, [favoriteRecipes]);
 
+  const defineButtonClassName = pathname.includes('done-recipes')
+    ? 'favorite-recipes-fav-btn' : 'favorite-btn';
+
   return (
     <button
       type="button"
       data-testid={ testid }
       onClick={ handleFavorite }
       src={ isFavorite ? blackImage : whiteImage }
-      className="favorite-btn"
+      className={ defineButtonClassName }
     >
       <img src={ isFavorite ? blackImage : whiteImage } alt="share-icon" />
     </button>

@@ -109,6 +109,15 @@
   filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(177deg) brightness(104%) contrast(101%);
 }
 
+.favorite-recipes-fav-btn {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  width: fit-content;
+  background-color: transparent;
+  filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(177deg) brightness(104%) contrast(101%);
+}
+
 /* recmomended items cards */
 
 .recomended-items-container {
