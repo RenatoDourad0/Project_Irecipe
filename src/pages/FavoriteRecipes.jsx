@@ -40,7 +40,7 @@ export default function FavoritesRecipes() {
       </button>
 
       { showFavorites && showFavorites.map((dR, index) => (
-        <div key={ dR.id } alt="favorite-recipe">
+        <div key={ dR.id } alt="favorite-recipe" className="done-card-container">
           <Link to={ `/${dR.type}s/${dR.id}` } className="card-food">
             <img
               src={ dR.image }

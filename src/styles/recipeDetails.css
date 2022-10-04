@@ -214,3 +214,7 @@
   margin: 10px 10vw;
   padding: 5px;
 }
+
+.done-card-container {
+  position: relative;
+}
