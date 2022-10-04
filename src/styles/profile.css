@@ -52,36 +52,4 @@
   }
   
 }
-
-/* .profile-container{
-  display: flex;
-  justify-content: center;
-  flex-direction: column; 
-}
-
-.profile-email{
-  color: white;
-  text-align: center;
-  font-size: 25px;
-
-  padding: 10px;
-  margin-bottom: 50px;
-  margin-top: 10px;
-
-}
-
-
-.profile-button{
-  margin: 15px auto;
-  width: 60%;
-  background-image: './images-style/logout-icon.png';
-}
-
-button:hover{
-  background-color: #be1924;
-
-  cursor: pointer;
-}
-h2{
-  color: white;
-} */
+/**/
