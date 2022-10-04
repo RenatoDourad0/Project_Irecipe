@@ -4,6 +4,7 @@ import Header from '../components/Header';
 import { GlobalContext } from '../context/GlobalProvider';
 import ShareButton from '../components/ShareButton';
 import FavoriteButton from '../components/FavoriteButton';
+import '../styles/favoriteRecipes.css';
 
 export default function FavoritesRecipes() {
   const { favoriteRecipes } = useContext(GlobalContext);
@@ -15,38 +16,43 @@ export default function FavoritesRecipes() {
     .type === ty));
   console.log(showFavorites);
   return (
-    <div>
-      <Header />
-      <button
-        data-testid="filter-by-all-btn"
-        type="button"
-        onClick={ () => setShowFavorites(favoriteRecipes) }
-      >
-        All
-      </button>
-      <button
-        data-testid="filter-by-meal-btn"
-        type="button"
-        onClick={ () => showPerType('meal') }
-      >
-        Meals
-      </button>
-      <button
-        data-testid="filter-by-drink-btn"
-        type="button"
-        onClick={ () => showPerType('drink') }
-      >
-        Drinks
-      </button>
+    <div className="favorite-recipes-container">
+      <div className="favorite-recipes-header">
+        <Header />
+      </div>
+      <div className="favorite-recipes-filters">
+        <button
+          data-testid="filter-by-all-btn"
+          type="button"
+          onClick={ () => setShowFavorites(favoriteRecipes) }
+        >
+          All
+        </button>
+        <button
+          data-testid="filter-by-meal-btn"
+          type="button"
+          onClick={ () => showPerType('meal') }
+        >
+          Meals
+        </button>
+        <button
+          data-testid="filter-by-drink-btn"
+          type="button"
+          onClick={ () => showPerType('drink') }
+        >
+          Drinks
+        </button>
+      </div>
 
       { showFavorites && showFavorites.map((dR, index) => (
-        <div key={ dR.id } alt="favorite-recipe" className="done-card-container">
+        <div key={ dR.id } alt="favorite-recipe" className="favorite-recipes-card">
           <Link to={ `/${dR.type}s/${dR.id}` } className="card-food">
             <img
               src={ dR.image }
               alt="recipe-favorite"
               role="presentation"
               data-testid={ `${index}-horizontal-image` }
+              className="favorite-recipes-container-img"
             />
           </Link>
           <h3
