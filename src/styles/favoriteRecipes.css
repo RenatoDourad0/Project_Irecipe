@@ -1,0 +1,44 @@
+.favorite-recipes-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.favorite-recipes-filters {
+  display: flex;
+  justify-content: center;
+}
+
+.favorite-recipes-card{
+  display: flex;
+  padding: 16px;
+  margin-right: 16px;
+  margin-left: 16px;
+  border-bottom: var(--light-blue) 1px solid
+}
+
+.favorite-recipes-container img {
+  max-width: 28vw;
+  border-radius: 0 50%;
+}
+
+.favorite-recipes-container a {
+  position: relative;
+  color: var(--white);
+  font-family: cream_cake_regular, sans-serif;
+  font-size: 2em;
+  padding-left: 1.6em;
+  text-align: left;  
+}
+
+.favorite-recipes-container h3 {
+  font-family: sans-serif;
+  font-size: 16px;
+}
+
+.favorite-recipes-header h3 {
+  color: var(--white);
+  font-family: cream_cake_regular, sans-serif;
+  font-size: 2em;
+  padding-left: 0.6em;
+  text-align: center;
+}
