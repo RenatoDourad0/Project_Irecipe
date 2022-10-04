@@ -2,6 +2,7 @@ import React, { useState, useContext } from 'react';
 import { useLocation } from 'react-router-dom';
 import { fetchByIngredient, fetchByName, fetchByLetter } from '../helpers/requests';
 import { GlobalContext } from '../context/GlobalProvider';
+import '../styles/searchBar.css';
 
 export default function SearchBar() {
   const { setSearchResult, setFromBtnFilter } = useContext(GlobalContext);
@@ -34,53 +35,63 @@ export default function SearchBar() {
   };
 
   return (
-    <form onSubmit={ (e) => handleSubmit(e) }>
-      <label htmlFor="searchBarInput">
-        <input
-          type="text"
-          name=""
-          id="searchBarInput"
-          value={ textToSearch }
-          data-testid="search-input"
-          onChange={ ({ target: { value } }) => setTextToSearch(value) }
-        />
-      </label>
-      <label htmlFor="ingredientsRadio">
-        <input
-          type="radio"
-          id="ingredientsRadio"
-          name="searchRadio"
-          onClick={ () => setFilterToApply('ingredientsRadio') }
-          data-testid="ingredient-search-radio"
-        />
-        Buscar por ingrediente
-      </label>
-      <label htmlFor="nameRadio">
-        <input
-          type="radio"
-          id="nameRadio"
-          name="searchRadio"
-          onClick={ () => setFilterToApply('nameRadio') }
-          data-testid="name-search-radio"
-        />
-        Buscar por nome
-      </label>
-      <label htmlFor="firstLetterRadio">
-        <input
-          type="radio"
-          id="firstLetterRadio"
-          name="searchRadio"
-          onClick={ () => setFilterToApply('firstLetterRadio') }
-          data-testid="first-letter-search-radio"
-        />
-        Buscar por primeira letra
-      </label>
-      <button
-        type="submit"
-        data-testid="exec-search-btn"
-      >
-        Pesquisar
-      </button>
+    <form onSubmit={ (e) => handleSubmit(e) } className="search-bar-form">
+      <div className="search-bar-container">
+        <div className="search-bar-text">
+          <input
+            type="text"
+            name=""
+            id="searchBarInput"
+            value={ textToSearch }
+            data-testid="search-input"
+            onChange={ ({ target: { value } }) => setTextToSearch(value) }
+            className="search-bar-input"
+            placeholder="Pesquisar..."
+          />
+        </div>
+        <div className="search-bar-inputs-container">
+          <label htmlFor="ingredientsRadio" className="search-bar-ingredientes-radio">
+            <input
+              type="radio"
+              id="ingredientsRadio"
+              name="searchRadio"
+              onClick={ () => setFilterToApply('ingredientsRadio') }
+              data-testid="ingredient-search-radio"
+              className="search-bar-radio search-bar-ingredientes-radio"
+            />
+            Ingrediente
+          </label>
+          <label htmlFor="nameRadio" className="search-bar-name-radio">
+            <input
+              type="radio"
+              id="nameRadio"
+              name="searchRadio"
+              onClick={ () => setFilterToApply('nameRadio') }
+              data-testid="name-search-radio"
+              className="search-bar-radio search-bar-name-radio"
+            />
+            Nome
+          </label>
+          <label htmlFor="firstLetterRadio" className="search-bar-first-letter-radio">
+            <input
+              type="radio"
+              id="firstLetterRadio"
+              name="searchRadio"
+              onClick={ () => setFilterToApply('firstLetterRadio') }
+              data-testid="first-letter-search-radio"
+              className="search-bar-radio search-bar-first-letter-radio"
+            />
+            Primeira letra
+          </label>
+        </div>
+        <button
+          type="submit"
+          data-testid="exec-search-btn"
+          className="search-bar-button"
+        >
+          Pesquisar
+        </button>
+      </div>
     </form>
   );
 }

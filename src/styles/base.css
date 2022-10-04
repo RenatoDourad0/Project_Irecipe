@@ -96,12 +96,6 @@ a {
   text-decoration: none;
 }
 
-footer {
-  background-color: var(--yellow);
-  opacity: 0.7;
-  padding-top: 0.5em;
-}
-
 .loader {
   display: block;
   height: 30vh;
