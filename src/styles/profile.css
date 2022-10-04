@@ -15,41 +15,44 @@
   /* fonts */
   font-size: 16px;
 }
+
 @import url('http://fonts.cdnfonts.com/css/ice-cream-cake');
 
-@media only screen and (min-device-width: 280px){
-  .profile-container{
+@media only screen and (min-device-width: 280px) {
+  .profile-container {
     display: flex;
     justify-content: center;
-    flex-direction: column; 
+    flex-direction: column;
   }
-  
-  .profile-email{
+
+  .profile-email {
     color: white;
     text-align: center;
     font-size: 25px;
-    font-family: 'Ice Cream Cake', sans-serif;
+    font-family: sans-serif;
     padding: 10px;
     margin-bottom: 50px;
     margin-top: 10px;
-  
+
   }
-  
-  
-  .profile-button{
+
+
+  .profile-button {
     margin: 15px auto;
     width: 60%;
     background-image: './images-style/logout-icon.png';
   }
-  
-  button:hover{
+
+  button:hover {
     background-color: #be1924;
-  
+
     cursor: pointer;
   }
-  h2{
+
+  h2 {
     color: white;
   }
-  
+
 }
+
 /**/

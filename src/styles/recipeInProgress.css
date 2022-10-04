@@ -7,14 +7,14 @@
 }
 
 .in-progress-ul {
-  list-style: none;
   line-height: 1.5em;
+  list-style: none;
 }
 
 .btn-in-progress {
-  width: 80vw;
-  padding: 5px;
   margin: 30px 10vw;
+  padding: 5px;
+  width: 80vw;
 }
 
 .recipe-progress-voltar-btn {

@@ -1,10 +1,10 @@
-@import './reset.css' ;
+@import './reset.css';
 
 @font-face {
   font-family: cream_cake_regular;
   font-style: normal;
   font-weight: 400;
-  src: url('./fonts/cream_cake-webfont.woff2') format('woff2') , url('./fonts/cream_cake-webfont.woff') format('woff');
+  src: url('./fonts/cream_cake-webfont.woff2') format('woff2'), url('./fonts/cream_cake-webfont.woff') format('woff');
 }
 
 :root {
@@ -27,26 +27,27 @@
 
 body {
   background-color: var(--dark-gray);
+
   /* height: 100%;
   width: 100%; */
 }
 
 h1 {
-  font-family: cream_cake_regular , sans-serif;
+  font-family: cream_cake_regular, sans-serif;
   font-size: 3em;
   text-align: left;
   overflow: hidden;
 }
 
 h2 {
-  font-family: cream_cake_regular , sans-serif;
+  font-family: cream_cake_regular, sans-serif;
   font-size: 3em;
   text-align: center;
 }
 
 h3 {
   color: var(--white);
-  font-family: cream_cake_regular , sans-serif;
+  font-family: cream_cake_regular, sans-serif;
   font-size: 2em;
   padding-left: 0.6em;
   text-align: left;
@@ -204,7 +205,7 @@ a {
 }
 
 .heading-page-title {
-  text-align: center;
   font-size: 3em;
   padding: 0;
+  text-align: center;
 }

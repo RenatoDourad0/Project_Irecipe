@@ -96,6 +96,19 @@
   filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(177deg) brightness(104%) contrast(101%);
 }
 
+.done-recipe-card {
+  position: relative;
+}
+
+.done-recipes-share-btn {
+  position: absolute;
+  bottom: 5px;
+  right: 10px;
+  width: fit-content;
+  background-color: transparent;
+  filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(177deg) brightness(104%) contrast(101%);
+}
+
 /* recmomended items cards */
 
 .recomended-items-container {
@@ -171,6 +184,16 @@
   position: absolute;
   top: 26.5vh;
   right: 5px;
+  padding: 10px;
+  background-color: #727373;
+  border-radius: 10px;
+  color: white;
+}
+
+.done-recipes-share-msg {
+  position: absolute;
+  bottom: 10px;
+  right: 50px;
   padding: 10px;
   background-color: #727373;
   border-radius: 10px;
