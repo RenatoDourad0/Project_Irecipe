@@ -16,16 +16,15 @@ export default function Recipes(props) {
     }
     return array;
   };
-  const renderIngredients = (ingre) => generatorNmb().map((e) => {
+  const renderIngredients = (ingre) => generatorNmb().map((e, index) => {
     const objName = `strIngredient${e}`;
     const string = `${ingre[objName]}`;
-    console.log('oi');
     if (string === '' || string === 'undefined' || string === 'null') {
       return '';
     }
     return (
       <span
-        key={ string }
+        key={ `${string}${index}` }
       >
         { string }
         {', '}
