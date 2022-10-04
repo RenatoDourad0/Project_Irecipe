@@ -80,20 +80,36 @@
 
 .favorite-btn {
   position: absolute;
-  top: 15vh;
-  right: 0;
+  top: 16vh;
+  right: 20px;
   width: fit-content;
   background-color: transparent;
   filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(177deg) brightness(104%) contrast(101%);
+  margin: 0;
+  padding: 0;
+}
+
+.favorite-btn:hover {
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
 }
 
 .share-btn {
   position: absolute;
-  top: 5px;
-  right: 0;
+  top: 20px;
+  right: 20px;
   width: fit-content;
   background-color: transparent;
   filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(177deg) brightness(104%) contrast(101%);
+  margin: 0;
+  padding: 0;
+}
+
+.share-btn:hover {
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
 }
 
 .done-recipe-card {
@@ -102,20 +118,36 @@
 
 .done-recipes-share-btn {
   position: absolute;
-  bottom: 5px;
+  top: 15px;
   right: 10px;
   width: fit-content;
   background-color: transparent;
   filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(177deg) brightness(104%) contrast(101%);
+  margin: 0;
+  padding: 0;
+}
+
+.done-recipes-share-btn:hover {
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
 }
 
 .favorite-recipes-fav-btn {
   position: absolute;
-  bottom: 5px;
-  right: 10px;
+  bottom: 0;
+  right: 17px;
   width: fit-content;
   background-color: transparent;
   filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(177deg) brightness(104%) contrast(101%);
+  margin: 0;
+  padding: 0;
+}
+
+.favorite-recipes-fav-btn:hover {
+  background-color: transparent;
+  margin: 0;
+  padding: 0;
 }
 
 /* recmomended items cards */

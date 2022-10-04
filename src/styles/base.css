@@ -175,15 +175,16 @@ a {
 }
 
 .card-food-details {
+  align-items: center;
   border-bottom: var(--light-blue) 1px solid;
   display: flex;
+  height: 120px;
   padding: 8px;
 }
 
 .card-food-details img {
   border-radius: 0 50%;
   height: 100%;
-  width: 16vh;
 }
 
 .recipe-details {

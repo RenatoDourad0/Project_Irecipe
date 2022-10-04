@@ -45,7 +45,7 @@ export default function FavoriteButton(props) {
     };
   }, [favoriteRecipes]);
 
-  const defineButtonClassName = pathname.includes('done-recipes')
+  const defineButtonClassName = pathname.includes('favorite-recipes')
     ? 'favorite-recipes-fav-btn' : 'favorite-btn';
 
   return (

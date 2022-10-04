@@ -3,42 +3,49 @@
   flex-direction: column;
 }
 
+.favorite-recipe {
+  position: relative;
+  border-bottom: var(--light-blue) 1px solid;
+  display: flex;
+  padding: 8px;
+  height: 100px;
+}
+
 .favorite-recipes-filters {
   display: flex;
   justify-content: center;
 }
 
-.favorite-recipes-card{
-  display: flex;
-  padding: 16px;
-  margin-right: 16px;
-  margin-left: 16px;
-  border-bottom: var(--light-blue) 1px solid
+.favorite-recipe a {
+  padding: 0;
+  margin: 0;
 }
 
-.favorite-recipes-container img {
-  max-width: 28vw;
+.favorite-recipe img {
+  max-height: 100%;
   border-radius: 0 50%;
 }
 
 .favorite-recipes-container a {
-  position: relative;
   color: var(--white);
   font-family: cream_cake_regular, sans-serif;
   font-size: 2em;
-  padding-left: 1.6em;
-  text-align: left;  
 }
 
-.favorite-recipes-container h3 {
+.favorite-recipe h3:nth-child(2) {
+  position: absolute;
   font-family: sans-serif;
-  font-size: 16px;
+  font-size: 1em;
+  padding: 0;
+  bottom: 5px;
+  left: 140px;
 }
 
-.favorite-recipes-header h3 {
-  color: var(--white);
-  font-family: cream_cake_regular, sans-serif;
+.favorite-recipe a:nth-child(3) {
+  position: absolute;
+  font-family: cream_cake_regular;
   font-size: 2em;
-  padding-left: 0.6em;
-  text-align: center;
+  padding: 0;
+  top: 5px;
+  left: 140px;
 }
