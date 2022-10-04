@@ -14,8 +14,6 @@ export default function RecipeInProgress() {
   const [checkedIngredients, setCheckedIngredients] = useState([]);
   const { setSearchResult } = useContext(GlobalContext);
   const { push, goBack } = useHistory();
-  console.log(useHistory());
-
   const { pathname } = useLocation();
   const id = pathname.split('/')[2];
   const type = pathname.split('/')[1];
