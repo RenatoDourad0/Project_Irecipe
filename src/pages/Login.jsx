@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 import { minPassSize, rgx } from '../helpers/utilData';
 import { sendToLS } from '../helpers/localStorage';
+import logo from '../styles/images-style/logo.png';
+import '../styles/login.css';
 
 export default function Login() {
   const [isDisabled, setDisabled] = useState(true);
@@ -31,9 +33,10 @@ export default function Login() {
   return (
 
     <form onSubmit={ handleSubmit } className="login-form">
-      <div className="logo-div">
+      {/* <div className="logo-div">
         <h1>irecipe</h1>
-      </div>
+      </div> */}
+      <img src={ logo } alt="logo-element" />
       <input
         type="text"
         name="email"

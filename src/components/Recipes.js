@@ -16,16 +16,16 @@ export default function Recipes(props) {
     }
     return array;
   };
-  const renderIngredients = (ingre) => generatorNmb().map((e) => {
+  const renderIngredients = (ingre) => generatorNmb().map((e, index) => {
     const objName = `strIngredient${e}`;
     const string = `${ingre[objName]}`;
-    console.log('oi');
+    console.log(string);
     if (string === '' || string === 'undefined' || string === 'null') {
       return '';
     }
     return (
       <span
-        key={ string }
+        key={ `${ingre}, ${index}` }
       >
         { string }
         {', '}
@@ -56,11 +56,14 @@ export default function Recipes(props) {
                 >
                   { searchItem[str] }
                 </h3>
-                <p className="recipe-details">
-                  <span className="ingredients-md">Ingredients: </span>
-                  {' '}
-                  { renderIngredients(searchItem) }
-                </p>
+                { searchItem.strIngredient1 && (
+                  <p className="recipe-details">
+                    <span className="ingredients-md">Ingredients: </span>
+                    {' '}
+                    { renderIngredients(searchItem) }
+                    { console.log(searchItem)}
+                  </p>
+                )}
               </div>
             </div>
           </Link>

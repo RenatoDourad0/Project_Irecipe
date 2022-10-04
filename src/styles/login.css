@@ -1,0 +1,7 @@
+.login-title {
+  font: inherit;
+  align-self: flex-start;
+  margin-left: 40px;
+  color: var(--white);
+  font-size: x-large;
+}

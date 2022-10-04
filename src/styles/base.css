@@ -35,6 +35,7 @@ h1 {
   font-family: cream_cake_regular , sans-serif;
   font-size: 3em;
   text-align: left;
+  overflow: hidden;
 }
 
 h2 {
