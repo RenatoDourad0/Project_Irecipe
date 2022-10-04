@@ -1,16 +1,20 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { useHistory, useLocation } from 'react-router-dom/cjs/react-router-dom.min';
+import { GlobalContext } from '../context/GlobalProvider';
 import FavoriteButton from '../components/FavoriteButton';
 import ShareButton from '../components/ShareButton';
 import { getFromLS, sendToLS } from '../helpers/localStorage';
 import { fetchById } from '../helpers/requests';
+import '../styles/recipeInProgress.css';
 
 export default function RecipeInProgress() {
   const [recipe, setRecipe] = useState({});
   const [recipeClone, setRecipeClone] = useState({});
   const [checkBoxes, setCheckboxes] = useState([]);
   const [checkedIngredients, setCheckedIngredients] = useState([]);
-  const { push } = useHistory();
+  const { setSearchResult } = useContext(GlobalContext);
+  const { push, goBack } = useHistory();
+  console.log(useHistory());
 
   const { pathname } = useLocation();
   const id = pathname.split('/')[2];
@@ -91,44 +95,70 @@ export default function RecipeInProgress() {
     push('/done-recipes');
   };
 
+  const navigateBack = () => {
+    setSearchResult(null);
+    goBack();
+  };
+
   return (
-    <div>
-      <img
-        src={ recipe.strMealThumb }
-        alt={ recipe.strMeal }
-        data-testid="recipe-photo"
-      />
-      <h1 data-testid="recipe-title">{recipe.strMeal}</h1>
-      <ShareButton link={ global.document.location.href } testid="share-btn" />
-      <FavoriteButton
-        testid="favorite-btn"
-        recipeDetails={ recipeClone }
-        id={ id }
-      />
-      <p data-testid="recipe-category">
-        {recipe.strCategory}
-      </p>
-      <p data-testid="instructions">{recipe.strInstructions}</p>
-      {checkBoxes.length > 0 && checkBoxes.map((checkbox, index) => (
-        <label
-          htmlFor={ checkbox.ingredient }
-          key={ checkbox.ingredient }
-          data-testid={ `${index}-ingredient-step` }
+    <div className="recipe-details-container">
+      <div
+        className="recipe-details-header-container recipe-in-progress-header-container"
+      >
+        <img
+          src={ recipe.strMealThumb }
+          alt={ recipe.strMeal }
+          data-testid="recipe-photo"
+        />
+        <h3 data-testid="recipe-title">{recipe.strMeal}</h3>
+        <h3 data-testid="recipe-category">
+          {recipe.strCategory}
+        </h3>
+        <ShareButton link={ global.document.location.href } testid="share-btn" />
+        <FavoriteButton
+          testid="favorite-btn"
+          recipeDetails={ recipeClone }
+          id={ id }
+        />
+        <button
+          className="recipe-details-voltar-btn recipe-progress-voltar-btn"
+          type="button"
+          onClick={ navigateBack }
         >
-          {`${checkbox.ingredient} ${checkbox.qnty}`}
-          <input
-            type="checkbox"
-            name={ checkbox.ingredient }
-            checked={ checkedIngredients.includes(checkbox.ingredient) }
-            onChange={ handleChange }
-          />
-        </label>
-      ))}
+          Back
+        </button>
+      </div>
+      <p
+        data-testid="instructions"
+        className="recipe-details-text recipe-in-progress-text"
+      >
+        {recipe.strInstructions}
+      </p>
+      <ul className="in-progress-ul">
+        {checkBoxes.length > 0 && checkBoxes.map((checkbox, index) => (
+          <li key={ checkbox.ingredient }>
+            <label
+              htmlFor={ checkbox.ingredient }
+              data-testid={ `${index}-ingredient-step` }
+            >
+              <input
+                type="checkbox"
+                name={ checkbox.ingredient }
+                checked={ checkedIngredients.includes(checkbox.ingredient) }
+                onChange={ handleChange }
+              />
+              { ' ' }
+              {` ${checkbox.ingredient} - ${checkbox.qnty}`}
+            </label>
+          </li>
+        ))}
+      </ul>
       <button
         type="button"
         data-testid="finish-recipe-btn"
         disabled={ checkBoxes.length !== checkedIngredients.length }
         onClick={ handleFinish }
+        className="btn-in-progress"
       >
         Finish
       </button>

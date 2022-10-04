@@ -19,13 +19,12 @@ export default function Recipes(props) {
   const renderIngredients = (ingre) => generatorNmb().map((e, index) => {
     const objName = `strIngredient${e}`;
     const string = `${ingre[objName]}`;
-    console.log(string);
     if (string === '' || string === 'undefined' || string === 'null') {
       return '';
     }
     return (
       <span
-        key={ `${ingre}, ${index}` }
+        key={ `${string}, ${index}` }
       >
         { string }
         {', '}
@@ -33,7 +32,7 @@ export default function Recipes(props) {
     );
   });
   return (
-    <div>
+    <div className="recipe-card-container">
       {searchResult && searchResult[search] && searchResult[search]
         .filter((food, index) => index < CARDS_MAX_LENGTH)
         .map((searchItem, index) => (

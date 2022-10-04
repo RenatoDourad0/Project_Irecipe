@@ -99,7 +99,7 @@ export default function RecipeDetails() {
   };
 
   return (
-    <div>
+    <div className="recipe-details-container">
       { recipeDetails && pathname === `/drinks/${id}`
         && (
           <div>
@@ -110,8 +110,10 @@ export default function RecipeDetails() {
               navigateBack={ navigateBack }
               className="card-food"
             />
-            <h1>Recomendado</h1>
-            <RecomItems id="idMeal" thumb="strMealThumb" search="meals" str="strMeal" />
+            <div className="recomended-items-container">
+              <h3>Recommended</h3>
+              <RecomItems id="idMeal" thumb="strMealThumb" search="meals" str="strMeal" />
+            </div>
           </div>
         )}
       { recipeDetails && pathname === `/meals/${id}`
@@ -123,13 +125,15 @@ export default function RecipeDetails() {
             type="meals"
             navigateBack={ navigateBack }
           />
-          <h1>Recomendado</h1>
-          <RecomItems
-            id="idDrink"
-            thumb="strDrinkThumb"
-            search="drinks"
-            str="strDrink"
-          />
+          <div className="recomended-items-container">
+            <h3>Recommended</h3>
+            <RecomItems
+              id="idDrink"
+              thumb="strDrinkThumb"
+              search="drinks"
+              str="strDrink"
+            />
+          </div>
         </div>
       )}
       <ShareButton link={ global.document.location.href } testid="share-btn" />

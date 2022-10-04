@@ -39,13 +39,13 @@ export default function Header() {
           )}
       </div>
       {showInputSearch && <SearchBar /> }
-      <h2 data-testid="page-title">
+      <h3 data-testid="page-title" className="heading-page-title">
         { pathname === '/meals' && 'Meals'}
         { pathname === '/drinks' && 'Drinks'}
         { pathname === '/profile' && 'Profile'}
         { pathname === '/done-recipes' && 'Done Recipes' }
         { pathname === '/favorite-recipes' && 'Favorite Recipes' }
-      </h2>
+      </h3>
     </header>
   );
 }

@@ -1,0 +1,22 @@
+.recipe-in-progress-header-container {
+  margin-bottom: 30px;
+}
+
+.recipe-in-progress-text {
+  margin-bottom: 30px;
+}
+
+.in-progress-ul {
+  list-style: none;
+  line-height: 1.5em;
+}
+
+.btn-in-progress {
+  width: 80vw;
+  padding: 5px;
+  margin: 30px 10vw;
+}
+
+.recipe-progress-voltar-btn {
+  margin-top: 15px;
+}

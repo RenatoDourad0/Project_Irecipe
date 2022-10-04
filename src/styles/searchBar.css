@@ -1,0 +1,74 @@
+:root {
+
+  /* colors  */
+
+  --white: white;
+
+  --yellow: #fac70f;
+
+  --red: #fb2434;
+
+  --light-blue: #76949f;
+
+  --dark-gray: #393e41;
+
+  /* fonts */
+  font-size: 16px;
+}
+
+.search-bar-container {
+  align-items: center;
+  background-color: rgb(52, 50, 50);
+  color: var(--white);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-bottom: 3%;
+  padding-top: 3%;
+  width: 100%;
+}
+
+.search-bar-input {
+  background: var(--white);
+  border: 1px solid #b1b1b1;
+  border-radius: 5px;
+  box-sizing: border-box;
+  height: 30px;
+  width: 100%;
+}
+
+.search-bar-radio {
+  filter: drop-shadow(7px rgba(0, 0, 0, 0.2));
+  margin-right: 5px;
+}
+
+.search-bar-inputs-container {
+  align-items: center;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: row;
+  font-size: 15px;
+  height: 88px;
+  justify-content: space-around;
+  left: 11px;
+  width: 80%;
+}
+
+.search-bar-button {
+  border-radius: 10px;
+}
+
+.search-bar-form {
+  width: 100%;
+}
+
+.search-bar-text {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  width: 80%;
+}
+
+.search-bar-ingredientes-radio {
+  padding-left: 1%;
+}
