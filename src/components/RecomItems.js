@@ -1,48 +1,49 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import PropTypes from 'prop-types';
 import React, { useContext, useState } from 'react';
+import Carousel from 'react-bootstrap/Carousel';
 import { GlobalContext } from '../context/GlobalProvider';
 
 export default function RecomItems(props) {
+  const [index, setIndex] = useState(0);
   const { fetchRecFoods } = useContext(GlobalContext);
   const { id, thumb, search, str } = props;
-  const [showIndex, setIndex] = useState({
-    lower: 0,
-    high: 1,
-  });
-  const { lower, high } = showIndex;
   const REC_MAX_LENGTH = 6;
-  const changeRecom = () => {
-    if (lower === 0) return setIndex({ lower: 2, high: 3 });
-    if (lower === 2) return setIndex({ lower: 4, high: 5 });
-    setIndex({ lower: 0, high: 1 });
+
+  const handleSelect = (selectedIndex) => {
+    setIndex(selectedIndex);
   };
+
   return (
-    <div>
-      {fetchRecFoods && fetchRecFoods[search] && fetchRecFoods[search]
-        .filter((rec, index) => index < REC_MAX_LENGTH)
-        .map((e, index) => (
-          <div
-            key={ e[id] }
-            data-testid={ `${index}-recommendation-card` }
-            className="recomended-items-card"
-            style={ { display: index !== high && lower !== index ? 'none' : 'block' } }
-            display="none"
-          >
-            <p data-testid={ `${index}-recommendation-title` }>{ e[str] }</p>
-            <img src={ e[thumb] } alt="recomendElement" />
-          </div>
-        ))}
-      <button
-        className="sugestion-card-btn"
-        type="button"
-        onClick={ changeRecom }
+    <div style={ { marginBottom: '15px' } }>
+      <Carousel
+        activeIndex={ index }
+        onSelect={ handleSelect }
       >
-        Next
-      </button>
+        { fetchRecFoods && fetchRecFoods[search] && fetchRecFoods[search]
+          .filter((rec, ind) => ind < REC_MAX_LENGTH)
+          .map((e) => (
+            <Carousel.Item key={ e[id] }>
+              <img
+                className="d-block w-100"
+                src={ e[thumb] }
+                alt="recomendElement"
+              />
+              <Carousel.Caption>
+                <h3 style={ { textAlign: 'center' } }>
+                  { e[str] }
+                </h3>
+                <p>
+                  { ' ' }
+                </p>
+              </Carousel.Caption>
+            </Carousel.Item>
+          ))}
+      </Carousel>
     </div>
   );
 }
+
 RecomItems.propTypes = {
   id: PropTypes.string.isRequired,
   thumb: PropTypes.string.isRequired,

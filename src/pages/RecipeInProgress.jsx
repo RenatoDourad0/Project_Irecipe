@@ -5,6 +5,7 @@ import FavoriteButton from '../components/FavoriteButton';
 import ShareButton from '../components/ShareButton';
 import { getFromLS, sendToLS } from '../helpers/localStorage';
 import { fetchById } from '../helpers/requests';
+import image from '../images/back-svgrepo-com.svg';
 import '../styles/recipeInProgress.css';
 
 export default function RecipeInProgress() {
@@ -119,11 +120,11 @@ export default function RecipeInProgress() {
           id={ id }
         />
         <button
-          className="recipe-details-voltar-btn recipe-progress-voltar-btn"
+          className="recipe-progress-voltar-btn"
           type="button"
           onClick={ navigateBack }
         >
-          Back
+          <img src={ image } alt="back icon" />
         </button>
       </div>
       <p

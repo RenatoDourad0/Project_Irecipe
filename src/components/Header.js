@@ -22,7 +22,7 @@ export default function Header() {
           data-testid="profile-top-btn"
           onClick={ () => history.push('/profile') }
         />
-        <div className="logo-div">
+        <div className="logo-div" onClick={ () => history.push('/meals') }>
           <h1>irecipe</h1>
         </div>
         { pathname === '/profile'

@@ -1,11 +1,13 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
+import image from '../images/back-svgrepo-com.svg';
 
 export default function RecipeDetailsInfo(props) {
   const { recipeDetails, details, type: typeProp, navigateBack } = props;
 
   const imgSrcProp = typeProp === 'drinks' ? 'strDrinkThumb' : 'strMealThumb';
   const titleProp = typeProp === 'drinks' ? 'strDrink' : 'strMeal';
+  const newLine = '\n';
 
   return (
     <div className="recipe-details-page">
@@ -22,11 +24,8 @@ export default function RecipeDetailsInfo(props) {
         </h3>
         { typeProp === 'drinks'
           ? (
-            <h3
-              data-testid="recipe-category"
-            >
-              { `${recipeDetails.drinks[0].strAlcoholic}  
-              ${recipeDetails.drinks[0].strCategory}` }
+            <h3>
+              {recipeDetails.drinks[0].strCategory}
             </h3>
           ) : (
             <h3
@@ -72,7 +71,7 @@ export default function RecipeDetailsInfo(props) {
         type="button"
         onClick={ navigateBack }
       >
-        Back
+        <img src={ image } alt="back icon" />
       </button>
     </div>
   );
