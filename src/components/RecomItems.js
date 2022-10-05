@@ -28,6 +28,7 @@ export default function RecomItems(props) {
                 className="d-block w-100"
                 src={ e[thumb] }
                 alt="recomendElement"
+                style={ { padding: '0' } }
               />
               <Carousel.Caption>
                 <h3 style={ { textAlign: 'center' } }>
