@@ -7,7 +7,6 @@ export default function RecipeDetailsInfo(props) {
 
   const imgSrcProp = typeProp === 'drinks' ? 'strDrinkThumb' : 'strMealThumb';
   const titleProp = typeProp === 'drinks' ? 'strDrink' : 'strMeal';
-  const newLine = '\n';
 
   return (
     <div className="recipe-details-page">
