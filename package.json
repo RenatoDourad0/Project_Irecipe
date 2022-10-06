@@ -5,10 +5,11 @@
   "engines": {
     "node": "16"
   },
-  "homepage" : "https://RenatoDourad0.github.io/Project_Irecipe",
+  "homepage": "https://RenatoDourad0.github.io/Project_Irecipe",
   "dependencies": {
     "bootstrap": "^5.2.2",
     "clipboard-copy": "^4.0.1",
+    "gh-pages": "^4.0.0",
     "node-fetch": "^2.6.7",
     "prop-types": "^15.8.1",
     "react": "^17.0.2",
@@ -29,8 +30,8 @@
     "eject": "react-scripts eject",
     "lint": "eslint --no-inline-config --no-error-on-unmatched-pattern -c .eslintrc.json . --ext .js,.jsx",
     "lint:styles": "npx stylelint '**/*.css'",
-    "predeploy" : "npm run build",
-    "deploy" : "gh-pages -d build"
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
