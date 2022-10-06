@@ -52,18 +52,20 @@ export default function RecipeDetailsInfo(props) {
       </p>
       { typeProp === 'meals'
       && (
-        <video
-          width="320"
-          height="240"
-          controls
-          data-testid="video"
-        >
-          <source
-            src={ `${recipeDetails.meals[0].strYoutube}&origin=http://localhost:3000/` }
-            type="video/mp4"
-          />
-          <track kind="captions" />
-        </video>
+        <div className="video-container">
+          <video
+            width="320"
+            height="240"
+            controls
+            data-testid="video"
+          >
+            <source
+              src={ `${recipeDetails.meals[0].strYoutube}&origin=https://renatodourad0.github.io/Project_Irecipe/` }
+              type="video/mp4"
+            />
+            <track kind="captions" />
+          </video>
+        </div>
       )}
       <button
         className="recipe-details-voltar-btn"

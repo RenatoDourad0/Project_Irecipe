@@ -15,10 +15,11 @@ export default function RecomItems(props) {
   };
 
   return (
-    <div style={ { marginBottom: '15px' } }>
+    <div>
       <Carousel
         activeIndex={ index }
         onSelect={ handleSelect }
+        className="recomended-corousel"
       >
         { fetchRecFoods && fetchRecFoods[search] && fetchRecFoods[search]
           .filter((rec, ind) => ind < REC_MAX_LENGTH)

@@ -66,10 +66,6 @@
   padding: 20px 10px;
 }
 
-.recipe-details-page video {
-  margin-top: 5vh;
-}
-
 .recipe-details-page button {
   width: 90vw;
   margin-left: 5vw;
@@ -257,4 +253,23 @@
 
 .done-card-container {
   position: relative;
+}
+
+.recomended-corousel {
+  margin-bottom: 20px;
+  max-height: 30vh;
+}
+
+.carousel-item {
+  max-height: 30vh;
+}
+
+.carousel-item img {
+  object-fit: cover;
+  max-height: 30vh;
+}
+
+.video-container {
+  width: fit-content;
+  margin: auto;
 }
