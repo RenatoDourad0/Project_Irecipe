@@ -161,12 +161,12 @@ a {
 }
 
 .btn-category {
-  height: 25px;
-  width: 28%;
-  margin:  0.3em 0.2em;
-  display: flex;
   align-items: center;
+  display: flex;
+  height: 25px;
   justify-content: center;
+  margin: 0.3em 0.2em;
+  width: 28%;
 }
 
 .nav-category {
