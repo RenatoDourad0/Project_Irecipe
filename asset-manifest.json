@@ -1,0 +1,24 @@
+{
+  "files": {
+    "main.css": "/Project_Irecipe/static/css/main.9705e6c8.css",
+    "main.js": "/Project_Irecipe/static/js/main.0fff813c.js",
+    "static/media/logo.png": "/Project_Irecipe/static/media/logo.0406d6ce32dcf7fba242.png",
+    "static/media/cream_cake-webfont.woff": "/Project_Irecipe/static/media/cream_cake-webfont.6f01414e5269ff6cc357.woff",
+    "static/media/cream_cake-webfont.woff2": "/Project_Irecipe/static/media/cream_cake-webfont.c2fa488ae821244449be.woff2",
+    "static/media/mealIcon.svg": "/Project_Irecipe/static/media/mealIcon.40029e7f1422ba5a1bf1c10fa4f59030.svg",
+    "static/media/shareIcon.svg": "/Project_Irecipe/static/media/shareIcon.87def1bd1dff9af9263f046c3b9bd31a.svg",
+    "static/media/profileIcon.svg": "/Project_Irecipe/static/media/profileIcon.44eb3608f431845fe2fc2d2a23d758ae.svg",
+    "static/media/whiteHeartIcon.svg": "/Project_Irecipe/static/media/whiteHeartIcon.2b822118952dc5140129c6349fcd0472.svg",
+    "static/media/searchIcon.svg": "/Project_Irecipe/static/media/searchIcon.7353564d025de989f86f66ecb0202a04.svg",
+    "static/media/blackHeartIcon.svg": "/Project_Irecipe/static/media/blackHeartIcon.083cb006913d197c95857ebfa2161db7.svg",
+    "static/media/drinkIcon.svg": "/Project_Irecipe/static/media/drinkIcon.efc0d3c156e5da73e44a826c8d67b142.svg",
+    "static/media/back-svgrepo-com.svg": "/Project_Irecipe/static/media/back-svgrepo-com.a953475e35b690b9b92ce087e381925f.svg",
+    "index.html": "/Project_Irecipe/index.html",
+    "main.9705e6c8.css.map": "/Project_Irecipe/static/css/main.9705e6c8.css.map",
+    "main.0fff813c.js.map": "/Project_Irecipe/static/js/main.0fff813c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9705e6c8.css",
+    "static/js/main.0fff813c.js"
+  ]
+}
