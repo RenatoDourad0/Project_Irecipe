@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/Project_Irecipe/static/css/main.9705e6c8.css",
-    "main.js": "/Project_Irecipe/static/js/main.0fff813c.js",
+    "main.css": "/Project_Irecipe/static/css/main.d0dbbcdb.css",
+    "main.js": "/Project_Irecipe/static/js/main.9b934486.js",
     "static/media/logo.png": "/Project_Irecipe/static/media/logo.0406d6ce32dcf7fba242.png",
     "static/media/cream_cake-webfont.woff": "/Project_Irecipe/static/media/cream_cake-webfont.6f01414e5269ff6cc357.woff",
     "static/media/cream_cake-webfont.woff2": "/Project_Irecipe/static/media/cream_cake-webfont.c2fa488ae821244449be.woff2",
@@ -14,11 +14,11 @@
     "static/media/drinkIcon.svg": "/Project_Irecipe/static/media/drinkIcon.efc0d3c156e5da73e44a826c8d67b142.svg",
     "static/media/back-svgrepo-com.svg": "/Project_Irecipe/static/media/back-svgrepo-com.a953475e35b690b9b92ce087e381925f.svg",
     "index.html": "/Project_Irecipe/index.html",
-    "main.9705e6c8.css.map": "/Project_Irecipe/static/css/main.9705e6c8.css.map",
-    "main.0fff813c.js.map": "/Project_Irecipe/static/js/main.0fff813c.js.map"
+    "main.d0dbbcdb.css.map": "/Project_Irecipe/static/css/main.d0dbbcdb.css.map",
+    "main.9b934486.js.map": "/Project_Irecipe/static/js/main.9b934486.js.map"
   },
   "entrypoints": [
-    "static/css/main.9705e6c8.css",
-    "static/js/main.0fff813c.js"
+    "static/css/main.d0dbbcdb.css",
+    "static/js/main.9b934486.js"
   ]
 }
