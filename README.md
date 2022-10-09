@@ -114,7 +114,7 @@ To get a local copy up and running check below and follow these simple steps if 
 1. Fork the repo
 2. Clone the repo
    ```sh
-   git clone git@github.com:RenatoDourad0/Project_Irecipe.git
+   git clone git@github.com:< USERNAME >/Project_Irecipe.git
    ```
 3. Install NPM packages
    ```sh
