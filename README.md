@@ -145,6 +145,7 @@ Project Link: [https://github.com/RenatoDourad0/Project_Irecipe](https://github.
 ## Acknowledgments
 
 A special thanks to all my team members who embraced this project and made possible a fast and enjoyable development.
+- Fernando Oliveira, Lucas Rodrigues, Arthur Barbosa, Júlio Venancio,  Matheus Bora 
 
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
