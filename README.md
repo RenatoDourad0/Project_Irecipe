@@ -1,4 +1,7 @@
+<!--  Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description` -->
+<a name="readme-top"></a>
 <!-- PROJECT SHIELDS -->
+
 <!--
 *** I'm using markdown "reference style" links for readability.
 *** Reference links are enclosed in brackets [ ] instead of parentheses ( ).
@@ -6,19 +9,17 @@
 *** for contributors-url, forks-url, etc. This is an optional, concise syntax you may use.
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
-[![Contributors][contributors-shield]][contributors-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
 
 <!-- PROJECT LOGO -->
-<br />
-<h3 align="center">Irecipe</h3>
+<div>
+  <br />
+  <h1 align="center">Irecipe</h1>
 
   <p align="center">
-    project_description
+    This project is a frontend application developed with data from TheMealDB API and intends to meet the needs of people looking for practical and quick recipes, optimizing their daily routine
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
+    <a href="https://renatodourad0.github.io/Project_Irecipe/">View Demo</a>
   </p>
 </div>
 
@@ -34,6 +35,7 @@
         <li><a href="#built-with">Built With</a></li>
       </ul>
     </li>
+    <li><a href="#usage">Usage</a></li>
     <li>
       <a href="#getting-started">Getting Started</a>
       <ul>
@@ -41,7 +43,6 @@
         <li><a href="#installation">Installation</a></li>
       </ul>
     </li>
-    <li><a href="#usage">Usage</a></li>
     <li><a href="#contact">Contact</a></li>
     <li><a href="#acknowledgments">Acknowledgments</a></li>
   </ol>
@@ -51,12 +52,11 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-[![Irecipe Screen Shot][product-screenshot]]
-
-[![][product-screenshot2]]
-
-Here's a blank template to get started: To avoid retyping too much info. Do a search and replace with your text editor for the following: `github_username`, `repo_name`, `twitter_handle`, `linkedin_username`, `email_client`, `email`, `project_title`, `project_description`
+<div>
+  <img src='/screenshotLogin.png' width='33%'>
+  <img src='/screenshotRecomended.png' width='33%'>
+  <img src='/screenshotIrecipe.png' width='33%'>
+</div>
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -64,48 +64,12 @@ Here's a blank template to get started: To avoid retyping too much info. Do a se
 
 ### Built With
 
-* [![Next][Next.js]][Next-url]
-* [![React][React.js]][React-url]
-* [![Vue][Vue.js]][Vue-url]
-* [![Angular][Angular.io]][Angular-url]
-* [![Svelte][Svelte.dev]][Svelte-url]
-* [![Laravel][Laravel.com]][Laravel-url]
-* [![Bootstrap][Bootstrap.com]][Bootstrap-url]
-* [![JQuery][JQuery.com]][JQuery-url]
-
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
-
-
-
-<!-- GETTING STARTED -->
-## Getting Started
-
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
-
-### Installation
-
-1. Get a free API Key at [https://example.com](https://example.com)
-2. Clone the repo
-   ```sh
-   git clone https://github.com/github_username/repo_name.git
-   ```
-3. Install NPM packages
-   ```sh
-   npm install
-   ```
-4. Enter your API in `config.js`
-   ```js
-   const API_KEY = 'ENTER YOUR API';
-   ```
+* [![React][React.js]][React-url] ![Hooks](https://img.shields.io/badge/Hooks-000000?style=for-the-badge&logo=&logoColor=purple) ![Context API](https://img.shields.io/badge/ContextAPI-000000?style=for-the-badge&logo=&logoColor=white)
+* ![React-router](https://img.shields.io/badge/reactrouter-000000?style=for-the-badge&logo=reactrouter&logoColor=white)
+* ![RTL](https://img.shields.io/badge/rtl-000000?style=for-the-badge&logo=rtl&logoColor=red)
+* ![Jest](https://img.shields.io/badge/jest-000000?style=for-the-badge&logo=jest&logoColor=white)
+* ![CSS3](https://img.shields.io/badge/css3-000000?style=for-the-badge&logo=css3&logoColor=blue)
+* ![Bootstrap](https://img.shields.io/badge/Bootstrap-000000?style=for-the-badge&logo=bootstrap&logoColor=white)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -114,10 +78,54 @@ This is an example of how to list things you need to use the software and how to
 <!-- USAGE EXAMPLES -->
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
+<!-- Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources. -->
+These project was conceived for a viewport of 365px x 660px.
 
-_For more examples, please refer to the [Documentation](https://example.com)_
+Users are able to
+  * view recommended meals and drinks recipes
+  * search for recipes by name, ingredient or first letter
+  * switch between categories
+  * favorite and share recipes, saving to local storage
+  * start an recipe and check the used ingredients, also saving to local storage
+  * see their favorites and finished recipes
 
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+
+
+<!-- GETTING STARTED -->
+## Getting Started
+
+<!-- This is an example of how you may give instructions on setting up your project locally. -->
+
+### Prerequisites
+
+To get a local copy up and running check below and follow these simple steps if needed.
+
+<!-- This is an example of how to list things you need to use the software and how to install them. -->
+* [Install node](https://nodejs.org/en/download/)
+* Install npm
+  ```sh
+  npm install npm@latest -g
+  ```
+
+### Installation
+
+1. Fork the repo
+2. Clone the repo
+   ```sh
+   git clone git@github.com:RenatoDourad0/Project_Irecipe.git
+   ```
+3. Install NPM packages
+   ```sh
+   npm install
+   ```
+4. Start the server
+   ```sh
+   npm start
+   ```
+5. To log into the application use a random email and a password longer than 6 characters
+   
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -125,9 +133,9 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- CONTACT -->
 ## Contact
 
-Your Name - [@twitter_handle](https://twitter.com/twitter_handle) - email@email_client.com
+Renato Dourado - [Linkedin](https://linkedin.com/in/renato-dourado-b1b301112) - renatocvdourado@hotmail.com
 
-Project Link: [https://github.com/github_username/repo_name](https://github.com/github_username/repo_name)
+Project Link: [https://github.com/RenatoDourad0/Project_Irecipe](https://github.com/RenatoDourad0/Project_Irecipe)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -136,13 +144,17 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 <!-- ACKNOWLEDGMENTS -->
 ## Acknowledgments
 
-* []()
-* []()
-* []()
+A special thanks to all my team members who embraced this project and made possible a fast and enjoyable development.
+
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
+<!-- 
+link para logos das tecnologias
+- https://github.com/simple-icons/simple-icons/blob/develop/slugs.md
+- buscar pelo nome do logo e substituir no url do badge (https://img.shields.io/badge/<NOME-DO-LOGO>-000000?style=for-the-badge&logo=<NOME-DO-LOGO>&logoColor=white)
+ -->
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
@@ -151,8 +163,8 @@ Project Link: [https://github.com/github_username/repo_name](https://github.com/
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://linkedin.com/in/renato-dourado-b1b301112
 
-[product-screenshot]: https://github.com/RenatoDourad0/Project_Irecipe/blob/main/screenshotIrecipe.png
-[product-sceenshot2]: https://github.com/RenatoDourad0/Project_Irecipe/blob/main/screenshotRecomended.png
+[product-screenshot]: /screenshotIrecipe.png
+[product-sceenshot2]: /screenshotRecomended.png
 
 [Next.js]: https://img.shields.io/badge/next.js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white
 [Next-url]: https://nextjs.org/
