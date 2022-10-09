@@ -19,7 +19,7 @@
     This project is a frontend application developed with data from TheMealDB API and intends to meet the needs of people looking for practical and quick recipes, optimizing their daily routine
     <br />
     <br />
-    <a href="https://renatodourad0.github.io/Project_Irecipe/">View Demo</a>
+    <a href="https://renatodourad0.github.io/Project_Irecipe/" target='_blank'>View Demo</a>
   </p>
 </div>
 
