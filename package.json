@@ -5,7 +5,7 @@
   "engines": {
     "node": "16"
   },
-  "homepage":"https://main.duahufdnfo9cm.amplifyapp.com/Project_Irecipe",
+  "homepage": "",
   "dependencies": {
     "bootstrap": "^5.2.2",
     "clipboard-copy": "^4.0.1",
