@@ -16,7 +16,7 @@ function App() {
   return (
     <GlobalProvider>
       <Switch>
-        <Route exact path="/Project_Irecipe" component={ Login } />
+        <Route exact path="/" component={ Login } />
         <Route exact path="/meals" component={ Meals } />
         <Route exact path="/drinks" component={ Drinks } />
         <Route exact path="/meals/:id" component={ RecipeDetails } />

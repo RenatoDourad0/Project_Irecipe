@@ -60,7 +60,7 @@ export default function RecipeDetailsInfo(props) {
             data-testid="video"
           >
             <source
-              src={ `${recipeDetails.meals[0].strYoutube}&origin=https://renatodourad0.github.io/Project_Irecipe/` }
+              src={ `${recipeDetails.meals[0].strYoutube}&origin=https://renatodourad0.github.io/` }
               type="video/mp4"
             />
             <track kind="captions" />
